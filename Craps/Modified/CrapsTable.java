@@ -10,7 +10,7 @@ import javax.swing.Timer;
 
 public class CrapsTable extends JPanel
 implements ActionListener {
-	private RollingDie die1, die2;
+	private RollingDie die1, die2, die3;
 	private final int delay = 20;
 	private Timer clock;
 	private CrapsGame game;
@@ -24,6 +24,7 @@ implements ActionListener {
 		game = new CrapsGame();
 		die1 = new RollingDie();
 		die2 = new RollingDie();
+		die3 = new RollingDie();
 		clock = new Timer(delay, this);
 	}
 
@@ -33,6 +34,7 @@ implements ActionListener {
 		RollingDie.setBounds(3, getWidth() - 3, 3, getHeight() - 3);
 		die1.roll();
 		die2.roll();
+		die3.roll();
 		clock.start();
 	}
 
@@ -40,13 +42,22 @@ implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (diceAreRolling()) {
 			if (!clock.isRunning()) clock.restart();
-			if (die1.isRolling()) die1.avoidCollision(die2);
-			else if (die2.isRolling()) die2.avoidCollision(die1);
+			if(die1.isRolling()) {
+				die1.avoidCollision(die2);
+				die1.avoidCollision(die3);
+			}
+			else if(die2.isRolling()) {
+				die2.avoidCollision(die1);
+				die2.avoidCollision(die3);
+			}
+			else if(die3.isRolling()) {
+				die3.avoidCollision(die1);
+				die3.avoidCollision(die2);
+			}
 		}
 		else {
 			clock.stop();
-			int total = die1.getNumDots() + die2.getNumDots();
-			int result = game.processRoll(total);
+			int result = game.processRoll(die1.getNumDots(), die2.getNumDots(), die3.getNumDots());
 			int point = game.getPoint();
 			display.update(result, point);
 		}
@@ -57,7 +68,7 @@ implements ActionListener {
 	// returns true if dice are still rolling; otherwise
 	// returns false
 	public boolean diceAreRolling() {
-		return die1.isRolling() || die2.isRolling();
+		return die1.isRolling() || die2.isRolling() || die3.isRolling();
 	}
 
 	// Called automatically after a repaint request
@@ -65,5 +76,6 @@ implements ActionListener {
 		super.paintComponent(g);
 		die1.draw(g);
 		die2.draw(g);
+		die3.draw(g);
 	}
 }
