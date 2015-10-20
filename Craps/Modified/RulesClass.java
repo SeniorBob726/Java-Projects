@@ -4,9 +4,9 @@ public class RulesClass {
 	private int point = 0;
 
 	private static boolean pairWith(int a, int b, int c, int n) {
-		return (a == b && c == n && a != n)
-			|| (a == c && b == n && a != n)
-			|| (b == c && a == n && b != n);
+		return (a == b && c == n && a != c)
+			|| (a == c && b == n && a != b)
+			|| (b == c && a == n && b != a);
 	}
 	
 	private static boolean threeInARow(int a, int b, int c, int x, int y, int z) {
