@@ -11,6 +11,7 @@ public class Die {
 	public void roll() {
 		numDots = random.nextInt(6) + 1;
 	}
+	
 	public int getNumDots() {
 		return numDots;
 	}

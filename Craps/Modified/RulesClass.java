@@ -1,6 +1,6 @@
 // Implements the game of Craps logic
 
-public class CrapsGame {
+public class RulesClass {
 	private int point = 0;
 
 	private static boolean pairWith(int a, int b, int c, int n) {

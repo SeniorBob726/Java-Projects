@@ -13,7 +13,7 @@ implements ActionListener {
 	private RollingDie die1, die2, die3;
 	private final int delay = 20;
 	private Timer clock;
-	private CrapsGame game;
+	private RulesClass game;
 	private DisplayPanel display;
 
 	// Constructor
@@ -21,7 +21,7 @@ implements ActionListener {
 		setBackground(Color.green);
 		setBorder(new LineBorder(Color.ORANGE.darker(), 3));
 		display = displ;
-		game = new CrapsGame();
+		game = new RulesClass();
 		die1 = new RollingDie();
 		die2 = new RollingDie();
 		die3 = new RollingDie();
