@@ -29,10 +29,10 @@ public class NestedLoops {
 		for(int i = 0; i < n; i++) {
 			for(int j = 0; j < n; j++) {
 				if(i % 2 == j % 2) {
-					System.out.print("+");
+					System.out.print("#");
 				}
 				else {
-					System.out.print(" ");
+					System.out.print("o");
 				}
 			}
 			System.out.println();
