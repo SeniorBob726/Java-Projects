@@ -14,12 +14,12 @@ public class Stones {
 			System.out.println("The computer will make the first move this round.");
 			aiStonesTaken = stonesLeft - 8;
 			stonesLeft -= aiStonesTaken;
-			System.out.println("The computer took " + aiStonesTaken + " stones.");
+			System.out.println("  The computer took " + aiStonesTaken + " stones.");
 		}
 
 		while(stonesLeft > 0) {
 			System.out.println("There are " + stonesLeft + " stones left.");
-			System.out.println("Do you want to take 1, 2 or 3 stones?");
+			System.out.print("Do you want to take 1, 2 or 3 stones?\n  ");
 			stonesTaken = scanner.nextInt();
 			stonesLeft -= stonesTaken;
 			if(stonesLeft == 0) {
@@ -34,7 +34,7 @@ public class Stones {
 				aiStonesTaken = stonesLeft;
 			}
 			stonesLeft -= aiStonesTaken;
-			System.out.println("The computer took " + aiStonesTaken + " stones.");
+			System.out.println("  The computer took " + aiStonesTaken + " stones.");
 		}
 
 		System.out.println(winner);
