@@ -36,8 +36,8 @@ public class Encryptor extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == vigenereCipher) {
-			String keytext = key.getText().trim();
-			if(!keytext.matches("^[A-Za-z]+$")) {
+			String keytext = key.getText().trim().toLowerCase();
+			if(!keytext.matches("^[a-z]+$")) {
 				key.setBackground(Color.RED);
 			}
 			else {
