@@ -1,5 +1,5 @@
 public class LipogramAnalyser {
-	private static String analyserText;
+	private String analyserText;
 
 	public LipogramAnalyser(String text) {
 		analyserText = text;
@@ -9,29 +9,25 @@ public class LipogramAnalyser {
 		return analyserText.replace(letter, '#');
 	}
 
-	public static String allWordsWith(char letter) {
+	public String allWordsWith(char letter) {
+		String words = "";
 		int j = 0, k = 0;
 		for(int i = 0; i < analyserText.length(); i++) {
 			j = i;
 			k = i;
 			if(analyserText.charAt(i) == letter) {
-				while(analyserText.charAt(j) != ' ' && j > 0) {
+				while(j >= 0 && analyserText.charAt(j) != ' ') {
 					j--;
 				}
 
-				while(analyserText.charAt(k) != ' ' && k > analyserText.length()) {
+				while(k < analyserText.length() && analyserText.charAt(k) != ' ') {
 					k++;
 				}
-				System.out.println(analyserText);
-				System.out.println(j);
-				System.out.println(i);
-				System.out.println(k);
+				i = k;
+				words += analyserText.substring(j + 1, k) + "\n";
 			}
 		}
-	}
 
-	public static void main(String[] args) {
-		analyserText = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-		allWordsWith('e');
+		return words;
 	}
 }
