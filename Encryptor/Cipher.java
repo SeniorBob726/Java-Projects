@@ -1,33 +1,29 @@
 public class Cipher {
-	private String analyserText;
+	private String plaintext;
 
 	public Cipher(String text) {
-		analyserText = text;
+		plaintext = text;
 	}
 
-	public String mark(char letter) {
-		return analyserText.replace(letter, '#');
+	public String getAnalyserText() {
+		return plaintext;
 	}
 
-	public String allWordsWith(char letter) {
-		String words = "";
-		int j = 0, k = 0;
-		for(int i = 0; i < analyserText.length(); i++) {
-			j = i;
-			k = i;
-			if(analyserText.charAt(i) == letter) {
-				while(j >= 0 && analyserText.charAt(j) != ' ') {
-					j--;
-				}
+	public void setAnalyserText(String text) {
+		plaintext = text;
+	}
 
-				while(k < analyserText.length() && analyserText.charAt(k) != ' ') {
-					k++;
-				}
-				i = k;
-				words += analyserText.substring(j + 1, k) + "\n";
-			}
+	public String caesarShift(char letter) {
+		String ciphertext = plaintext;
+		for(int i = 0; i < plaintext.length(); i++) {
+			System.out.println((int) plaintext.charAt(i));
+			System.out.println(((int) plaintext.charAt(i) - 65 + 1) % 26);
 		}
 
-		return words;
+		return "";
+	}
+
+	public static void main(String[] args) {
+		System.out.println("T");
 	}
 }
