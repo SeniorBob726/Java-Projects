@@ -1,4 +1,4 @@
-public class Strings {
+public class StringPractice {
 	public static String scroll(String s) {
 		return s.substring(1) + s.charAt(0);
 	}
