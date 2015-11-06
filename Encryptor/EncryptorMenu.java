@@ -80,12 +80,10 @@ public class EncryptorMenu extends JMenuBar {
 			buffer.append(fileIn.nextLine());
 
 			encryptor.setText(buffer.toString());
-			encryptor.refresh();
 			fileIn.close();
 		}
 
 		private void saveText() {
-			encryptor.refresh();
 			JFileChooser fileChooser = new JFileChooser(pathname);
 			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			int result = fileChooser.showSaveDialog(encryptor);
