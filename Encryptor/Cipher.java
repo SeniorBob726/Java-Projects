@@ -32,4 +32,28 @@ public class Cipher {
 
 		return ciphertext;
 	}
+
+	public String vigenereCipher(String key) {
+		String ciphertext = "";
+		int j = 0;
+		for(int i = 0; i < plaintext.length(); i++) {
+			char cipherChar = plaintext.charAt(i);
+			if(Character.isLetter(cipherChar)) {
+				char shift = key.charAt(j % key.length());
+				shift -= 'a';
+				cipherChar += shift;
+				if(cipherChar < 'a') {
+					cipherChar += 26;
+				}
+				if(cipherChar > 'z') {
+					cipherChar -= 26;
+				}
+				j++;
+			}
+
+			ciphertext += cipherChar;
+		}
+
+		return ciphertext;
+	}
 }
