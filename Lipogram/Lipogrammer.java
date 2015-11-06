@@ -53,8 +53,8 @@ implements ActionListener {
 		original.setLineWrap(true);
 		original.setWrapStyleWord(true);
 		JScrollPane originalPane = new JScrollPane(original,
-		ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-		ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		marked = new JTextArea(10, 20);
 		marked.setEditable(false);
@@ -62,15 +62,15 @@ implements ActionListener {
 		marked.setLineWrap(true);
 		marked.setWrapStyleWord(true);
 		JScrollPane markedPane = new JScrollPane(marked,
-		ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-		ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		words = new JTextArea(10, 10);
 		words.setEditable(false);
 		words.setBackground(Color.LIGHT_GRAY);
 		JScrollPane wordsPane = new JScrollPane(words,
-		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-		ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		go = new JButton("Refresh");
 		go.addActionListener(this);
