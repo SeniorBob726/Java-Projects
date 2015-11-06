@@ -5,6 +5,14 @@ public class LipogramAnalyser {
 		analyserText = text;
 	}
 
+	public String getAnalyserText() {
+		return analyserText;
+	}
+
+	public void setAnalyserText(String text) {
+		analyserText = text;
+	}
+
 	public String mark(char letter) {
 		return analyserText.replace(letter, '#');
 	}
