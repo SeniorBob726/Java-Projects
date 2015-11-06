@@ -12,7 +12,7 @@ import javax.swing.ScrollPaneConstants;
 
 public class Encryptor extends JFrame
 implements ActionListener {
-	private JTextArea original, marked, words;
+	private JTextArea original, marked;
 	private JButton go;
 
 	// Constructor
@@ -37,10 +37,7 @@ implements ActionListener {
 	public void refresh() {
 		String text = original.getText();
 		Cipher cipher = new Cipher(text.toLowerCase());
-		marked.setText(cipher.mark('e'));
-		words.setText(cipher.allWordsWith('e'));
-		//marked.setText(text.toLowerCase());
-		//words.setText(text);
+		marked.setText(cipher.caesarShift(4));
 	}
 
 	// Called when the Refresh burron is clicked
@@ -55,8 +52,8 @@ implements ActionListener {
 		original.setLineWrap(true);
 		original.setWrapStyleWord(true);
 		JScrollPane originalPane = new JScrollPane(original,
-		ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-		ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		marked = new JTextArea(10, 20);
 		marked.setEditable(false);
@@ -64,15 +61,8 @@ implements ActionListener {
 		marked.setLineWrap(true);
 		marked.setWrapStyleWord(true);
 		JScrollPane markedPane = new JScrollPane(marked,
-		ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-		ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-		words = new JTextArea(10, 10);
-		words.setEditable(false);
-		words.setBackground(Color.LIGHT_GRAY);
-		JScrollPane wordsPane = new JScrollPane(words,
-		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-		ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		go = new JButton("Refresh");
 		go.addActionListener(this);
@@ -84,18 +74,10 @@ implements ActionListener {
 		box1.add(markedPane);
 		box1.add(Box.createVerticalStrut(10));
 		box1.add(go);
-		Box box2 = Box.createVerticalBox();
-		box2.add(Box.createVerticalStrut(10));
-		box2.add(wordsPane);
-		box2.add(Box.createVerticalStrut(40));
-		Box box3 = Box.createHorizontalBox();
-		box3.add(box1);
-		box3.add(Box.createHorizontalStrut(20));
-		box3.add(box2);
 
 		Container c = getContentPane();
 		c.setLayout(new FlowLayout());
-		c.add(box3);
+		c.add(box1);
 	}
 
 	public static void main(String[] args) {
