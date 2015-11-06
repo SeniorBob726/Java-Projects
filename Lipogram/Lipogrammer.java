@@ -39,8 +39,6 @@ implements ActionListener {
 		LipogramAnalyser analyser = new LipogramAnalyser(text.toLowerCase());
 		marked.setText(analyser.mark('e'));
 		words.setText(analyser.allWordsWith('e'));
-		//marked.setText(text.toLowerCase());
-		//words.setText(text);
 	}
 
 	// Called when the Refresh burron is clicked
