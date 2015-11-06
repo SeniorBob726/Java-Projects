@@ -10,8 +10,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-public class Lipogrammer extends JFrame
-implements ActionListener {
+public class Lipogrammer extends JFrame implements ActionListener {
 	private JTextArea original, marked, words;
 	private JButton go;
 
