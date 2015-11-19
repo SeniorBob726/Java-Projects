@@ -14,7 +14,7 @@ public class Quadratic {
 		}
 
 		double disc = b * b - 4 * a * c;
-		if(disc == 0) {
+		if(disc < 0) {
 			return null;
 		}
 		roots[0] = (-b + Math.sqrt(disc)) / 2 / a;
