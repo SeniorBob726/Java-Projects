@@ -9,6 +9,14 @@ public class Bank {
 		numberCustomers = 0;
 	}
 
+	public BankAccount[] getAccounts() {
+		return accounts;
+	}
+
+	public int getNumberCustomers() {
+		return numberCustomers;
+	}
+
 	public boolean elementExistsInArray(int[] array, int element) {
 		for(int i : array) {
 			if(i == element) {
@@ -60,11 +68,16 @@ public class Bank {
 			}
 
 			if(input.equals("add")) {
-				System.out.print("Please enter your name: ");
-				String name = scanner.next();
-				System.out.print("Please enter your address: ");
-				String address = scanner.next();
-				System.out.println("Your account number is: " + bank.addAccount(name, address, 0));
+				if(bank.getAccounts().length > bank.getNumberCustomers()) {
+					System.out.print("Please enter your name: ");
+					String name = scanner.next();
+					System.out.print("Please enter your address: ");
+					String address = scanner.next();
+					System.out.println("Your account number is: " + bank.addAccount(name, address, 0));
+				}
+				else {
+					System.out.println("Sorry, the bank is at max capacity.");
+				}
 			}
 		}
 	}
