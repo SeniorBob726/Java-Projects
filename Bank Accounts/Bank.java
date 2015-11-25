@@ -4,7 +4,16 @@ public class Bank {
 
 	public Bank(int bankSize) {
 		accounts = new BankAccount[bankSize];
-		numCustomers = 0;
+		numberCustomers = 0;
+	}
+
+	public boolean elementExistsInArray(int[] array, int element) {
+		for(int i : array) {
+			if(i == element) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public int addAccount(String name, String address, double balance) {
@@ -16,8 +25,8 @@ public class Bank {
 
 			int number;
 			do {
-				number = Math.random() * 1000000;
-			} while(accountNumbers.indexOf(number) == -1);
+				number = (int)(Math.random() * 1000000);
+			} while(elementExistsInArray(accountNumbers, number));
 
 			accounts[numberCustomers] = new BankAccount(name, address, number, balance);
 			numberCustomers++;
