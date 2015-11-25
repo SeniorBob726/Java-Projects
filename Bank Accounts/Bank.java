@@ -9,11 +9,11 @@ public class Bank {
 		numberCustomers = 0;
 	}
 
-	public BankAccount[] getAccounts() {
+	private BankAccount[] getAccounts() {
 		return accounts;
 	}
 
-	public BankAccount getAccount(int accountNumber) {
+	private BankAccount getAccount(int accountNumber) {
 		for(int i = 0; i < numberCustomers; i++) {
 			if(accounts[i].getAccountNumber() == accountNumber) {
 				return accounts[i];
@@ -22,11 +22,11 @@ public class Bank {
 		return null;
 	}
 
-	public int getNumberCustomers() {
+	private int getNumberCustomers() {
 		return numberCustomers;
 	}
 
-	public boolean elementExistsInArray(int[] array, int element) {
+	private static boolean elementExistsInArray(int[] array, int element) {
 		for(int i : array) {
 			if(i == element) {
 				return true;
@@ -35,7 +35,7 @@ public class Bank {
 		return false;
 	}
 
-	public int addAccount(String name, String address, double balance) {
+	private int addAccount(String name, String address, double balance) {
 		if(accounts.length > numberCustomers) {
 			int[] accountNumbers = new int[numberCustomers];
 			for(int i = 0; i < numberCustomers; i++) {
@@ -54,19 +54,19 @@ public class Bank {
 		return -1;
 	}
 
-	public String showAccount(int accountNumber) {
+	private String showAccount(int accountNumber) {
 		BankAccount account = getAccount(accountNumber);
 		return "- Name:    " + account.getAccountName() + " -\n- Address: " + account.getAddress() + " -\n- Balance: $" + String.format("%.2f", account.getBalance()) + " -";
 	}
 
-	public boolean makeDeposit(int accountNumber, double amt) {
+	private boolean makeDeposit(int accountNumber, double amt) {
 		BankAccount account = getAccount(accountNumber);
 		account.deposit(amt);
 		System.out.println("- Your new balance is $" + String.format("%.2f", account.getBalance()) + " -");
 		return true;
 	}
 
-	public boolean makeWithdrawal(int accountNumber, double amt) {
+	private boolean makeWithdrawal(int accountNumber, double amt) {
 		BankAccount account = getAccount(accountNumber);
 		if(!account.withdraw(amt)) {
 			System.out.println("- Unable to withdraw $" + String.format("%.2f", amt) + " -\n- Your current balance is $" + String.format("%.2f", account.getBalance()) + " -");
