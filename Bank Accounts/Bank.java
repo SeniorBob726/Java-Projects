@@ -13,11 +13,20 @@ public class Bank {
 		return accounts;
 	}
 
+	public BankAccount getAccount(int accountNumber) {
+		for(BankAccount account : accounts) {
+			if(account.getAccountNumber() == accountNumber) {
+				return account;
+			}
+		}
+		return null;
+	}
+
 	public int getNumberCustomers() {
 		return numberCustomers;
 	}
 
-	public static boolean elementExistsInArray(int[] array, int element) {
+	public boolean elementExistsInArray(int[] array, int element) {
 		for(int i : array) {
 			if(i == element) {
 				return true;
@@ -45,13 +54,31 @@ public class Bank {
 		return 0;
 	}
 
-	public static void main(String[] args) {
+	public String showAccount(int accountNumber) {
+		BankAccount account = getAccount(accountNumber);
+		return "- Name:    " + account.getAccountName() + " -\n- Address: " + account.getAddress() + " -\n- Balance: $" + String.format("%.2f", account.getBalance()) + " -";
+	}
+
+	public boolean makeDeposit(int accountNumber, double amt) {
+		BankAccount account = getAccount(accountNumber);
+		account.deposit(amt);
+		System.out.println("- Your new balance is $" + String.format("%.2f", account.getBalance()) + " -");
+		return true;
+	}
+
+	public boolean makeWithdrawal(int accountNumber, double amt) {
+		BankAccount account = getAccount(accountNumber);
+		if(!account.withdraw(amt)) {
+			System.out.println("- Unable to withdraw $" + String.format("%.2f", amt) + " -\n- Your current balance is $" + String.format("%.2f", account.getBalance()) + " -");
+			return false;
+		}
+
+		System.out.println("- Your new balance is $" + String.format("%.2f", account.getBalance()) + " -");
+		return true;
+	}
+
+	public void manageCustomers() {
 		Scanner scanner = new Scanner(System.in);
-
-		System.out.print("Create a bank with a maximum size of: ");
-		Bank bank = new Bank(scanner.nextInt());
-
-		System.out.print("\n");
 		System.out.println("Welcome to the Bank! Type any of the following commands to start.");
 		System.out.println("\tAdd - Add an account to the bank");
 		System.out.println("\tInfo - View the information for an account");
@@ -69,12 +96,12 @@ public class Bank {
 			}
 
 			if(input.equals("add")) {
-				if(bank.getAccounts().length > bank.getNumberCustomers()) {
+				if(accounts.length > numberCustomers) {
 					System.out.print("Please enter your name: ");
 					String name = scanner.next();
 					System.out.print("Please enter your address: ");
 					String address = scanner.next();
-					System.out.println("Your account number is: " + bank.addAccount(name, address, 0));
+					System.out.println("Your account number is: " + addAccount(name, address, 0));
 				}
 				else {
 					System.out.println("Sorry, the bank is at max capacity.");
@@ -83,26 +110,45 @@ public class Bank {
 			else if(input.equals("deposit") || input.equals("withdraw") || input.equals("info")) {
 				System.out.print("Please enter your account number: ");
 				int accountNumber = scanner.nextInt();
-				int[] accountNumbers = new int[bank.getNumberCustomers()];
-				for(int i = 0; i < bank.getNumberCustomers(); i++) {
-					accountNumbers[i] = bank.getAccounts()[i].getAccountNumber();
+
+				int[] accountNumbers = new int[numberCustomers];
+				for(int i = 0; i < numberCustomers; i++) {
+					accountNumbers[i] = accounts[i].getAccountNumber();
 				}
 				while(!elementExistsInArray(accountNumbers, accountNumber)) {
 					System.out.print("- Account not found. -\nPlease enter your account number: ");
 					accountNumber = scanner.nextInt();
 				}
+
+				if(input.equals("deposit")) {
+					System.out.print("Please enter the deposit amount: ");
+					double deposit = scanner.nextDouble();
+					makeDeposit(accountNumber, deposit);
+				}
+				else if(input.equals("withdraw")) {
+					System.out.print("Please enter the withdrawal amount: ");
+					double withdrawal = scanner.nextDouble();
+					makeWithdrawal(accountNumber, withdrawal);
+				}
+				else if(input.equals("info")) {
+					System.out.println(showAccount(accountNumber));
+				}
 			}
 		}
 	}
 
-	/*int addAccount(String name, String address, double balance) - instantiates next element of the accounts[] array to a new BankAccount with this information. Updates numberCustomers. Return account number to user.  Ensure you don't go over capacity.
-	boolean makeWithdrawal(int acctNum, double amt) - makes a withdrawal from the correct account based on account number. Returns success or failure.
-	boolean makeDeposit(int acctNum, double amt) - makes a deposit from the correct account based on account number. Returns success or failure.
-	String showAccount(int acctNum) - returns in String form the account information related to the accountNum
-	toString() prints out all accounts
-	void manageCustomers() - contains a while loop that displays the main menu for the Bank. Last 3 options require user to enter acct number.  Menu should include:
-	Create an Account  -> call addAccount()
-	Make a withdrawal -> call makeWithdrawal()
-	Make a deposit -> call makeDeposit()
-	View account information -> call showAccount()*/
+	public String toString() {
+		String output = "";
+		for(int i = 0; i < numberCustomers; i++) {
+			output += "- Account Number: " + accounts[i].getAccountNumber() + " -\n\tName:    " + accounts[i].getAccountName() + "\n\tAddress: " + accounts[i].getAddress() + "\n\tBalance: $" + String.format("%.2f", accounts[i].getBalance()) + "\n";
+		}
+		return output;
+	}
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter bank capacity: ");
+		Bank bank = new Bank(scanner.nextInt());
+		bank.manageCustomers();
+	}
 }
