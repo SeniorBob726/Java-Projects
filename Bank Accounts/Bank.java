@@ -36,7 +36,7 @@ public class Bank {
 			int number;
 			do {
 				number = (int)(Math.random() * 1000000);
-			} while(!elementExistsInArray(accountNumbers, number));
+			} while(elementExistsInArray(accountNumbers, number));
 
 			accounts[numberCustomers] = new BankAccount(name, address, number, balance);
 			numberCustomers++;
