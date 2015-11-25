@@ -17,7 +17,7 @@ public class Bank {
 		return numberCustomers;
 	}
 
-	public boolean elementExistsInArray(int[] array, int element) {
+	public static boolean elementExistsInArray(int[] array, int element) {
 		for(int i : array) {
 			if(i == element) {
 				return true;
@@ -54,9 +54,10 @@ public class Bank {
 		System.out.print("\n");
 		System.out.println("Welcome to the Bank! Type any of the following commands to start.");
 		System.out.println("\tAdd - Add an account to the bank");
+		System.out.println("\tInfo - View the information for an account");
 		System.out.println("\tDeposit - Deposit money into an account");
 		System.out.println("\tWithdraw - Withdraw money from an account");
-		System.out.println("\tExit - Exit the bank interface");
+		System.out.println("\tExit - Exit the bank");
 
 		while(true) {
 			System.out.print("> ");
@@ -77,6 +78,18 @@ public class Bank {
 				}
 				else {
 					System.out.println("Sorry, the bank is at max capacity.");
+				}
+			}
+			else if(input.equals("deposit") || input.equals("withdraw") || input.equals("info")) {
+				System.out.print("Please enter your account number: ");
+				int accountNumber = scanner.nextInt();
+				int[] accountNumbers = new int[bank.getNumberCustomers()];
+				for(int i = 0; i < bank.getNumberCustomers(); i++) {
+					accountNumbers[i] = bank.getAccounts()[i].getAccountNumber();
+				}
+				while(!elementExistsInArray(accountNumbers, accountNumber)) {
+					System.out.print("- Account not found. -\nPlease enter your account number: ");
+					accountNumber = scanner.nextInt();
 				}
 			}
 		}
