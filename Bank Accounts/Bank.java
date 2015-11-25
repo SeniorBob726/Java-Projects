@@ -51,7 +51,7 @@ public class Bank {
 			numberCustomers++;
 			return number;
 		}
-		return 0;
+		return -1;
 	}
 
 	public String showAccount(int accountNumber) {
