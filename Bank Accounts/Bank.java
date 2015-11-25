@@ -14,9 +14,9 @@ public class Bank {
 	}
 
 	public BankAccount getAccount(int accountNumber) {
-		for(BankAccount account : accounts) {
-			if(account.getAccountNumber() == accountNumber) {
-				return account;
+		for(int i = 0; i < numberCustomers; i++) {
+			if(accounts[i].getAccountNumber() == accountNumber) {
+				return accounts[i];
 			}
 		}
 		return null;
