@@ -10,7 +10,7 @@ public class Bank {
 	}
 
 	private BankAccount[] getAccounts() {
-		return accounts;
+		return accounts.clone();
 	}
 
 	private BankAccount getAccount(int accountNumber) {
