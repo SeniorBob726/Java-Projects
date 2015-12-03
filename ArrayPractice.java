@@ -1,31 +1,25 @@
-import java.util.Scanner;
-
 public class ArrayPractice {
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+		String[] values = {"For", "Never", "To", "Return", "Take"};
+		for(int i = 0; i < values.length; i++) {
+			System.out.print(values[i]);
+		}
+		System.out.println();
 
-		System.out.print("Enter a length for your array: ");
-		int length = scanner.nextInt();
+		values[1] = null;
+		values[3] = null;
 
-		int min = Integer.MAX_VALUE;
-		double avg = 0;
-		int max = Integer.MIN_VALUE;
-		System.out.print(min + " " + max);
-
-		if(length > 0) {
-			int[] array = new int[length];
-			for(int i = 0; i < length; i++) {
-				System.out.print("Enter a number for index " + i + ": ");
-				array[i] = scanner.nextInt();
-				min = Math.min(min, array[i]);
-				avg += array[i];
-				max = Math.max(max, array[i]);
+		int j = 0;
+		for(int i = 0; i < values.length; i++) {
+			String v = values[i];
+			if(v != null) {
+				values[j++] = v;
 			}
-
-			avg /= length;
-
-			System.out.println("Minimum: " + min + ", " + "Average: " + avg + ", " + "Maximum: " + max);
 		}
 
+		for(int i = 0; i < values.length; i++) {
+			System.out.print(values[i]);
+		}
+		System.out.println();
 	}
 }
