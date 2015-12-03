@@ -55,10 +55,32 @@ public class Deck {
 		return c;
 	}
 
+	public boolean returnToDeck(Card c) {
+		if(size <= deck.length) {
+			deck[size] = c;
+			size++;
+			return true;
+		}
+		return false;
+	}
+
+	public boolean returnToDeck(Card[] pile) {
+		if(size + pile.length <= deck.length) {
+			for(int i = 0; i < pile.length; i++) {
+				deck[size + i] = pile[i];
+			}
+			size += pile.length;
+			return true;
+		}
+		return false;
+	}
+
 	public String toString() {
 		String output = "";
 		for(int i = 0; i < size; i++) {
-			output += deck[i].toString() + "\n";
+			if(deck[i] != null) {
+				output += deck[i].toString() + "\n";
+			}
 		}
 		return output;
 	}

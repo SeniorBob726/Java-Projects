@@ -45,18 +45,18 @@ public class DeckTester {
 		System.out.println(myDeck);
 		System.out.println();
 
-		// myDeck.returnToDeck(player1Hand[hand1 - 1]);
-		// player1Hand[hand1 - 1] = null;
-		// hand1--;
-		//
-		// System.out.println(myDeck);
-		// System.out.println();
-		//
-		// player1Hand[hand1] = myDeck.deal();
-		// hand1++;
-		//
-		// myDeck.returnToDeck(player1Hand);
-		// myDeck.returnToDeck(player2Hand);
+		myDeck.returnToDeck(player1Hand[hand1 - 1]);
+		player1Hand[hand1 - 1] = null;
+		hand1--;
+
+		System.out.println(myDeck);
+		System.out.println();
+
+		player1Hand[hand1] = myDeck.deal();
+		hand1++;
+
+		myDeck.returnToDeck(player1Hand);
+		myDeck.returnToDeck(player2Hand);
 
 		System.out.println("\nVerify full deck");
 		System.out.println(myDeck);
