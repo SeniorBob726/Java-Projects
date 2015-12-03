@@ -37,7 +37,7 @@ public class Deck {
 	}
 
 	public void shuffle() { // Fisher-Yates Shuffle
-		int m = deck.length;
+		int m = size;
 		while(m > 0) {
 			m--;
 			int i = (int)(Math.random() * m);
