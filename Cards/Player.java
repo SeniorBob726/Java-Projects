@@ -33,7 +33,7 @@ public class Player {
 
 	public String showHand() {
 		String output = "";
-		for(int i = 0; i < size; i++) {
+		for(int i = 0; i < hand.length; i++) {
 			output += hand[i] + ", ";
 		}
 
