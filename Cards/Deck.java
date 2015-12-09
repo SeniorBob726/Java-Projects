@@ -4,20 +4,24 @@ public class Deck {
 
 	public Deck() {
 		int[] faceValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+
 		this(faceValues);
 	}
 
-	public Deck(int[] fv) {
-		size = 52;
-		deck = new Card[size];
-
-		int[] faceValues = fv.clone();
+	public Deck(int[] faceValues) {
 		String[] names = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
 		String[] suits = {"Spades", "Hearts", "Clubs", "Diamonds"};
 
+		this(52, faceValues, names, suits);
+	}
+
+	public Deck(int s, int[] faceValues, String[] names, String[] suits) {
+		size = s;
+		deck = new Card[size];
+
 		for(int s = 0; s < suits.length; s++) {
 			for(int n = 0; n < names.length; n++) {
-				deck[s * 13 + n] = new Card(faceValues[n], names[n], suits[s]);
+				deck[s * names.length + n] = new Card(faceValues[n], names[n], suits[s]);
 			}
 		}
 	}
