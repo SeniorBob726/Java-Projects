@@ -11,7 +11,7 @@ public class Player {
 		MAX_SIZE = max;
 	}
 
-	public void addCard(Card c) {
+	public void setCard(Card c) {
 		hand[size] = c;
 		size++;
 	}
@@ -47,5 +47,6 @@ public class Player {
 				hand[j++] = hand[i];
 			}
 		}
+		size = j;
 	}
 }
