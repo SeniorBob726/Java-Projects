@@ -1,22 +1,12 @@
 public class Deck {
 	private Card[] deck;
 	public int size;
+	private static final int[] defaultFaceValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+	private static final String[] defaultNames = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
+	private static final String[] defaultSuits = {"Spades", "Hearts", "Clubs", "Diamonds"};
 
-	public Deck() {
-		int[] faceValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
-
-		this(faceValues);
-	}
-
-	public Deck(int[] faceValues) {
-		String[] names = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
-		String[] suits = {"Spades", "Hearts", "Clubs", "Diamonds"};
-
-		this(52, faceValues, names, suits);
-	}
-
-	public Deck(int s, int[] faceValues, String[] names, String[] suits) {
-		size = s;
+	public Deck(int sz, int[] faceValues, String[] names, String[] suits) {
+		size = sz;
 		deck = new Card[size];
 
 		for(int s = 0; s < suits.length; s++) {
@@ -24,6 +14,14 @@ public class Deck {
 				deck[s * names.length + n] = new Card(faceValues[n], names[n], suits[s]);
 			}
 		}
+	}
+
+	public Deck(int[] faceValues) {
+		this(52, faceValues, defaultNames, defaultSuits);
+	}
+
+	public Deck() {
+		this(defaultFaceValues);
 	}
 
 	public int getSize() {
