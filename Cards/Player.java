@@ -2,13 +2,13 @@ public class Player {
 	private String name;
 	private Card[] hand;
 	private int size;
-	private int max_size;
+	private final int MAX_SIZE;
 
 	public Player(String n, int max) {
 		name = n;
 		hand = new Card[max];
 		size = 0;
-		max_size = max;
+		MAX_SIZE = max;
 	}
 
 	public void addCard(Card c) {
@@ -25,7 +25,7 @@ public class Player {
 	}
 
 	public Card[] discard() {
-		hand = new Card[max_size];
+		hand = new Card[MAX_SIZE];
 		size = 0;
 
 		return hand;
