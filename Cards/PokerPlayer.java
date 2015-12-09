@@ -1,7 +1,7 @@
 public class PokerPlayer extends Player {
 	private double balance;
 
-	public PokerPlayer(double b) {
+	public PokerPlayer(String name, int max, double b) {
 		super(name, max);
 		balance = b;
 	}
