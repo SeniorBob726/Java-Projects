@@ -49,16 +49,7 @@ public class Deck {
 		return c;
 	}
 
-	public boolean returnToDeck(Card c) {
-		if(size <= deck.length) {
-			deck[size] = c;
-			size++;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean returnToDeck(Card[] pile) {
+	public boolean returnToDeck(Card... pile) {
 		if(size + pile.length <= deck.length) {
 			for(int i = 0; i < pile.length; i++) {
 				deck[size + i] = pile[i];
