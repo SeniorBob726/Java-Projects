@@ -24,4 +24,10 @@ public class Card {
 	public String toString() {
 		return name + " of " + suit;
 	}
+
+	public static Card[] sortBySuit(Card[] array) {
+		for(int i = 0; i < array.length; i++) {
+
+		}
+	}
 }
