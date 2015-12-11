@@ -13,6 +13,14 @@ public class Card {
 		return faceValue;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public String getSuit() {
+		return suit;
+	}
+
 	public String toString() {
 		return name + " of " + suit;
 	}
