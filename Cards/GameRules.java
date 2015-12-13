@@ -1,11 +1,11 @@
 public class GameRules {
-	private static boolean elementExistsInArray(int[] array, int element) {
-		for(int i : array) {
-			if(i == element) {
-				return true;
+	private static int indexOf(int[] array, int element) {
+		for(int i = 0; i < array.length; i++) {
+			if(array[i] == element) {
+				return i;
 			}
 		}
-		return false;
+		return -1;
 	}
 
 	private boolean isFlush(Card[] hand) {
@@ -30,42 +30,62 @@ public class GameRules {
 		return true;
 	}
 
-	private int[] threeOfAKind(Card[] hand) {
+	private void repeatedCards(Card[] hand, int[] fourOfAKind, int[] threeOfAKind, int[] twoOfAKind) {
 		Card.sortByFaceValue(hand);
-		int[] pairs = new int[(int)(hand.length / 3)];
-		int size = 0;
+		int fourSize = 0;
+		int threeSize = 0;
+		int twoSize = 0;
 
 		int check = hand[0].getFaceValue();
 		for(int i = 1; i < hand.length; i++) {
-			if(!elementExistsInArray(pairs, check) && check == hand[i].getFaceValue()) {
-				pairs[size++] = check;
+			if(check == hand[i].getFaceValue()) {
+				int fourIndex = indexOf(fourOfAKind, check);
+				int threeIndex = indexOf(threeOfAKind, check);
+				int twoIndex = indexOf(twoOfAKind, check);
+
+				if(fourIndex != -1) {
+					fourOfAKind[fourIndex] = 0;
+					fourSize--;
+				}
+				if(threeIndex != -1) {
+					fourOfAKind[fourSize++] = check;
+					threeOfAKind[threeIndex] = 0;
+					threeSize--;
+				}
+				else if(twoIndex != -1) {
+					threeOfAKind[threeSize++] = check;
+					twoOfAKind[twoIndex] = 0;
+					twoSize--;
+				}
+				else {
+					twoOfAKind[twoSize++] = check;
+				}
 			}
 			check = hand[i].getFaceValue();
 		}
-		return pairs;
-	}
-
-	private int[] pairs(Card[] hand) {
-		Card.sortByFaceValue(hand);
-		int[] pairs = new int[(int)(hand.length / 2)];
-		int size = 0;
-
-		int check = hand[0].getFaceValue();
-		for(int i = 1; i < hand.length; i++) {
-			if(!elementExistsInArray(pairs, check) && check == hand[i].getFaceValue()) {
-				pairs[size++] = check;
-			}
-			check = hand[i].getFaceValue();
-		}
-		return pairs;
 	}
 
 	public void processHand(Card[] hand) {
 		System.out.println(isFlush(hand));
 		System.out.println(isStraight(hand));
-		int[] pairs = pairs(hand);
-		for(int i = 0; i < pairs.length; i++) {
-			System.out.println(pairs[i]);
+
+		int[] fourOfAKind = new int[(int)(hand.length / 4)];
+		int[] threeOfAKind = new int[(int)(hand.length / 3)];
+		int[] twoOfAKind = new int[(int)(hand.length / 2)];
+
+		repeatedCards(hand, fourOfAKind, threeOfAKind, twoOfAKind);
+
+		System.out.println("fourOfAKind");
+		for(int i = 0; i < fourOfAKind.length; i++) {
+			System.out.println(fourOfAKind[i]);
+		}
+		System.out.println("threeOfAKind");
+		for(int i = 0; i < threeOfAKind.length; i++) {
+			System.out.println(threeOfAKind[i]);
+		}
+		System.out.println("twoOfAKind");
+		for(int i = 0; i < twoOfAKind.length; i++) {
+			System.out.println(twoOfAKind[i]);
 		}
 	}
 }

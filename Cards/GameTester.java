@@ -17,18 +17,23 @@ public class GameTester {
 		Scanner scanner = new Scanner(System.in);
 
 		Deck deck = new Deck();
+		GameRules rules = new GameRules();
 
 		Player p1 = new Player("p1", 5);
 		Player p2 = new Player("p2", 5);
 
 		deck.shuffle();
 
-		for(int i = 0; i < 5; i++) {
-			p1.addCard(deck.deal());
-			p2.addCard(deck.deal());
-		}
+		p1.setCard(new Card(2, "Two", "Hearts"));
+		p1.setCard(new Card(2, "Two", "Spades"));
+		p1.setCard(new Card(2, "Two", "Diamonds"));
+		p1.setCard(new Card(3, "Three", "Clubs"));
+		p1.setCard(new Card(3, "Three", "Hearts"));
 
-		Card[] discardedPile = new Card[10];
+		System.out.println(p1.showHand());
+		rules.processHand(p1.getHand());
+
+		/* Card[] discardedPile = new Card[10];
 		int size = 0;
 
 		System.out.println(p1.showHand());
@@ -59,6 +64,6 @@ public class GameTester {
 		for(int i = 0; i < discardedPile.length; i++) {
 			output += discardedPile[i] + ", ";
 		}
-		System.out.println(output.substring(0, output.length() - 2));
+		System.out.println(output.substring(0, output.length() - 2));*/
 	}
 }
