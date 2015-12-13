@@ -31,6 +31,12 @@ public class Player {
 		return hand;
 	}
 
+	public Card[] getHand() {
+		Card[] returnHand = new Card[size];
+		System.arraycopy(hand, 0, returnHand, 0, size);
+		return returnHand;
+	}
+
 	public String showHand() {
 		String output = "";
 		for(int i = 0; i < hand.length; i++) {
