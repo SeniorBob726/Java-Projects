@@ -38,7 +38,20 @@ public class GameRules {
 				values[0] = true;
 			}
 		}
-		return true;
+
+		int count = 1;
+		for(int i = 1; i < values.length; i++) {
+			if(values[i]) {
+				count++;
+			}
+			else {
+				count = 1;
+			}
+			if(count == 5) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void repeatedCards(Card[] hand, int[] fourOfAKind, int[] threeOfAKind, int[] twoOfAKind) {
