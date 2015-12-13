@@ -19,8 +19,6 @@ public class GameRules {
 	}
 
 	private boolean isStraight(Card[] hand) {
-		Card.sortByFaceValue(hand);
-
 		int check = hand[0].getFaceValue();
 		for(int i = 1; i < hand.length; i++) {
 			if(check + i != hand[i].getFaceValue()) {
@@ -31,7 +29,6 @@ public class GameRules {
 	}
 
 	private void repeatedCards(Card[] hand, int[] fourOfAKind, int[] threeOfAKind, int[] twoOfAKind) {
-		Card.sortByFaceValue(hand);
 		int fourSize = 0;
 		int threeSize = 0;
 		int twoSize = 0;
@@ -66,12 +63,12 @@ public class GameRules {
 	}
 
 	private Card highCard(Card[] hand) {
-		Card.sortByFaceValue(hand);
-
 		return hand[hand.length - 1];
 	}
 
 	public void processHand(Card[] hand) {
+		Card.sortByFaceValue(hand);
+
 		System.out.println("Flush: " + isFlush(hand));
 		System.out.println("Straight: " + isStraight(hand));
 

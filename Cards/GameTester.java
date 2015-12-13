@@ -19,12 +19,12 @@ public class GameTester {
 		Deck deck = new Deck();
 		GameRules rules = new GameRules();
 
-		Player p1 = new Player("p1", 5);
-		Player p2 = new Player("p2", 5);
+		Player p1 = new Player("p1", 7);
+		Player p2 = new Player("p2", 7);
 
 		deck.shuffle();
 
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < 7; i++) {
 			p1.setCard(deck.deal());
 			p2.setCard(deck.deal());
 		}

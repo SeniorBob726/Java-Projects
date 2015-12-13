@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.Comparator;
-
 public class Card {
 	private final int faceValue;
 	private final String name;
@@ -28,25 +25,15 @@ public class Card {
 		return name + " of " + suit;
 	}
 
-	public static Card[] sortBySuit(Card[] array) { // Sort cards in alphabetical order by suit
-		Arrays.sort(array, new Comparator<Card>() {
-			@Override
-			public int compare(Card a, Card b) {
-				return a.getSuit().compareTo(b.getSuit());
+	public static void sortByFaceValue(Card[] array) { // Sort cards in ascending order by faceValue
+		for(int i = 1; i < array.length; i++) {
+			for(int j = i; j > 0; j--) {
+				if(array[j].getFaceValue() < array[j - 1].getFaceValue()) {
+					Card temp = array[j];
+					array[j] = array[j - 1];
+					array[j - 1] = temp;
+				}
 			}
-		});
-
-		return array;
-	}
-
-	public static Card[] sortByFaceValue(Card[] array) { // Sort cards in ascending order by faceValue
-		Arrays.sort(array, new Comparator<Card>() {
-			@Override
-			public int compare(Card a, Card b) {
-				return a.getFaceValue() - b.getFaceValue();
-			}
-		});
-
-		return array;
+		}
 	}
 }
