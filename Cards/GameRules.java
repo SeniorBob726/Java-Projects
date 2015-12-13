@@ -30,6 +30,21 @@ public class GameRules {
 		return true;
 	}
 
+	private int[] threeOfAKind(Card[] hand) {
+		Card.sortByFaceValue(hand);
+		int[] pairs = new int[(int)(hand.length / 3)];
+		int size = 0;
+
+		int check = hand[0].getFaceValue();
+		for(int i = 1; i < hand.length; i++) {
+			if(!elementExistsInArray(pairs, check) && check == hand[i].getFaceValue()) {
+				pairs[size++] = check;
+			}
+			check = hand[i].getFaceValue();
+		}
+		return pairs;
+	}
+
 	private int[] pairs(Card[] hand) {
 		Card.sortByFaceValue(hand);
 		int[] pairs = new int[(int)(hand.length / 2)];
