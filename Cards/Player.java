@@ -11,6 +11,10 @@ public class Player {
 		MAX_SIZE = max;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public void setCard(Card c) {
 		hand[size] = c;
 		size++;
