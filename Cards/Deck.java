@@ -39,7 +39,7 @@ public class Deck {
 		}
 	}
 
-	public Card deal() {
+	public Card deal() { // Return a card and remove it from the deck
 		Card c = deck[size - 1];
 		deck[size - 1] = null;
 		size--;
@@ -47,7 +47,7 @@ public class Deck {
 		return c;
 	}
 
-	public boolean returnToDeck(Card... pile) {
+	public boolean returnToDeck(Card... pile) { // Return cards to the end of the deck
 		if(size + pile.length <= deck.length) {
 			for(int i = 0; i < pile.length; i++) {
 				deck[size + i] = pile[i];
@@ -66,12 +66,5 @@ public class Deck {
 			}
 		}
 		return output;
-	}
-
-	public static void main(String[] args) {
-		Deck deck = new Deck();
-		System.out.println(deck.getSize() + " " + deck);
-		deck.shuffle();
-		System.out.println(deck.getSize() + " " + deck);
 	}
 }

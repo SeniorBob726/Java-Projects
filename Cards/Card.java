@@ -28,7 +28,7 @@ public class Card {
 		return name + " of " + suit;
 	}
 
-	public static Card[] sortBySuit(Card[] array) {
+	public static Card[] sortBySuit(Card[] array) { // Sort cards in alphabetical order by suit
 		Arrays.sort(array, new Comparator<Card>() {
 			@Override
 			public int compare(Card a, Card b) {
@@ -39,7 +39,7 @@ public class Card {
 		return array;
 	}
 
-	public static Card[] sortByFaceValue(Card[] array) {
+	public static Card[] sortByFaceValue(Card[] array) { // Sort cards in ascending order by faceValue
 		Arrays.sort(array, new Comparator<Card>() {
 			@Override
 			public int compare(Card a, Card b) {
