@@ -9,13 +9,21 @@ public class GameRules {
 	}
 
 	private boolean isFlush(Card[] hand) {
+		int count = 1;
 		String check = hand[0].getSuit();
 		for(int i = 1; i < hand.length; i++) {
 			if(!check.equals(hand[i].getSuit())) {
-				return false;
+				check = hand[i].getSuit();
+				count = 1;
+			}
+			else {
+				count++;
+			}
+			if(count == 5) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	private boolean isStraight(Card[] hand) {
@@ -67,9 +75,10 @@ public class GameRules {
 	}
 
 	public void processHand(Card[] hand) {
-		Card.sortByFaceValue(hand);
-
+		Card.sortBySuit(hand);
 		System.out.println("Flush: " + isFlush(hand));
+
+		Card.sortByFaceValue(hand);
 		System.out.println("Straight: " + isStraight(hand));
 
 		int[] fourOfAKind = new int[(int)(hand.length / 4)];
