@@ -8,7 +8,7 @@ public class GameRules {
 		return -1;
 	}
 
-	private boolean isFlush(Card[] hand) {
+	private String isFlush(Card[] hand) {
 		int count = 1;
 		String check = hand[0].getSuit();
 		for(int i = 1; i < hand.length; i++) {
@@ -20,10 +20,10 @@ public class GameRules {
 				count++;
 			}
 			if(count == 5) {
-				return true;
+				return check;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	private boolean isStraight(Card[] hand) {
