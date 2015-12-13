@@ -66,8 +66,8 @@ public class GameRules {
 	}
 
 	public void processHand(Card[] hand) {
-		System.out.println(isFlush(hand));
-		System.out.println(isStraight(hand));
+		System.out.println("Flush: " + isFlush(hand));
+		System.out.println("Straight: " + isStraight(hand));
 
 		int[] fourOfAKind = new int[(int)(hand.length / 4)];
 		int[] threeOfAKind = new int[(int)(hand.length / 3)];
@@ -75,17 +75,28 @@ public class GameRules {
 
 		repeatedCards(hand, fourOfAKind, threeOfAKind, twoOfAKind);
 
-		System.out.println("fourOfAKind");
+		String output = "fourOfAKind: ";
 		for(int i = 0; i < fourOfAKind.length; i++) {
-			System.out.println(fourOfAKind[i]);
+			if(fourOfAKind[i] != 0) {
+				output += fourOfAKind[i] + ", ";
+			}
 		}
-		System.out.println("threeOfAKind");
+		System.out.println(output.substring(0, output.length() - 2));
+
+		output = "threeOfAKind: ";
 		for(int i = 0; i < threeOfAKind.length; i++) {
-			System.out.println(threeOfAKind[i]);
+			if(threeOfAKind[i] != 0) {
+				output += threeOfAKind[i] + ", ";
+			}
 		}
-		System.out.println("twoOfAKind");
+		System.out.println(output.substring(0, output.length() - 2));
+
+		output = "twoOfAKind: ";
 		for(int i = 0; i < twoOfAKind.length; i++) {
-			System.out.println(twoOfAKind[i]);
+			if(twoOfAKind[i] != 0) {
+				output += twoOfAKind[i] + ", ";
+			}
 		}
+		System.out.println(output.substring(0, output.length() - 2));
 	}
 }

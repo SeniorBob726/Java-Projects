@@ -24,14 +24,18 @@ public class GameTester {
 
 		deck.shuffle();
 
-		p1.setCard(new Card(2, "Two", "Hearts"));
-		p1.setCard(new Card(2, "Two", "Spades"));
-		p1.setCard(new Card(2, "Two", "Diamonds"));
-		p1.setCard(new Card(3, "Three", "Clubs"));
-		p1.setCard(new Card(3, "Three", "Hearts"));
+		for(int i = 0; i < 5; i++) {
+			p1.setCard(deck.deal());
+			p2.setCard(deck.deal());
+		}
 
-		System.out.println(p1.showHand());
+		System.out.println(p1.getName() + ": " + p1.showHand());
 		rules.processHand(p1.getHand());
+
+		System.out.println();
+
+		System.out.println(p2.getName() + ": " + p2.showHand());
+		rules.processHand(p2.getHand());
 
 		/* Card[] discardedPile = new Card[10];
 		int size = 0;
