@@ -65,6 +65,12 @@ public class GameRules {
 		}
 	}
 
+	private void highCard(Card[] hand) {
+		Card.sortByFaceValue(hand);
+
+		return hand[hand.length - 1];
+	}
+
 	public void processHand(Card[] hand) {
 		System.out.println("Flush: " + isFlush(hand));
 		System.out.println("Straight: " + isStraight(hand));
@@ -98,5 +104,7 @@ public class GameRules {
 			}
 		}
 		System.out.println(output.substring(0, output.length() - 2));
+
+		System.out.println("High Card: " + highCard(hand));
 	}
 }
