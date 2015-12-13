@@ -28,7 +28,7 @@ public class Card {
 	public static void sortBySuit(Card[] array) { // Sort cards in alphabetical order by suit
 		for(int i = 1; i < array.length; i++) {
 			for(int j = i; j > 0; j--) {
-				if(array[j].getSuit().compareTo(array[j - 1].getSuit()) > 0) {
+				if(array[j].getSuit().compareTo(array[j - 1].getSuit()) < 0) {
 					Card temp = array[j];
 					array[j] = array[j - 1];
 					array[j - 1] = temp;
