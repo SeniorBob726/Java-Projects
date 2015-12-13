@@ -65,7 +65,7 @@ public class GameRules {
 		}
 	}
 
-	private void highCard(Card[] hand) {
+	private Card highCard(Card[] hand) {
 		Card.sortByFaceValue(hand);
 
 		return hand[hand.length - 1];
