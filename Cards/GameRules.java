@@ -8,6 +8,18 @@ public class GameRules {
 		return -1;
 	}
 
+	private String isStraightFlush(Card[] hand, String flushSuit) {
+		Card[] flushSuitCards = new Card[0];
+
+		for(int i = 0; i < hand.length; i++) {
+			if(!flushSuit.equals(hand[i].getSuit())) {
+				Card[] flushSuitCards = new Card[0];
+			}
+		}
+
+		return isStraight(flushSuitCards);
+	}
+
 	private String isFlush(Card[] hand) {
 		int count = 1;
 		String check = hand[0].getSuit();
@@ -19,6 +31,7 @@ public class GameRules {
 			else {
 				count++;
 			}
+
 			if(count == 5) {
 				return check;
 			}
@@ -47,6 +60,7 @@ public class GameRules {
 			else {
 				count = 1;
 			}
+
 			if(count == 5) {
 				return true;
 			}
