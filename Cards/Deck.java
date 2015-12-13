@@ -24,6 +24,12 @@ public class Deck {
 		this(defaultFaceValues);
 	}
 
+	public Card[] getDeck() {
+		Card[] returnDeck = new Card[size];
+		System.arraycopy(deck, 0, returnDeck, 0, size);
+		return returnDeck;
+	}
+
 	public int getSize() {
 		return size;
 	}
