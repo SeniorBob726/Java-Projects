@@ -78,6 +78,35 @@ public class PokerHand {
 		return 0;
 	}
 
+	public int getHandValue() {
+		if(royalFlush) {
+			return 9;
+		}
+		if(straightFlush) {
+			return 8;
+		}
+		if(fourOfAKind.length > 0) {
+			return 7;
+		}
+		if(fullHouse) {
+			return 6;
+		}
+		if(flushSuit != null) {
+			return 5;
+		}
+		if(straight != null) {
+			return 4;
+		}
+		if(threeOfAKind.length > 0) {
+			return 3;
+		}
+		if(twoOfAKind.length > 0) {
+			return 2;
+		}
+
+		return 1;
+	}
+
 	public int compareTo(PokerHand pokerHand) {
 		int hC = highCard.compareTo(pokerHand.highCard);
 		int rF = royalFlush.compareTo(pokerHand.royalFlush);
