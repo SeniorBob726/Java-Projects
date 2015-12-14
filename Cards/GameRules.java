@@ -95,14 +95,9 @@ public class GameRules {
 		int check = hand[0].getFaceValue();
 		for(int i = 1; i < hand.length; i++) {
 			if(check == hand[i].getFaceValue()) {
-				int fourIndex = indexOf(fourOfAKind, check);
 				int threeIndex = indexOf(threeOfAKind, check);
 				int twoIndex = indexOf(twoOfAKind, check);
 
-				if(fourIndex != -1) {
-					fourOfAKind[fourIndex] = 0;
-					fourSize--;
-				}
 				if(threeIndex != -1) {
 					fourOfAKind[fourSize++] = check;
 					threeOfAKind[threeIndex] = 0;
