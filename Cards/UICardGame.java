@@ -60,26 +60,39 @@ public class UICardGame {
 		}
 	}
 
+	private void endGame(PokerPlayer player, ComputerPokerPlayer computer) {
+		System.out.println("- Your hand is: " + player.showHand() + " -");
+		System.out.println("- The computer's hand is: " + computer.showHand() + " -");
+		PokerHand playerHand = rules.processHand(player.getHand());
+		PokerHand computerHand = rules.processHand(computer.getHand());
+
+		switch(playerHand.compareTo(computerHand)) {
+			case 1:
+				System.out.println("You won!");
+				break;
+			case -1:
+				System.out.println("You lost!");
+				break;
+			case 0:
+				System.out.println("There was a tie!");
+				break;
+		}
+	}
+
 	public void play() {
 		deck.shuffle();
 
-		p1.setCard(new Card(11, "Ace", "Hearts"));
-		p1.setCard(new Card(12, "Jack", "Hearts"));
-		p1.setCard(new Card(13, "Jack", "Hearts"));
-		p1.setCard(new Card(14, "Jack", "Hearts"));
-		p1.setCard(new Card(10, "Ace", "Hearts"));
-
 		for(int i = 0; i < rules.getHandSize(); i++) {
+			p1.setCard(deck.deal());
 			computer.setCard(deck.deal());
 		}
-		System.out.println(rules.processHand(p1.getHand()).compareTo(rules.processHand(computer.getHand())));
 
 		bet(p1);
 		discard(p1);
 		bet(p1);
 
-		System.out.println(rules.processHand(p1.getHand()));
-	}
+		endGame(p1, computer);
+}
 
 	public static void main(String[] args) {
 		System.out.print("Enter your name: ");
