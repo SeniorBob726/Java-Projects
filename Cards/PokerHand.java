@@ -1,10 +1,10 @@
 public class PokerHand {
-	private boolean royalFlush;
-	private boolean straightFlush;
+	private Boolean royalFlush;
+	private Boolean straightFlush;
 	private int[] fourOfAKind;
-	private boolean fullHouse;
+	private Boolean fullHouse;
 	private String flushSuit;
-	private boolean straight;
+	private Boolean straight;
 	private int[] threeOfAKind;
 	private int[] twoOfAKind;
 	private Card highCard;
@@ -19,17 +19,6 @@ public class PokerHand {
 		threeOfAKind = threeOAK;
 		twoOfAKind = twoOAK;
 		highCard = hc;
-	}
-
-	private int booleanCompare(boolean a, boolean b) {
-		if(a && !b) {
-			return 1;
-		}
-		else if(b && !a) {
-			return -1;
-		}
-
-		return 0;
 	}
 
 	private int pairCompare(int[] a, int[] b) {
@@ -62,11 +51,11 @@ public class PokerHand {
 	}
 
 	public int compareTo(PokerHand pokerHand) {
-		if(booleanCompare(royalFlush, pokerHand.royalFlush) != 0) {
-			return booleanCompare(royalFlush, pokerHand.royalFlush);
+		if(royalFlush.compareTo(pokerHand.royalFlush) != 0) {
+			return royalFlush.compareTo(pokerHand.royalFlush);
 		}
-		if(booleanCompare(straightFlush, pokerHand.straightFlush) != 0) {
-			return booleanCompare(straightFlush, pokerHand.straightFlush);
+		if(straightFlush.compareTo(pokerHand.straightFlush) != 0) {
+			return straightFlush.compareTo(pokerHand.straightFlush);
 		}
 		if(pairCompare(fourOfAKind, pokerHand.fourOfAKind) != 0) {
 			return pairCompare(fourOfAKind, pokerHand.fourOfAKind);
