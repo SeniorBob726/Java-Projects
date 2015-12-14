@@ -121,13 +121,12 @@ public class GameRules {
 	public void processHand(Card[] hand) {
 		Card.sortBySuit(hand);
 		String flushSuit = isFlush(hand);
-		System.out.println("Flush: " + flushSuit);
 
 		Card.sortByFaceValue(hand);
-		System.out.println("Straight: " + isStraight(hand));
 
+		boolean straightFlush = false;
 		if(flushSuit != null) {
-			System.out.println("Straight Flush: " + isStraightFlush(hand, flushSuit));
+			straightFlush = isStraightFlush(hand, flushSuit);
 		}
 
 		int[] fourOfAKind = new int[(int)(hand.length / 4)];
@@ -136,30 +135,7 @@ public class GameRules {
 
 		repeatedCards(hand, fourOfAKind, threeOfAKind, twoOfAKind);
 
-		String output = "fourOfAKind: ";
-		for(int i = 0; i < fourOfAKind.length; i++) {
-			if(fourOfAKind[i] != 0) {
-				output += fourOfAKind[i] + ", ";
-			}
-		}
-		System.out.println(output.substring(0, output.length() - 2));
-
-		output = "threeOfAKind: ";
-		for(int i = 0; i < threeOfAKind.length; i++) {
-			if(threeOfAKind[i] != 0) {
-				output += threeOfAKind[i] + ", ";
-			}
-		}
-		System.out.println(output.substring(0, output.length() - 2));
-
-		output = "twoOfAKind: ";
-		for(int i = 0; i < twoOfAKind.length; i++) {
-			if(twoOfAKind[i] != 0) {
-				output += twoOfAKind[i] + ", ";
-			}
-		}
-		System.out.println(output.substring(0, output.length() - 2));
-
 		System.out.println("High Card: " + highCard(hand));
+		PokerHand pokerHand = new PokerHand(straightFlush, flushSuit, isStraight(hand), fourOfAKind, threeOfAKind, twoOfAKind, highCard(hand));
 	}
 }
