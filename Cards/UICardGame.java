@@ -20,43 +20,43 @@ public class UICardGame {
 		computer = new ComputerPokerPlayer("Computer", rules.getHandSize(), balance);
 	}
 
-	private void bet() {
-		System.out.println("- Your hand is: " + p1.showHand() + " -");
+	private void bet(PokerPlayer player) {
+		System.out.println("- Your hand is: " + player.showHand() + " -");
 		while(true) {
 			System.out.print("Enter the amount you would like to bet: ");
 			try {
 				double bet = scanner.nextDouble();
-				if(p1.bet(bet)) {
+				if(player.bet(bet)) {
 					pot += bet;
-					System.out.println("- Your new balance is $" + String.format("%.2f", p1.getBalance()) + " -");
+					System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
 					break;
 				}
 				else {
-					System.out.println("- Your balance is $" + String.format("%.2f", p1.getBalance()) + " -");
+					System.out.println("- Your balance is $" + String.format("%.2f", player.getBalance()) + " -");
 				}
 			}
 			catch(Exception e) {
-				System.out.println("Invalid input, enter a number");
+				System.out.println("Invalid input");
 				scanner.nextLine();
 			}
 		}
 	}
 
-	private void discard() {
-		System.out.println("- Your hand is: " + p1.showHand() + " -");
+	private void discard(Player player) {
+		System.out.println("- Your hand is: " + player.showHand() + " -");
 		while(true) {
 			System.out.print("Enter the index of the card you want to discard (-1 to not discard): ");
 			int input = scanner.nextInt();
-			if(input < 0 || input > p1.getSize()) {
+			if(input < 0 || input > player.getSize()) {
 				break;
 			}
-			discardedPile[dPSize++] = p1.discard(input);
+			discardedPile[dPSize++] = player.discard(input);
 			System.out.println("- Removed: " + discardedPile[dPSize - 1] + " -");
 		}
-		p1.fixCards();
+		player.fixCards();
 
-		for(int i = p1.getSize(); i < rules.getHandSize(); i++) {
-			p1.setCard(deck.deal());
+		for(int i = player.getSize(); i < rules.getHandSize(); i++) {
+			player.setCard(deck.deal());
 		}
 	}
 
@@ -68,9 +68,9 @@ public class UICardGame {
 			computer.setCard(deck.deal());
 		}
 
-		bet();
-		discard();
-		bet();
+		bet(p1);
+		discard(p1);
+		bet(p1);
 
 		rules.processHand(p1.getHand());
 	}
@@ -85,7 +85,7 @@ public class UICardGame {
 				balance = scanner.nextDouble();
 			}
 			catch(Exception e) {
-				System.out.println("Invalid input, enter a number");
+				System.out.println("Invalid input");
 				scanner.nextLine();
 			}
 		} while(balance == 0.0);
