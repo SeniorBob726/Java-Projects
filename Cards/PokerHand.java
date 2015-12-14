@@ -21,7 +21,7 @@ public class PokerHand {
 		highCard = hc;
 	}
 
-	public int booleanCompare(boolean a, boolean b) {
+	private int booleanCompare(boolean a, boolean b) {
 		if(a && !b) {
 			return 1;
 		}
@@ -32,13 +32,44 @@ public class PokerHand {
 		return 0;
 	}
 
+	private int pairCompare(int[] a, int[] b) {
+		int aSize = 0;
+		int bSize = 0;
+		int aSum = 0;
+		int bSum = 0;
+
+		for(int i = 0; i < a.length; i++) {
+			if(a[i] != 0) {
+				aSize++;
+				aSum += a[i];
+			}
+		}
+		for(int i = 0; i < b.length; i++) {
+			if(b[i] != 0) {
+				bSize++;
+				bSum += b[i];
+			}
+		}
+
+		if(aSize != bSize) {
+			return aSize > bSize ? 1 : -1;
+		}
+		else if(aSum != bSum) {
+			return aSum > bSum ? 1 : -1;
+		}
+
+		return 0;
+	}
+
 	public int compareTo(PokerHand pokerHand) {
-		int value = 0;
 		if(booleanCompare(royalFlush, pokerHand.royalFlush) != 0) {
 			return booleanCompare(royalFlush, pokerHand.royalFlush);
 		}
 		if(booleanCompare(straightFlush, pokerHand.straightFlush) != 0) {
 			return booleanCompare(straightFlush, pokerHand.straightFlush);
+		}
+		if(pairCompare(fourOfAKind, pokerHand.fourOfAKind) != 0) {
+			return pairCompare(fourOfAKind, pokerHand.fourOfAKind);
 		}
 
 		return 0;
