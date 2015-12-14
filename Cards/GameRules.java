@@ -41,7 +41,7 @@ public class GameRules {
 			flushCheck[i] = flushSuitCards[i];
 		}
 
-		if(isStraight(flushCheck)) {
+		if(isStraight(flushCheck) != null) {
 			if(highCard(flushCheck).getFaceValue() == 14) {
 				return 2;
 			}
@@ -70,7 +70,7 @@ public class GameRules {
 		return null;
 	}
 
-	private boolean isStraight(Card[] hand) {
+	private Card isStraight(Card[] hand) {
 		boolean[] values = new boolean[15];
 		for(int i = 0; i < values.length; i++) {
 			values[i] = false;
@@ -93,10 +93,14 @@ public class GameRules {
 			}
 
 			if(count == 5) {
-				return true;
+				for(int j = 0; j < hand.length; j++) {
+					if(hand[j].getFaceValue() == i) {
+						return hand[j];
+					}
+				}
 			}
 		}
-		return false;
+		return null;
 	}
 
 	private boolean repeatedCards(Card[] hand, int[] fourOfAKind, int[] threeOfAKind, int[] twoOfAKind) {
