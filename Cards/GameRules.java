@@ -118,7 +118,7 @@ public class GameRules {
 		return hand[hand.length - 1];
 	}
 
-	public void processHand(Card[] hand) {
+	public PokerHand processHand(Card[] hand) {
 		Card.sortBySuit(hand);
 		String flushSuit = isFlush(hand);
 
@@ -137,5 +137,7 @@ public class GameRules {
 
 		System.out.println("High Card: " + highCard(hand));
 		PokerHand pokerHand = new PokerHand(straightFlush, flushSuit, isStraight(hand), fourOfAKind, threeOfAKind, twoOfAKind, highCard(hand));
+
+		return pokerHand;
 	}
 }
