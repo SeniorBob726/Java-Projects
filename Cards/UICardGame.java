@@ -72,7 +72,7 @@ public class UICardGame {
 		discard(p1);
 		bet(p1);
 
-		rules.processHand(p1.getHand());
+		System.out.println(rules.processHand(p1.getHand()));
 	}
 
 	public static void main(String[] args) {
