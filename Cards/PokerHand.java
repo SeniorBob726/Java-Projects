@@ -77,6 +77,18 @@ public class PokerHand {
 		if(suitCompare(flushSuit, pokerHand.flushSuit)) {
 			return suitCompare(flushSuit, pokerHand.flushSuit);
 		}
+		if(straight.compareTo(pokerHand.straight) != 0) {
+			return straight.compareTo(pokerHand.straight);
+		}
+		if(pairCompare(threeOfAKind, pokerHand.threeOfAKind) != 0) {
+			return pairCompare(threeOfAKind, pokerHand.threeOfAKind);
+		}
+		if(pairCompare(twoOfAKind, pokerHand.twoOfAKind) != 0) {
+			return pairCompare(twoOfAKind, pokerHand.twoOfAKind);
+		}
+		if(highCard.compareTo(pokerHand.highCard) != 0) {
+			return highCard.compareTo(pokerHand.highCard);
+		}
 
 		return 0;
 	}
