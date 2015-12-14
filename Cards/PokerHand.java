@@ -62,32 +62,41 @@ public class PokerHand {
 	}
 
 	public int compareTo(PokerHand pokerHand) {
-		if(royalFlush.compareTo(pokerHand.royalFlush) != 0) {
-			return royalFlush.compareTo(pokerHand.royalFlush);
+		int rF = royalFlush.compareTo(pokerHand.royalFlush);
+		if(rF != 0) {
+			return rF;
 		}
-		if(straightFlush.compareTo(pokerHand.straightFlush) != 0) {
-			return straightFlush.compareTo(pokerHand.straightFlush);
+		int sF = straightFlush.compareTo(pokerHand.straightFlush);
+		if(sF != 0) {
+			return sF;
 		}
-		if(pairCompare(fourOfAKind, pokerHand.fourOfAKind) != 0) {
-			return pairCompare(fourOfAKind, pokerHand.fourOfAKind);
+		int fourOAK = pairCompare(fourOfAKind, pokerHand.fourOfAKind);
+		if(fourOAK != 0) {
+			return fourOAK;
 		}
-		if(fullHouse.compareTo(pokerHand.fullHouse) != 0) {
-			return fullHouse.compareTo(pokerHand.fullHouse);
+		int fH = fullHouse.compareTo(pokerHand.fullHouse);
+		if(fH != 0) {
+			return fH;
 		}
-		if(suitCompare(flushSuit, pokerHand.flushSuit) != 0) {
-			return suitCompare(flushSuit, pokerHand.flushSuit);
+		int flush = suitCompare(flushSuit, pokerHand.flushSuit);
+		if(flush != 0) {
+			return flush;
 		}
-		if(straight.compareTo(pokerHand.straight) != 0) {
-			return straight.compareTo(pokerHand.straight);
+		int str = straight.compareTo(pokerHand.straight);
+		if(str != 0) {
+			return str;
 		}
-		if(pairCompare(threeOfAKind, pokerHand.threeOfAKind) != 0) {
-			return pairCompare(threeOfAKind, pokerHand.threeOfAKind);
+		int threeOAK = pairCompare(threeOfAKind, pokerHand.threeOfAKind);
+		if(threeOAK != 0) {
+			return threeOAK;
 		}
-		if(pairCompare(twoOfAKind, pokerHand.twoOfAKind) != 0) {
-			return pairCompare(twoOfAKind, pokerHand.twoOfAKind);
+		int twoOAK = pairCompare(twoOfAKind, pokerHand.twoOfAKind);
+		if(twoOAK != 0) {
+			return twoOAK;
 		}
-		if(highCard.compareTo(pokerHand.highCard) != 0) {
-			return highCard.compareTo(pokerHand.highCard);
+		int hC = highCard.compareTo(pokerHand.highCard);
+		if(hC != 0) {
+			return hC;
 		}
 
 		return 0;
