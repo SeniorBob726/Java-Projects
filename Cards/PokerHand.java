@@ -21,7 +21,7 @@ public class PokerHand {
 		highCard = hc;
 	}
 
-	private int suitCompare(String a, String b) {
+	private int flushCompare(String a, String b) {
 		if(a == null && b != null) {
 			return 1;
 		}
@@ -88,7 +88,7 @@ public class PokerHand {
 				return twoOAK;
 			}
 		}
-		int flush = suitCompare(flushSuit, pokerHand.flushSuit);
+		int flush = flushCompare(flushSuit, pokerHand.flushSuit);
 		if(flush != 0) {
 			return flush;
 		}
