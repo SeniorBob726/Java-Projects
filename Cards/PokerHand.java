@@ -21,6 +21,17 @@ public class PokerHand {
 		highCard = hc;
 	}
 
+	private int suitCompare(String a, String b) {
+		if(a == null && b != null) {
+			return 1;
+		}
+		else if(b == null && a != null) {
+			return -1;
+		}
+
+		return 0;
+	}
+
 	private int pairCompare(int[] a, int[] b) {
 		int aSize = 0;
 		int bSize = 0;
@@ -59,6 +70,12 @@ public class PokerHand {
 		}
 		if(pairCompare(fourOfAKind, pokerHand.fourOfAKind) != 0) {
 			return pairCompare(fourOfAKind, pokerHand.fourOfAKind);
+		}
+		if(fullHouse.compareTo(pokerHand.fullHouse) != 0) {
+			return fullHouse.compareTo(pokerHand.fullHouse);
+		}
+		if(suitCompare(flushSuit, pokerHand.flushSuit)) {
+			return suitCompare(flushSuit, pokerHand.flushSuit);
 		}
 
 		return 0;
