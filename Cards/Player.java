@@ -15,6 +15,10 @@ public class Player {
 		return name;
 	}
 
+	public int getSize() {
+		return size;
+	}
+
 	public void setCard(Card c) {
 		hand[size] = c;
 		size++;
