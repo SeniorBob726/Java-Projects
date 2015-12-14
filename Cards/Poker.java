@@ -58,8 +58,6 @@ public class Poker {
 		for(int i = p1.getSize(); i < rules.getHandSize(); i++) {
 			p1.setCard(deck.deal());
 		}
-
-		System.out.println("- Your hand is: " + p1.showHand() + " -");
 	}
 
 	public void play() {
@@ -73,6 +71,8 @@ public class Poker {
 		bet();
 		discard();
 		bet();
+
+		rules.processHand(p1.getHand());
 	}
 
 	public static void main(String[] args) {
