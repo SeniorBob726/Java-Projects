@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Poker {
+public class UICardGame {
 	private static Scanner scanner = new Scanner(System.in);
 	private Deck deck;
 	private GameRules rules;
@@ -10,7 +10,7 @@ public class Poker {
 	private PokerPlayer p1;
 	private ComputerPokerPlayer computer;
 
-	public Poker(String name, double balance) {
+	public UICardGame(String name, double balance) {
 		deck = new Deck();
 		rules = new GameRules();
 		discardedPile = new Card[52];
@@ -90,7 +90,7 @@ public class Poker {
 			}
 		} while(balance == 0.0);
 
-		Poker pokerGame = new Poker(name, balance);
+		UICardGame pokerGame = new UICardGame(name, balance);
 		pokerGame.play();
 	}
 }
