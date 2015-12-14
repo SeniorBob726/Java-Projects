@@ -1,4 +1,10 @@
 public class GameRules {
+	private final int HAND_SIZE = 5;
+
+	public int getHandSize() {
+		return HAND_SIZE;
+	}
+
 	private static int indexOf(int[] array, int element) {
 		for(int i = 0; i < array.length; i++) {
 			if(array[i] == element) {
