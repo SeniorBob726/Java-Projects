@@ -14,7 +14,7 @@ public class GameRules {
 		return -1;
 	}
 
-	private boolean isStraightFlush(Card[] hand, String flushSuit, boolean royalFlush) {
+	private int isStraightFlush(Card[] hand, String flushSuit) {
 		Card[] flushSuitCards = new Card[hand.length];
 		int size = 0;
 
@@ -31,12 +31,12 @@ public class GameRules {
 
 		if(isStraight(flushCheck)) {
 			if(highCard(flushCheck).getFaceValue() == 14) {
-				royalFlush = true;
+				return 2;
 			}
-			return true;
+			return 1;
 		}
 
-		return false;
+		return -1;
 	}
 
 	private String isFlush(Card[] hand) {
@@ -87,7 +87,7 @@ public class GameRules {
 		return false;
 	}
 
-	private void repeatedCards(Card[] hand, int[] fourOfAKind, int[] threeOfAKind, int[] twoOfAKind, boolean fullHouse) {
+	private boolean repeatedCards(Card[] hand, int[] fourOfAKind, int[] threeOfAKind, int[] twoOfAKind) {
 		int fourSize = 0;
 		int threeSize = 0;
 		int twoSize = 0;
@@ -121,8 +121,9 @@ public class GameRules {
 		}
 
 		if(twoSize > 0 && threeSize > 0) {
-			fullHouse = true;
+			return true;
 		}
+		return false;
 	}
 
 	private Card highCard(Card[] hand) {
@@ -138,15 +139,19 @@ public class GameRules {
 		boolean royalFlush = false;
 		boolean straightFlush = false;
 		if(flushSuit != null) {
-			straightFlush = isStraightFlush(hand, flushSuit, royalFlush);
+			if(isStraightFlush(hand, flushSuit) == 2) {
+				royalFlush = true;
+				straightFlush = true;
+			}
+			else if(isStraightFlush(hand, flushSuit) == 1) {
+				straightFlush = true;
+			}
 		}
 
 		int[] fourOfAKind = new int[(int)(hand.length / 4)];
 		int[] threeOfAKind = new int[(int)(hand.length / 3)];
 		int[] twoOfAKind = new int[(int)(hand.length / 2)];
-		boolean fullHouse = false;
-
-		repeatedCards(hand, fourOfAKind, threeOfAKind, twoOfAKind, fullHouse);
+		boolean fullHouse = repeatedCards(hand, fourOfAKind, threeOfAKind, twoOfAKind);
 
 		PokerHand pokerHand = new PokerHand(royalFlush, straightFlush, fourOfAKind, fullHouse, isFlush(hand), isStraight(hand), threeOfAKind, twoOfAKind, highCard(hand));
 		return pokerHand;
