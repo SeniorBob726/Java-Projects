@@ -74,7 +74,7 @@ public class PokerHand {
 		if(fullHouse.compareTo(pokerHand.fullHouse) != 0) {
 			return fullHouse.compareTo(pokerHand.fullHouse);
 		}
-		if(suitCompare(flushSuit, pokerHand.flushSuit)) {
+		if(suitCompare(flushSuit, pokerHand.flushSuit) != 0) {
 			return suitCompare(flushSuit, pokerHand.flushSuit);
 		}
 		if(straight.compareTo(pokerHand.straight) != 0) {
