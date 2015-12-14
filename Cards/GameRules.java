@@ -59,25 +59,25 @@ public class GameRules {
 	}
 
 	private boolean isStraight(Card[] hand) {
-		boolean[] values = new boolean[14];
+		boolean[] values = new boolean[15];
 		for(int i = 0; i < values.length; i++) {
 			values[i] = false;
 		}
 
 		for(int i = 0; i < hand.length; i++) {
-			values[hand[i].getFaceValue() - 1] = true;
+			values[hand[i].getFaceValue()] = true;
 			if(hand[i].getFaceValue() == 14) { // Ace can be high or low
-				values[0] = true;
+				values[1] = true;
 			}
 		}
 
-		int count = 1;
+		int count = 0;
 		for(int i = 1; i < values.length; i++) {
 			if(values[i]) {
 				count++;
 			}
 			else {
-				count = 1;
+				count = 0;
 			}
 
 			if(count == 5) {
