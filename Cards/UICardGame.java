@@ -42,7 +42,7 @@ public class UICardGame {
 		}
 	}
 
-	private void discard(Player player) {
+	private void discard(PokerPlayer player) {
 		System.out.println("- Your hand is: " + player.showHand() + " -");
 		while(true) {
 			System.out.print("Enter the index of the card you want to discard (-1 to not discard): ");
