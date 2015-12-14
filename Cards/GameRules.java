@@ -14,6 +14,18 @@ public class GameRules {
 		return -1;
 	}
 
+	private void sortDescending(int[] array) {
+		for(int i = 1; i < array.length; i++) {
+			for(int j = i; j > 0; j--) {
+				if(array[j] > array[j - 1]) {
+					int temp = array[j];
+					array[j] = array[j - 1];
+					array[j - 1] = temp;
+				}
+			}
+		}
+	}
+
 	private int isStraightFlush(Card[] hand, String flushSuit) {
 		Card[] flushSuitCards = new Card[hand.length];
 		int size = 0;
@@ -114,6 +126,10 @@ public class GameRules {
 			}
 			check = hand[i].getFaceValue();
 		}
+
+		sortDescending(fourOfAKind);
+		sortDescending(threeOfAKind);
+		sortDescending(twoOfAKind);
 
 		if(twoSize > 0 && threeSize > 0) {
 			return true;
