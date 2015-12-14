@@ -75,8 +75,18 @@ public class PokerHand {
 			return fourOAK;
 		}
 		int fH = fullHouse.compareTo(pokerHand.fullHouse);
+		int threeOAK = pairCompare(threeOfAKind, pokerHand.threeOfAKind);
+		int twoOAK = pairCompare(twoOfAKind, pokerHand.twoOfAKind);
 		if(fH != 0) {
 			return fH;
+		}
+		else if(fullHouse && pokerHand.fullHouse) {
+			if(threeOAK != 0) {
+				return threeOAK;
+			}
+			else if(twoOAK != 0) {
+				return twoOAK;
+			}
 		}
 		int flush = suitCompare(flushSuit, pokerHand.flushSuit);
 		if(flush != 0) {
@@ -86,11 +96,9 @@ public class PokerHand {
 		if(str != 0) {
 			return str;
 		}
-		int threeOAK = pairCompare(threeOfAKind, pokerHand.threeOfAKind);
 		if(threeOAK != 0) {
 			return threeOAK;
 		}
-		int twoOAK = pairCompare(twoOfAKind, pokerHand.twoOfAKind);
 		if(twoOAK != 0) {
 			return twoOAK;
 		}
