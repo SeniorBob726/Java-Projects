@@ -6,6 +6,10 @@ public class PokerPlayer extends Player {
 		balance = b;
 	}
 
+	public double getBalance() {
+		return balance;
+	}
+
 	public void addWinnings(double amount) {
 		balance += amount;
 	}
