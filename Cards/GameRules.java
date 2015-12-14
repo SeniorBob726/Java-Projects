@@ -8,16 +8,22 @@ public class GameRules {
 		return -1;
 	}
 
-	private String isStraightFlush(Card[] hand, String flushSuit) {
-		Card[] flushSuitCards = new Card[0];
+	private boolean isStraightFlush(Card[] hand, String flushSuit) {
+		Card[] flushSuitCards = new Card[hand.length];
+		int size = 0;
 
 		for(int i = 0; i < hand.length; i++) {
-			if(!flushSuit.equals(hand[i].getSuit())) {
-				Card[] flushSuitCards = new Card[0];
+			if(flushSuit.equals(hand[i].getSuit())) {
+				flushSuitCards[size++] = hand[i];
 			}
 		}
 
-		return isStraight(flushSuitCards);
+		Card[] flushCheck = new Card[size];
+		for(int i = 0; i < size; i++) {
+			flushCheck[i] = flushSuitCards[i];
+		}
+
+		return isStraight(flushCheck);
 	}
 
 	private String isFlush(Card[] hand) {
@@ -108,10 +114,15 @@ public class GameRules {
 
 	public void processHand(Card[] hand) {
 		Card.sortBySuit(hand);
-		System.out.println("Flush: " + isFlush(hand));
+		String flushSuit = isFlush(hand);
+		System.out.println("Flush: " + flushSuit);
 
 		Card.sortByFaceValue(hand);
 		System.out.println("Straight: " + isStraight(hand));
+
+		if(flushSuit != null) {
+			System.out.println("Straight Flush: " + isStraightFlush(hand, flushSuit));
+		}
 
 		int[] fourOfAKind = new int[(int)(hand.length / 4)];
 		int[] threeOfAKind = new int[(int)(hand.length / 3)];
