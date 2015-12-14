@@ -21,6 +21,10 @@ public class Card {
 		return suit;
 	}
 
+	public int compareTo(Card card) {
+		return faceValue > card.faceValue ? 1 : faceValue < card.faceValue ? -1 : 0;
+	}
+
 	public String toString() {
 		return name + " of " + suit;
 	}
