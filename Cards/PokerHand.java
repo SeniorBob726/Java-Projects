@@ -1,17 +1,21 @@
 public class PokerHand {
+	private boolean royalFlush;
 	private boolean straightFlush;
+	private int[] fourOfAKind;
+	private boolean fullHouse;
 	private String flushSuit;
 	private boolean straight;
-	private int[] fourOfAKind;
 	private int[] threeOfAKind;
 	private int[] twoOfAKind;
 	private Card highCard;
 
-	public PokerHand(boolean sf, String fs, boolean s, int[] fourOAK, int[] threeOAK, int[] twoOAK, Card hc) {
+	public PokerHand(boolean rf, boolean sf, int[] fourOAK, boolean fh, String fs, boolean s, int[] threeOAK, int[] twoOAK, Card hc) {
+		royalFlush = rf;
 		straightFlush = sf;
+		fourOfAKind = fourOAK;
+		fullHouse = fh;
 		flushSuit = fs;
 		straight = s;
-		fourOfAKind = fourOAK;
 		threeOfAKind = threeOAK;
 		twoOfAKind = twoOAK;
 		highCard = hc;
@@ -19,34 +23,32 @@ public class PokerHand {
 
 	public String toString() {
 		String output = "";
+		output += "Royal Flush: " + royalFlush + "\n";
 		output += "Straight Flush: " + straightFlush + "\n";
-		output += "Flush: " + flushSuit + "\n";
-		output += "Straight: " + straight + "\n";
-
 		output += "fourOfAKind: ";
 		for(int i = 0; i < fourOfAKind.length; i++) {
 			if(fourOfAKind[i] != 0) {
 				output += fourOfAKind[i] + ", ";
 			}
 		}
-		output += output.substring(0, output.length() - 2)) + "\n";
-
+		output += output.substring(0, output.length() - 2) + "\n";
+		output += "Full House: " + fullHouse + "\n";
+		output += "Flush: " + flushSuit + "\n";
+		output += "Straight: " + straight + "\n";
 		output += "threeOfAKind: ";
 		for(int i = 0; i < threeOfAKind.length; i++) {
 			if(threeOfAKind[i] != 0) {
 				output += threeOfAKind[i] + ", ";
 			}
 		}
-		output += output.substring(0, output.length() - 2)) + "\n";
-
+		output += output.substring(0, output.length() - 2) + "\n";
 		output += "twoOfAKind: ";
 		for(int i = 0; i < twoOfAKind.length; i++) {
 			if(twoOfAKind[i] != 0) {
 				output += twoOfAKind[i] + ", ";
 			}
 		}
-		output += output.substring(0, output.length() - 2)) + "\n";
-
+		output += output.substring(0, output.length() - 2) + "\n";
 		output += "High Card: " + highCard + "\n";
 
 		return output;
