@@ -21,6 +21,29 @@ public class PokerHand {
 		highCard = hc;
 	}
 
+	public int booleanCompare(boolean a, boolean b) {
+		if(a && !b) {
+			return 1;
+		}
+		else if(b && !a) {
+			return -1;
+		}
+
+		return 0;
+	}
+
+	public int compareTo(PokerHand pokerHand) {
+		int value = 0;
+		if(booleanCompare(royalFlush, pokerHand.royalFlush) != 0) {
+			return booleanCompare(royalFlush, pokerHand.royalFlush);
+		}
+		if(booleanCompare(straightFlush, pokerHand.straightFlush) != 0) {
+			return booleanCompare(straightFlush, pokerHand.straightFlush);
+		}
+
+		return 0;
+	}
+
 	public String toString() {
 		String output = "";
 		output += "Royal Flush: " + royalFlush + "\n";
