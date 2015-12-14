@@ -4,12 +4,12 @@ public class PokerHand {
 	private int[] fourOfAKind;
 	private Boolean fullHouse;
 	private String flushSuit;
-	private Boolean straight;
+	private Card straight;
 	private int[] threeOfAKind;
 	private int[] twoOfAKind;
 	private Card highCard;
 
-	public PokerHand(boolean rf, boolean sf, int[] fourOAK, boolean fh, String fs, boolean s, int[] threeOAK, int[] twoOAK, Card hc) {
+	public PokerHand(boolean rf, boolean sf, int[] fourOAK, boolean fh, String fs, Card s, int[] threeOAK, int[] twoOAK, Card hc) {
 		royalFlush = rf;
 		straightFlush = sf;
 		fourOfAKind = fourOAK;
@@ -22,7 +22,10 @@ public class PokerHand {
 	}
 
 	private int flushCompare(String a, String b) {
-		if(a == null && b != null) {
+		if(a == null && b == null) {
+			return 0;
+		}
+		else if(a == null && b != null) {
 			return 1;
 		}
 		else if(b == null && a != null) {
@@ -32,55 +35,73 @@ public class PokerHand {
 		return 0;
 	}
 
+	private int straightCompare(Card a, Card b) {
+		if(a == null && b == null) {
+			return 0;
+		}
+		else if(a == null && b != null) {
+			return 1;
+		}
+		else if(b == null && a != null) {
+			return -1;
+		}
+
+		return a.compareTo(b);
+	}
+
 	private int pairCompare(int[] a, int[] b) {
 		int aSize = 0;
 		int bSize = 0;
-		int aSum = 0;
-		int bSum = 0;
 
 		for(int i = 0; i < a.length; i++) {
 			if(a[i] != 0) {
 				aSize++;
-				aSum += a[i];
 			}
 		}
 		for(int i = 0; i < b.length; i++) {
 			if(b[i] != 0) {
 				bSize++;
-				bSum += b[i];
 			}
 		}
 
 		if(aSize != bSize) {
 			return aSize > bSize ? 1 : -1;
 		}
-		else if(aSum != bSum) {
-			return aSum > bSum ? 1 : -1;
+		else {
+			for(int i = 0; i < aSize; i++) {
+				if(a[i] != b[i]) {
+					return a[i] > b[i] ? 1 : -1;
+				}
+			}
 		}
 
 		return 0;
 	}
 
 	public int compareTo(PokerHand pokerHand) {
+		int hC = highCard.compareTo(pokerHand.highCard);
 		int rF = royalFlush.compareTo(pokerHand.royalFlush);
-		if(rF != 0) {
+		if(rF != 0 || royalFlush && pokerHand.royalFlush) { // A hand won from a Royal Flush or both hands have Royal Flushes
 			return rF;
 		}
 		int sF = straightFlush.compareTo(pokerHand.straightFlush);
-		if(sF != 0) {
+		if(sF != 0) { // A hand won from a Straight Flush
 			return sF;
 		}
+		else if(straightFlush && pokerHand.straightFlush) { // Both hands have a Straight Flush
+			return hC;
+		}
 		int fourOAK = pairCompare(fourOfAKind, pokerHand.fourOfAKind);
-		if(fourOAK != 0) {
+		if(fourOAK != 0) { // A hand won from a Four of a Kind
 			return fourOAK;
 		}
 		int fH = fullHouse.compareTo(pokerHand.fullHouse);
 		int threeOAK = pairCompare(threeOfAKind, pokerHand.threeOfAKind);
 		int twoOAK = pairCompare(twoOfAKind, pokerHand.twoOfAKind);
-		if(fH != 0) {
+		if(fH != 0) { // A hand won from a Full House
 			return fH;
 		}
-		else if(fullHouse && pokerHand.fullHouse) {
+		else if(fullHouse && pokerHand.fullHouse) { // Both hands have a Full House
 			if(threeOAK != 0) {
 				return threeOAK;
 			}
@@ -89,21 +110,20 @@ public class PokerHand {
 			}
 		}
 		int flush = flushCompare(flushSuit, pokerHand.flushSuit);
-		if(flush != 0) {
+		if(flush != 0) { // A hand won from a Flush
 			return flush;
 		}
-		int str = straight.compareTo(pokerHand.straight);
-		if(str != 0) {
+		int str = straightCompare(straight, pokerHand.straight);
+		if(str != 0) { // A hand won from a Straight
 			return str;
 		}
-		if(threeOAK != 0) {
+		if(threeOAK != 0) { // A hand won from a Three of a Kind
 			return threeOAK;
 		}
-		if(twoOAK != 0) {
+		if(twoOAK != 0) { // A hand won from a Two of a Kind
 			return twoOAK;
 		}
-		int hC = highCard.compareTo(pokerHand.highCard);
-		if(hC != 0) {
+		if(hC != 0) { // A hand won from a High Card
 			return hC;
 		}
 
