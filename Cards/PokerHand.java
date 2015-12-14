@@ -121,7 +121,7 @@ public class PokerHand {
 			return hC;
 		}
 		int fourOAK = pairCompare(fourOfAKind, pokerHand.fourOfAKind);
-		if(fourOAK != 0) { // A hand won from a Four of a Kind
+		if(fourOAK != 0) { // A hand won from a Four Of A Kind
 			return fourOAK;
 		}
 		int fH = fullHouse.compareTo(pokerHand.fullHouse);
@@ -146,10 +146,10 @@ public class PokerHand {
 		if(str != 0) { // A hand won from a Straight
 			return str;
 		}
-		if(threeOAK != 0) { // A hand won from a Three of a Kind
+		if(threeOAK != 0) { // A hand won from a Three Of A Kind
 			return threeOAK;
 		}
-		if(twoOAK != 0) { // A hand won from a Two of a Kind
+		if(twoOAK != 0) { // A hand won from a Two Of A Kind
 			return twoOAK;
 		}
 		if(hC != 0) { // A hand won from a High Card
@@ -159,7 +159,7 @@ public class PokerHand {
 		return 0;
 	}
 
-	public String toString() {
+	public String printAllTests() {
 		String output = "";
 		output += "Royal Flush: " + royalFlush + "\n";
 		output += "Straight Flush: " + straightFlush + "\n";
@@ -190,5 +190,35 @@ public class PokerHand {
 		output += "High Card: " + highCard + "\n";
 
 		return output;
+	}
+
+	public String toString() {
+		int value = getHandValue();
+		if(value == 9) { // Royal Flush
+			return ;
+		}
+		if(value == 8) { // Straight Flush
+			return ;
+		}
+		if(value == 7) { // Four Of A Kind
+			return ;
+		}
+		if(value == 6) { // Full House
+			return ;
+		}
+		if(value == 5) { // Flush Suit
+			return ;
+		}
+		if(value == 4) { // Straight
+			return ;
+		}
+		if(value == 3) { // Three Of A Kind
+			return ;
+		}
+		if(value == 2) { // Two Of A Kind
+			return ;
+		}
+
+		return "";
 	}
 }
