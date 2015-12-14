@@ -63,8 +63,13 @@ public class UICardGame {
 	public void play() {
 		deck.shuffle();
 
+		p1.setCard(new Card(14, "Ace", "Spades"));
+		p1.setCard(new Card(11, "Jack", "Hearts"));
+		p1.setCard(new Card(11, "Jack", "Spades"));
+		p1.setCard(new Card(11, "Jack", "Clubs"));
+		p1.setCard(new Card(14, "Ace", "Hearts"));
+
 		for(int i = 0; i < rules.getHandSize(); i++) {
-			p1.setCard(deck.deal());
 			computer.setCard(deck.deal());
 		}
 
