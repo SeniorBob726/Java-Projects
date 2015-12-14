@@ -14,7 +14,7 @@ public class GameRules {
 		return -1;
 	}
 
-	private boolean isStraightFlush(Card[] hand, String flushSuit) {
+	private boolean isStraightFlush(Card[] hand, String flushSuit, boolean royalFlush) {
 		Card[] flushSuitCards = new Card[hand.length];
 		int size = 0;
 
@@ -29,7 +29,14 @@ public class GameRules {
 			flushCheck[i] = flushSuitCards[i];
 		}
 
-		return isStraight(flushCheck);
+		if(isStraight(flushCheck)) {
+			if(highCard(flushCheck).getFaceValue() == 14) {
+				royalFlush = true;
+			}
+			return true;
+		}
+
+		return false;
 	}
 
 	private String isFlush(Card[] hand) {
@@ -80,7 +87,7 @@ public class GameRules {
 		return false;
 	}
 
-	private void repeatedCards(Card[] hand, int[] fourOfAKind, int[] threeOfAKind, int[] twoOfAKind) {
+	private void repeatedCards(Card[] hand, int[] fourOfAKind, int[] threeOfAKind, int[] twoOfAKind, boolean fullHouse) {
 		int fourSize = 0;
 		int threeSize = 0;
 		int twoSize = 0;
@@ -112,6 +119,10 @@ public class GameRules {
 			}
 			check = hand[i].getFaceValue();
 		}
+
+		if(twoSize > 0 && threeSize > 0) {
+			fullHouse = true;
+		}
 	}
 
 	private Card highCard(Card[] hand) {
@@ -124,20 +135,20 @@ public class GameRules {
 
 		Card.sortByFaceValue(hand);
 
+		boolean royalFlush = false;
 		boolean straightFlush = false;
 		if(flushSuit != null) {
-			straightFlush = isStraightFlush(hand, flushSuit);
+			straightFlush = isStraightFlush(hand, flushSuit, royalFlush);
 		}
 
 		int[] fourOfAKind = new int[(int)(hand.length / 4)];
 		int[] threeOfAKind = new int[(int)(hand.length / 3)];
 		int[] twoOfAKind = new int[(int)(hand.length / 2)];
+		boolean fullHouse = false;
 
-		repeatedCards(hand, fourOfAKind, threeOfAKind, twoOfAKind);
+		repeatedCards(hand, fourOfAKind, threeOfAKind, twoOfAKind, fullHouse);
 
-		System.out.println("High Card: " + highCard(hand));
-		PokerHand pokerHand = new PokerHand(straightFlush, flushSuit, isStraight(hand), fourOfAKind, threeOfAKind, twoOfAKind, highCard(hand));
-
+		PokerHand pokerHand = new PokerHand(royalFlush, straightFlush, fourOfAKind, fullHouse, isFlush(hand), isStraight(hand), threeOfAKind, twoOfAKind, highCard(hand));
 		return pokerHand;
 	}
 }
