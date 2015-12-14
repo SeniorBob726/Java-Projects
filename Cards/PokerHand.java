@@ -31,7 +31,7 @@ public class PokerHand {
 				output += fourOfAKind[i] + ", ";
 			}
 		}
-		output += output.substring(0, output.length() - 2) + "\n";
+		output = output.substring(0, output.length() - 2) + "\n";
 		output += "Full House: " + fullHouse + "\n";
 		output += "Flush: " + flushSuit + "\n";
 		output += "Straight: " + straight + "\n";
@@ -41,14 +41,14 @@ public class PokerHand {
 				output += threeOfAKind[i] + ", ";
 			}
 		}
-		output += output.substring(0, output.length() - 2) + "\n";
+		output = output.substring(0, output.length() - 2) + "\n";
 		output += "twoOfAKind: ";
 		for(int i = 0; i < twoOfAKind.length; i++) {
 			if(twoOfAKind[i] != 0) {
 				output += twoOfAKind[i] + ", ";
 			}
 		}
-		output += output.substring(0, output.length() - 2) + "\n";
+		output = output.substring(0, output.length() - 2) + "\n";
 		output += "High Card: " + highCard + "\n";
 
 		return output;
