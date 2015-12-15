@@ -108,13 +108,17 @@ public class UICardGame {
 		}
 
 		bet(p1);
+		System.out.println();
 		discard(p1);
+		System.out.println();
 		bet(p1);
+		System.out.println();
 
 		endGame(p1, computer);
 }
 
 	public static void main(String[] args) {
+		System.out.print("5 Card Draw\n");
 		System.out.print("Enter your name: ");
 		String name = scanner.nextLine();
 		double balance = 0.0;
@@ -128,6 +132,7 @@ public class UICardGame {
 				scanner.nextLine();
 			}
 		} while(balance == 0.0);
+		System.out.println();
 
 		UICardGame pokerGame = new UICardGame(name, balance);
 		pokerGame.play();
