@@ -6,7 +6,7 @@ public class UICardGame {
 	private GameRules rules;
 	private Card[] discardedPile;
 	private int dPSize;
-	private double pot;
+	private double kitty;
 	private PokerPlayer p1;
 	private ComputerPokerPlayer computer;
 
@@ -15,7 +15,7 @@ public class UICardGame {
 		rules = new GameRules();
 		discardedPile = new Card[52];
 		dPSize = 0;
-		pot = 0.0;
+		kitty = 0.0;
 		p1 = new PokerPlayer(name, rules.getHandSize(), balance);
 		computer = new ComputerPokerPlayer("Computer", rules.getHandSize(), balance);
 	}
@@ -28,9 +28,9 @@ public class UICardGame {
 				double bet = scanner.nextDouble();
 				if(bet > 0) {
 					if(player.bet(bet)) {
-						pot += bet;
+						kitty += bet;
 						System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
-						System.out.println("- The pot is now $" + String.format("%.2f", pot) + " -");
+						System.out.println("- The kitty is now $" + String.format("%.2f", kitty) + " -");
 						break;
 					}
 					else {
