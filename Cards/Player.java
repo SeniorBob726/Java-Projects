@@ -20,8 +20,7 @@ public class Player {
 	}
 
 	public void setCard(Card c) {
-		hand[size] = c;
-		size++;
+		hand[size++] = c;
 	}
 
 	public Card discard(int i) {
