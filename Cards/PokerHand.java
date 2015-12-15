@@ -85,7 +85,13 @@ public class PokerHand {
 		if(straightFlush) {
 			return 8;
 		}
-		if(fourOfAKind.length > 0) {
+		int fourSize = 0;
+		for(int i = 0; i < fourOfAKind.length; i++) {
+			if(fourOfAKind[i] != 0) {
+				fourSize++;
+			}
+		}
+		if(fourSize > 0) {
 			return 7;
 		}
 		if(fullHouse) {
@@ -97,10 +103,22 @@ public class PokerHand {
 		if(straight != null) {
 			return 4;
 		}
-		if(threeOfAKind.length > 0) {
+		int threeSize = 0;
+		for(int i = 0; i < threeOfAKind.length; i++) {
+			if(threeOfAKind[i] != 0) {
+				threeSize++;
+			}
+		}
+		if(threeSize > 0) {
 			return 3;
 		}
-		if(twoOfAKind.length > 0) {
+		int twoSize = 0;
+		for(int i = 0; i < twoOfAKind.length; i++) {
+			if(twoOfAKind[i] != 0) {
+				twoSize++;
+			}
+		}
+		if(twoSize > 0) {
 			return 2;
 		}
 
@@ -194,31 +212,31 @@ public class PokerHand {
 
 	public String toString() {
 		int value = getHandValue();
-		if(value == 9) { // Royal Flush
-			return ;
+		if(value == 9) {
+			return "Royal Flush of " + flushSuit;
 		}
-		if(value == 8) { // Straight Flush
-			return ;
+		if(value == 8) {
+			return "Straight Flush with the " + straight + " as the top card";
 		}
-		if(value == 7) { // Four Of A Kind
-			return ;
+		if(value == 7) {
+			return "Four Of A Kind: " + fourOfAKind[0] + "s";
 		}
-		if(value == 6) { // Full House
-			return ;
+		if(value == 6) {
+			return "Full House";
 		}
-		if(value == 5) { // Flush Suit
-			return ;
+		if(value == 5) {
+			return "Flush of" + flushSuit;
 		}
-		if(value == 4) { // Straight
-			return ;
+		if(value == 4) {
+			return "Straight with the " + straight + " as the top card";
 		}
-		if(value == 3) { // Three Of A Kind
-			return ;
+		if(value == 3) {
+			return "Three Of A Kind: " + threeOfAKind[0] + "s";
 		}
-		if(value == 2) { // Two Of A Kind
-			return ;
+		if(value == 2) {
+			return "Two Of A Kind: " + twoOfAKind[0] + "s";
 		}
 
-		return "";
+		return "High Card of " + highCard;
 	}
 }
