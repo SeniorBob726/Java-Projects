@@ -17,7 +17,7 @@ public class UICardGame {
 		dPSize = 0;
 		kitty = 0.0;
 		p1 = new PokerPlayer(name, rules.getHandSize(), balance);
-		computer = new ComputerPokerPlayer("Computer", rules.getHandSize(), balance);
+		computer = new ComputerPokerPlayer("Computer", rules.getHandSize(), 1000);
 	}
 
 	private void bet(PokerPlayer player) {
@@ -26,7 +26,7 @@ public class UICardGame {
 			System.out.print("Enter the amount you would like to bet: ");
 			try {
 				double bet = scanner.nextDouble();
-				if(bet > 0) {
+				if(bet >= 0) {
 					if(player.bet(bet)) {
 						kitty += bet;
 						System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
@@ -38,11 +38,11 @@ public class UICardGame {
 					}
 				}
 				else {
-					System.out.println("Invalid input");
+					System.out.println("- Invalid input -");
 				}
 			}
 			catch(Exception e) {
-				System.out.println("Invalid input");
+				System.out.println("- Invalid input -");
 				scanner.nextLine();
 			}
 		}
@@ -59,44 +59,48 @@ public class UICardGame {
 				}
 				else if(player.getHand()[input] != null) {
 					discardedPile[dPSize++] = player.discard(input);
-					System.out.println("- Removed: " + discardedPile[dPSize - 1] + " -");
+					System.out.println("- Discarded: " + discardedPile[dPSize - 1] + " -");
 				}
 				else {
-					System.out.println("- This card was already removed -");
+					System.out.println("- This card was already discarded -");
 				}
 			}
 			catch(Exception e) {
-				System.out.println("Invalid input");
+				System.out.println("- Invalid input -");
 				scanner.nextLine();
 			}
 		}
 		player.fixCards();
 
+		String drawOutput = "- You drew: ";
 		for(int i = player.getSize(); i < rules.getHandSize(); i++) {
-			player.setCard(deck.deal());
+			Card card = deck.deal();
+			player.setCard(card);
+			drawOutput += card + ", ";
 		}
+		System.out.println(drawOutput.substring(0, drawOutput.length() - 2) + " -");
 	}
 
 	private void endGame(PokerPlayer player, ComputerPokerPlayer computer) {
-		System.out.println("- Your hand is: " + player.showHand() + " -");
-		System.out.println("- The computer's hand is: " + computer.showHand() + " -");
 		PokerHand playerHand = rules.processHand(player.getHand());
 		PokerHand computerHand = rules.processHand(computer.getHand());
+		System.out.println("- Your hand is: " + player.showHand() + " -");
+		System.out.println(playerHand);
+		System.out.println("- The computer's hand is: " + computer.showHand() + " -");
+		System.out.println(computerHand);
+		System.out.println();
 
 		switch(playerHand.compareTo(computerHand)) {
 			case 1:
-				System.out.println("You won!");
+				System.out.println("- You won! -");
 				break;
 			case -1:
-				System.out.println("You lost!");
+				System.out.println("- You lost! -");
 				break;
 			case 0:
-				System.out.println("There was a tie!");
+				System.out.println("- There was a tie! -");
 				break;
 		}
-
-		System.out.println(playerHand);
-		System.out.println(computerHand);
 	}
 
 	public void play() {
@@ -128,7 +132,7 @@ public class UICardGame {
 				balance = scanner.nextDouble();
 			}
 			catch(Exception e) {
-				System.out.println("Invalid input");
+				System.out.println("- Invalid input -");
 				scanner.nextLine();
 			}
 		} while(balance == 0.0);
