@@ -89,10 +89,10 @@ public class PokerHand {
 
 	public int getHandValue() {
 		if(royalFlush) {
-			return 9;
+			return 10;
 		}
 		if(straightFlush) {
-			return 8;
+			return 9;
 		}
 		int fourSize = 0;
 		for(int i = 0; i < fourOfAKind.length; i++) {
@@ -101,16 +101,16 @@ public class PokerHand {
 			}
 		}
 		if(fourSize > 0) {
-			return 7;
+			return 8;
 		}
 		if(fullHouse) {
-			return 6;
+			return 7;
 		}
 		if(flushSuit != null) {
-			return 5;
+			return 6;
 		}
 		if(straight != null) {
-			return 4;
+			return 5;
 		}
 		int threeSize = 0;
 		for(int i = 0; i < threeOfAKind.length; i++) {
@@ -119,7 +119,7 @@ public class PokerHand {
 			}
 		}
 		if(threeSize > 0) {
-			return 3;
+			return 4;
 		}
 		int twoSize = 0;
 		for(int i = 0; i < twoOfAKind.length; i++) {
@@ -127,7 +127,10 @@ public class PokerHand {
 				twoSize++;
 			}
 		}
-		if(twoSize > 0) {
+		if(twoSize == 2) {
+			return 3;
+		}
+		if(twoSize == 1) {
 			return 2;
 		}
 
@@ -176,7 +179,16 @@ public class PokerHand {
 		if(threeOAK != 0) { // A hand won from a Three Of A Kind
 			return threeOAK;
 		}
-		if(twoOAK != 0) { // A hand won from a Two Of A Kind
+		int twoSize = 0;
+		for(int i = 0; i < twoOfAKind.length; i++) {
+			if(twoOfAKind[i] != 0) {
+				twoSize++;
+			}
+		}
+		if(twoOAK != 0 && twoSize == 2) { // A hand won from a Two Pair
+			return twoOAK;
+		}
+		if(twoOAK != 0 && twoSize == 1) { // A hand won from a One Pair
 			return twoOAK;
 		}
 		if(hC != 0) { // A hand won from a High Card
@@ -225,29 +237,32 @@ public class PokerHand {
 
 	public String toString() {
 		int value = getHandValue();
-		if(value == 9) {
+		if(value == 10) {
 			return "Royal Flush of " + flushSuit;
 		}
-		if(value == 8) {
+		if(value == 9) {
 			return "Straight Flush with the " + straight + " as the top card";
 		}
-		if(value == 7) {
+		if(value == 8) {
 			return "Four Of A Kind: " + getNameForFaceValue(fourOfAKind[0]) + "s";
 		}
-		if(value == 6) {
+		if(value == 7) {
 			return "Full House";
 		}
-		if(value == 5) {
-			return "Flush of" + flushSuit;
+		if(value == 6) {
+			return "Flush of " + flushSuit;
 		}
-		if(value == 4) {
+		if(value == 5) {
 			return "Straight with the " + straight + " as the top card";
 		}
-		if(value == 3) {
+		if(value == 4) {
 			return "Three Of A Kind: " + getNameForFaceValue(threeOfAKind[0]) + "s";
 		}
+		if(value == 3) {
+			return "Two Pair: " + getNameForFaceValue(twoOfAKind[0]) + "s and " + getNameForFaceValue(twoOfAKind[1]) + "s";
+		}
 		if(value == 2) {
-			return "Two Of A Kind: " + getNameForFaceValue(twoOfAKind[0]) + "s";
+			return "One Pair: " + getNameForFaceValue(twoOfAKind[0]) + "s";
 		}
 
 		return "High Card of " + highCard;
