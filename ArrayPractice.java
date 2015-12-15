@@ -1,25 +1,37 @@
 public class ArrayPractice {
-	public static void main(String[] args) {
-		String[] values = {"For", "Never", "To", "Return", "Take"};
-		for(int i = 0; i < values.length; i++) {
-			System.out.print(values[i]);
-		}
-		System.out.println();
-
-		values[1] = null;
-		values[3] = null;
-
-		int j = 0;
-		for(int i = 0; i < values.length; i++) {
-			String v = values[i];
-			if(v != null) {
-				values[j++] = v;
+	public static int[] turnSingle(int[][] matrix) {
+		int[] single = new int[matrix.length * matrix[0].length];
+		for(int row = 0; row < matrix.length; row++) {
+			for(int col = 0; col < matrix[row].length; col++) {
+				single[row * matrix.length + col] = matrix[row][col];
 			}
 		}
 
-		for(int i = 0; i < values.length; i++) {
-			System.out.print(values[i]);
+		for(int i = 1; i < single.length; i++) {
+			for(int j = i; j > 0; j--) {
+				if(single[j] < single[j - 1]) {
+					int temp = single[j];
+					single[j] = single[j - 1];
+					single[j - 1] = temp;
+				}
+			}
 		}
-		System.out.println();
+
+		return single;
+	}
+
+	public static void main(String[] args) {
+		int[][] matrix = {{2, 4, 8}, {3, 1, 7}, {9, 1, 4}};
+		int[] single = turnSingle(matrix);
+		for(int i : single) {
+			System.out.print(i + " ");
+		}
+		System.out.println("\n");
+		for(int[] row : matrix) {
+			for(int i : row) {
+				System.out.print(i + " ");
+			}
+			System.out.println();
+		}
 	}
 }
