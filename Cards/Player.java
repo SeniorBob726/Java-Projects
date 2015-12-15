@@ -39,8 +39,8 @@ public class Player {
 	}
 
 	public Card[] getHand() {
-		Card[] returnHand = new Card[size];
-		System.arraycopy(hand, 0, returnHand, 0, size);
+		Card[] returnHand = new Card[hand.length];
+		System.arraycopy(hand, 0, returnHand, 0, hand.length);
 		return returnHand;
 	}
 
