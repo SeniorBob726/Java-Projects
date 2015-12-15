@@ -26,10 +26,11 @@ public class UICardGame {
 			System.out.print("Enter the amount you would like to bet: ");
 			try {
 				double bet = scanner.nextDouble();
-				if(bet < 0) {
+				if(bet > 0) {
 					if(player.bet(bet)) {
 						pot += bet;
 						System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
+						System.out.println("- The pot is now $" + String.format("%.2f", pot) + " -");
 						break;
 					}
 					else {
@@ -37,7 +38,7 @@ public class UICardGame {
 					}
 				}
 				else {
-					System.out.println("Invalid input")
+					System.out.println("Invalid input");
 				}
 			}
 			catch(Exception e) {
@@ -51,12 +52,23 @@ public class UICardGame {
 		System.out.println("- Your hand is: " + player.showHand() + " -");
 		while(true) {
 			System.out.print("Enter the index of the card you want to discard (-1 to not discard): ");
-			int input = scanner.nextInt();
-			if(input < 0 || input > player.getSize()) {
-				break;
+			try {
+				int input = scanner.nextInt();
+				if(input == -1) {
+					break;
+				}
+				else if(player.getHand()[input] != null) {
+					discardedPile[dPSize++] = player.discard(input);
+					System.out.println("- Removed: " + discardedPile[dPSize - 1] + " -");
+				}
+				else {
+					System.out.println("- This card was already removed -");
+				}
 			}
-			discardedPile[dPSize++] = player.discard(input);
-			System.out.println("- Removed: " + discardedPile[dPSize - 1] + " -");
+			catch(Exception e) {
+				System.out.println("Invalid input");
+				scanner.nextLine();
+			}
 		}
 		player.fixCards();
 
