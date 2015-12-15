@@ -40,10 +40,10 @@ public class PokerHand {
 			return 0;
 		}
 		else if(a == null && b != null) {
-			return 1;
+			return -1;
 		}
 		else if(b == null && a != null) {
-			return -1;
+			return 1;
 		}
 
 		return a.compareTo(b);
