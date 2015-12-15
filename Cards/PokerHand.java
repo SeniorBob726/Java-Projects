@@ -197,10 +197,16 @@ public class PokerHand {
 				twoSize++;
 			}
 		}
-		if(twoOAK != 0 && twoSize == 2) { // A hand won from a Two Pair
+		int compareTwoSize = 0;
+		for(int i = 0; i < pokerHand.twoOfAKind.length; i++) {
+			if(pokerHand.twoOfAKind[i] != 0) {
+				compareTwoSize++;
+			}
+		}
+		if(twoOAK != 0 && (twoSize == 2 || compareTwoSize == 2)) { // A hand won from a Two Pair
 			return twoOAK;
 		}
-		if(twoOAK != 0 && twoSize == 1) { // A hand won from a One Pair
+		if(twoOAK != 0 && (twoSize == 1 || compareTwoSize == 1)) { // A hand won from a One Pair
 			return twoOAK;
 		}
 		if(hC != 0) { // A hand won from a High Card
