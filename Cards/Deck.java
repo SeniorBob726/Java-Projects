@@ -1,9 +1,9 @@
 public class Deck {
 	private Card[] deck;
 	public int size;
-	private static final int[] defaultFaceValues = {14, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-	private static final String[] defaultNames = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
-	private static final String[] defaultSuits = {"Spades", "Hearts", "Clubs", "Diamonds"};
+	protected static final int[] defaultFaceValues = {14, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+	protected static final String[] defaultNames = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
+	protected static final String[] defaultSuits = {"Spades", "Hearts", "Clubs", "Diamonds"};
 
 	public Deck(int sz, int[] faceValues, String[] names, String[] suits) {
 		size = sz;
