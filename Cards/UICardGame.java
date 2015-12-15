@@ -20,7 +20,7 @@ public class UICardGame {
 		computer = new ComputerPokerPlayer("Computer", rules.getHandSize(), 100);
 	}
 
-	private void bet(PokerPlayer player) {
+	private double bet(PokerPlayer player) {
 		System.out.println("- Your hand is: " + player.showHand() + " -");
 		while(true) {
 			System.out.print("Enter the amount you would like to bet: ");
@@ -31,7 +31,7 @@ public class UICardGame {
 						kitty += bet;
 						System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
 						System.out.println("- The kitty is now $" + String.format("%.2f", kitty) + " -");
-						break;
+						return bet;
 					}
 					else {
 						System.out.println("- Your balance is $" + String.format("%.2f", player.getBalance()) + " -");
@@ -128,10 +128,10 @@ public class UICardGame {
 			computer.setCard(deck.deal());
 		}
 
-		bet(p1);
+		double p1Bet = bet(p1);
 		System.out.println();
 
-		double computerBet = computer.decideBet();
+		double computerBet = computer.decideBet(p1Bet);
 		computer.bet(computerBet);
 		kitty += computerBet;
 		System.out.println("- The computer bet $" + String.format("%.2f", computerBet) + " -");
@@ -152,10 +152,10 @@ public class UICardGame {
 		System.out.println("- The computer discarded " + computerDiscard.length + " cards -");
 		System.out.println();
 
-		bet(p1);
+		p1Bet = bet(p1);
 		System.out.println();
 
-		computerBet = computer.decideBet();
+		computerBet = computer.decideBet(p1Bet);
 		computer.bet(computerBet);
 		kitty += computerBet;
 		System.out.println("- The computer bet $" + String.format("%.2f", computerBet) + " -");
