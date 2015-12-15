@@ -26,13 +26,18 @@ public class UICardGame {
 			System.out.print("Enter the amount you would like to bet: ");
 			try {
 				double bet = scanner.nextDouble();
-				if(player.bet(bet)) {
-					pot += bet;
-					System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
-					break;
+				if(bet < 0) {
+					if(player.bet(bet)) {
+						pot += bet;
+						System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
+						break;
+					}
+					else {
+						System.out.println("- Your balance is $" + String.format("%.2f", player.getBalance()) + " -");
+					}
 				}
 				else {
-					System.out.println("- Your balance is $" + String.format("%.2f", player.getBalance()) + " -");
+					System.out.println("Invalid input")
 				}
 			}
 			catch(Exception e) {
@@ -77,6 +82,9 @@ public class UICardGame {
 				System.out.println("There was a tie!");
 				break;
 		}
+
+		System.out.println(playerHand);
+		System.out.println(computerHand);
 	}
 
 	public void play() {
