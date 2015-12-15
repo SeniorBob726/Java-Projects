@@ -21,6 +21,15 @@ public class PokerHand {
 		highCard = hc;
 	}
 
+	private static int indexOf(int[] array, int element) {
+		for(int i = 0; i < array.length; i++) {
+			if(array[i] == element) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	private int flushCompare(String a, String b) {
 		if(a == null && b == null) {
 			return 0;
@@ -210,6 +219,10 @@ public class PokerHand {
 		return output;
 	}
 
+	private String getNameForFaceValue(int fv) {
+		return Deck.defaultNames[indexOf(Deck.defaultFaceValues, fv)];
+	}
+
 	public String toString() {
 		int value = getHandValue();
 		if(value == 9) {
@@ -219,7 +232,7 @@ public class PokerHand {
 			return "Straight Flush with the " + straight + " as the top card";
 		}
 		if(value == 7) {
-			return "Four Of A Kind: " + fourOfAKind[0] + "s";
+			return "Four Of A Kind: " + getNameForFaceValue(fourOfAKind[0]) + "s";
 		}
 		if(value == 6) {
 			return "Full House";
@@ -231,10 +244,10 @@ public class PokerHand {
 			return "Straight with the " + straight + " as the top card";
 		}
 		if(value == 3) {
-			return "Three Of A Kind: " + threeOfAKind[0] + "s";
+			return "Three Of A Kind: " + getNameForFaceValue(threeOfAKind[0]) + "s";
 		}
 		if(value == 2) {
-			return "Two Of A Kind: " + twoOfAKind[0] + "s";
+			return "Two Of A Kind: " + getNameForFaceValue(twoOfAKind[0]) + "s";
 		}
 
 		return "High Card of " + highCard;
