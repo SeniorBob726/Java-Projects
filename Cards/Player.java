@@ -1,6 +1,6 @@
 public class Player {
-	private String name;
-	private Card[] hand;
+	protected String name;
+	protected Card[] hand;
 	private int size;
 	private final int MAX_SIZE;
 
