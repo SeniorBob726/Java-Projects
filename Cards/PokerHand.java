@@ -21,6 +21,18 @@ public class PokerHand {
 		highCard = hc;
 	}
 
+	public int[] getFourOfAKind() {
+		return fourOfAKind;
+	}
+
+	public int[] getThreeOfAKind() {
+		return threeOfAKind;
+	}
+
+	public int[] getTwoOfAKind() {
+		return twoOfAKind;
+	}
+
 	private static int indexOf(int[] array, int element) {
 		for(int i = 0; i < array.length; i++) {
 			if(array[i] == element) {
