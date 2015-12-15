@@ -17,7 +17,7 @@ public class UICardGame {
 		dPSize = 0;
 		kitty = 0.0;
 		p1 = new PokerPlayer(name, rules.getHandSize(), balance);
-		computer = new ComputerPokerPlayer("Computer", rules.getHandSize(), 1000);
+		computer = new ComputerPokerPlayer("Computer", rules.getHandSize(), 100);
 	}
 
 	private void bet(PokerPlayer player) {
@@ -85,22 +85,28 @@ public class UICardGame {
 		PokerHand playerHand = rules.processHand(player.getHand());
 		PokerHand computerHand = rules.processHand(computer.getHand());
 		System.out.println("- Your hand is: " + player.showHand() + " -");
-		System.out.println(playerHand);
+		System.out.println("- " + playerHand + " -");
 		System.out.println("- The computer's hand is: " + computer.showHand() + " -");
-		System.out.println(computerHand);
+		System.out.println("- " + computerHand + " -");
 		System.out.println();
 
 		switch(playerHand.compareTo(computerHand)) {
 			case 1:
 				System.out.println("- You won! -");
+				player.addWinnings(kitty);
+				System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
 				break;
 			case -1:
 				System.out.println("- You lost! -");
 				break;
 			case 0:
 				System.out.println("- There was a tie! -");
+				player.addWinnings(kitty / 2.0);
+				computer.addWinnings(kitty / 2.0);
+				System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
 				break;
 		}
+		kitty = 0;
 	}
 
 	public void play() {
@@ -113,9 +119,25 @@ public class UICardGame {
 
 		bet(p1);
 		System.out.println();
+
+		double computerBet = computer.decideBet();
+		computer.bet(computerBet);
+		kitty += computerBet;
+		System.out.println("- The computer bet $" + String.format("%.2f", computerBet) + " -");
+		System.out.println("- The kitty is now $" + String.format("%.2f", kitty) + " -");
+		System.out.println();
+
 		discard(p1);
 		System.out.println();
+
 		bet(p1);
+		System.out.println();
+
+		computerBet = computer.decideBet();
+		computer.bet(computerBet);
+		kitty += computerBet;
+		System.out.println("- The computer bet $" + String.format("%.2f", computerBet) + " -");
+		System.out.println("- The kitty is now $" + String.format("%.2f", kitty) + " -");
 		System.out.println();
 
 		endGame(p1, computer);

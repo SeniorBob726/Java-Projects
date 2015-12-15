@@ -6,14 +6,15 @@ public class ComputerPokerPlayer extends PokerPlayer {
 		rules = new GameRules();
 	}
 
-	public double decideBet(Card[] hand) {
+	public double decideBet() {
 		PokerHand pokerHand = rules.processHand(hand);
 		double betPercent = pokerHand.getHandValue() / 10.0 + Math.random() * 0.1 - 0.1;
 		return getBalance() * betPercent;
 	}
 
-	public int[] decideDiscard(Card[] hand) {
+	public int[] decideDiscard() {
 		PokerHand pokerHand = rules.processHand(hand);
+
 		return new int[0];
 	}
 }
