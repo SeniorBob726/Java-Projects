@@ -71,6 +71,7 @@ public class UICardGame {
 			}
 		}
 		player.fixCards();
+		System.out.println();
 
 		String drawOutput = "- You drew: ";
 		for(int i = player.getSize(); i < rules.getHandSize(); i++) {
@@ -85,14 +86,14 @@ public class UICardGame {
 		PokerHand playerHand = rules.processHand(player.getHand());
 		PokerHand computerHand = rules.processHand(computer.getHand());
 		System.out.println("- Your hand is: " + player.showHand() + " -");
-		System.out.println("- " + playerHand + " -");
 		System.out.println("- The computer's hand is: " + computer.showHand() + " -");
-		System.out.println("- " + computerHand + " -");
+		System.out.println("- Your best hand is " + playerHand + " -");
+		System.out.println("- The computer's best hand is " + computerHand + " -");
 		System.out.println();
 
 		switch(playerHand.compareTo(computerHand)) {
 			case 1:
-				System.out.println("- You won! -");
+				System.out.println("- You won $" + String.format("%.2f", kitty) + "! -");
 				player.addWinnings(kitty);
 				System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
 				break;
@@ -106,7 +107,16 @@ public class UICardGame {
 				System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
 				break;
 		}
+		deck.returnToDeck(discardedPile);
+		dPSize = 0;
+		deck.returnToDeck(player.discard());
+		deck.returnToDeck(computer.discard());
 		kitty = 0;
+
+		System.out.println();
+		System.out.println("5 Card Draw");
+		System.out.println("- Play");
+		System.out.println("- Quit");
 	}
 
 	public void play() {
@@ -144,7 +154,6 @@ public class UICardGame {
 }
 
 	public static void main(String[] args) {
-		System.out.print("5 Card Draw\n");
 		System.out.print("Enter your name: ");
 		String name = scanner.nextLine();
 		double balance = 0.0;
@@ -159,8 +168,25 @@ public class UICardGame {
 			}
 		} while(balance == 0.0);
 		System.out.println();
+		System.out.println("5 Card Draw");
+		System.out.println("- Play");
+		System.out.println("- Quit");
 
 		UICardGame pokerGame = new UICardGame(name, balance);
-		pokerGame.play();
+
+		while(true) {
+			System.out.print("> ");
+			String input = scanner.next().toLowerCase();
+
+			if(input.equals("quit")) {
+				System.out.println("Goodbye!");
+				break;
+			}
+
+			if(input.equals("play")) {
+				System.out.println();
+				pokerGame.play();
+			}
+		}
 	}
 }
