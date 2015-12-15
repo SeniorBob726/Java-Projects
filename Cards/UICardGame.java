@@ -99,6 +99,7 @@ public class UICardGame {
 				break;
 			case -1:
 				System.out.println("- You lost! -");
+				computer.addWinnings(kitty);
 				break;
 			case 0:
 				System.out.println("- There was a tie! -");
@@ -138,6 +139,17 @@ public class UICardGame {
 		System.out.println();
 
 		discard(p1);
+		System.out.println();
+
+		int[] computerDiscard = computer.decideDiscard();
+		for(int i = 0; i < computerDiscard.length; i++) {
+			discardedPile[dPSize++] = computer.discard(computerDiscard[i]);
+		}
+		computer.fixCards();
+		for(int i = 0; i < computerDiscard.length; i++) {
+			computer.setCard(deck.deal());
+		}
+		System.out.println("- The computer discarded " + computerDiscard.length + " cards -");
 		System.out.println();
 
 		bet(p1);
