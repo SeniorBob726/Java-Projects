@@ -244,7 +244,7 @@ public class PokerHand {
 			return "Straight Flush with the " + straight + " as the top card";
 		}
 		if(value == 8) {
-			return "Four Of A Kind: " + getNameForFaceValue(fourOfAKind[0]) + "s";
+			return "Four Of A Kind: " + getNameForFaceValue(fourOfAKind[0]);
 		}
 		if(value == 7) {
 			return "Full House";
@@ -256,13 +256,13 @@ public class PokerHand {
 			return "Straight with the " + straight + " as the top card";
 		}
 		if(value == 4) {
-			return "Three Of A Kind: " + getNameForFaceValue(threeOfAKind[0]) + "s";
+			return "Three Of A Kind: " + getNameForFaceValue(threeOfAKind[0]);
 		}
 		if(value == 3) {
-			return "Two Pair: " + getNameForFaceValue(twoOfAKind[0]) + "s and " + getNameForFaceValue(twoOfAKind[1]) + "s";
+			return "Two Pair: " + getNameForFaceValue(twoOfAKind[0]) + " and " + getNameForFaceValue(twoOfAKind[1]);
 		}
 		if(value == 2) {
-			return "One Pair: " + getNameForFaceValue(twoOfAKind[0]) + "s";
+			return "One Pair: " + getNameForFaceValue(twoOfAKind[0]);
 		}
 
 		return "High Card of " + highCard;
