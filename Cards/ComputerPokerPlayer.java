@@ -9,10 +9,7 @@ public class ComputerPokerPlayer extends PokerPlayer {
 	public double decideBet(double currentBet) {
 		PokerHand pokerHand = rules.processHand(hand);
 		double betPercent = pokerHand.getHandValue() / 10.0 + Math.random() * 0.1 - 0.1;
-		if(getBalance() * betPercent < currentBet) {
-			return currentBet;
-		}
-		return getBalance() * betPercent;
+		return Math.max(currentBet, getBalance() * betPercent);
 	}
 
 	public int[] decideDiscard() {
