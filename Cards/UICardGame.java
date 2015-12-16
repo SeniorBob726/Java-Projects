@@ -71,15 +71,17 @@ public class UICardGame {
 			}
 		}
 		player.fixCards();
-		System.out.println();
 
-		String drawOutput = "- You drew: ";
-		for(int i = player.getSize(); i < rules.getHandSize(); i++) {
-			Card card = deck.deal();
-			player.setCard(card);
-			drawOutput += card + ", ";
+		if(player.getSize() < rules.getHandSize()) {
+			String drawOutput = "- You drew: ";
+			for(int i = player.getSize(); i < rules.getHandSize(); i++) {
+				Card card = deck.deal();
+				player.setCard(card);
+				drawOutput += card + ", ";
+			}
+			System.out.println();
+			System.out.println(drawOutput.substring(0, drawOutput.length() - 2) + " -");
 		}
-		System.out.println(drawOutput.substring(0, drawOutput.length() - 2) + " -");
 	}
 
 	private void endGame(PokerPlayer player, ComputerPokerPlayer computer) {
@@ -108,7 +110,11 @@ public class UICardGame {
 				System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
 				break;
 		}
-		deck.returnToDeck(discardedPile);
+		for(int i = 0; i < discardedPile.length; i++) {
+			if(discardedPile[i] != null) {
+				deck.returnToDeck(discardedPile[i]);
+			}
+		}
 		dPSize = 0;
 		deck.returnToDeck(player.discard());
 		deck.returnToDeck(computer.discard());

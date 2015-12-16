@@ -32,10 +32,11 @@ public class Player {
 	}
 
 	public Card[] discard() {
+		Card[] returnHand = hand;
 		hand = new Card[MAX_SIZE];
 		size = 0;
 
-		return hand;
+		return returnHand;
 	}
 
 	public Card[] getHand() {
