@@ -110,7 +110,11 @@ public class UICardGame {
 				System.out.println("- Your new balance is $" + String.format("%.2f", player.getBalance()) + " -");
 				break;
 		}
-		deck.returnToDeck(discardedPile);
+		for(int i = 0; i < discardedPile.length; i++) {
+			if(discardedPile[i] != null) {
+				deck.returnToDeck(discardedPile[i]);
+			}
+		}
 		dPSize = 0;
 		deck.returnToDeck(player.discard());
 		deck.returnToDeck(computer.discard());
