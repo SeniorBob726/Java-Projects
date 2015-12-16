@@ -5,7 +5,7 @@ public class GameRules {
 		return HAND_SIZE;
 	}
 
-	private static int indexOf(int[] array, int element) {
+	private static int indexOf(int[] array, int element) { // Return index of element in array, -1 if not found
 		for(int i = 0; i < array.length; i++) {
 			if(array[i] == element) {
 				return i;
@@ -14,7 +14,7 @@ public class GameRules {
 		return -1;
 	}
 
-	private void sortDescending(int[] array) {
+	private void sortDescending(int[] array) { // Sort integer array in descending order
 		for(int i = 1; i < array.length; i++) {
 			for(int j = i; j > 0; j--) {
 				if(array[j] > array[j - 1]) {
@@ -26,7 +26,7 @@ public class GameRules {
 		}
 	}
 
-	private int isStraightFlush(Card[] hand, String flushSuit) {
+	private int isStraightFlush(Card[] hand, String flushSuit) { // 2 = Royal Flush, 1 = Straight Flush, -1 = no Straight Flush
 		Card[] flushSuitCards = new Card[hand.length];
 		int size = 0;
 
@@ -70,7 +70,7 @@ public class GameRules {
 		return null;
 	}
 
-	private Card isStraight(Card[] hand) {
+	private Card isStraight(Card[] hand) { // Return highest card of Straight
 		boolean[] values = new boolean[15];
 		for(int i = 0; i < values.length; i++) {
 			values[i] = false;
@@ -114,17 +114,17 @@ public class GameRules {
 				int threeIndex = indexOf(threeOfAKind, check);
 				int twoIndex = indexOf(twoOfAKind, check);
 
-				if(threeIndex != -1) {
+				if(threeIndex != -1) { // If number exists in threeOfAKind, shift it up to fourOfAKind
 					fourOfAKind[fourSize++] = check;
 					threeOfAKind[threeIndex] = 0;
 					threeSize--;
 				}
-				else if(twoIndex != -1) {
+				else if(twoIndex != -1) { // If number exists in twoOfAKind, shift it up to threeOfAKind
 					threeOfAKind[threeSize++] = check;
 					twoOfAKind[twoIndex] = 0;
 					twoSize--;
 				}
-				else {
+				else { // Add duplicate to twoOfAKind
 					twoOfAKind[twoSize++] = check;
 				}
 			}

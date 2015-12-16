@@ -8,8 +8,8 @@ public class ComputerPokerPlayer extends PokerPlayer {
 
 	public double decideBet(double currentBet) {
 		PokerHand pokerHand = rules.processHand(hand);
-		double betPercent = pokerHand.getHandValue() / 10.0 + Math.random() * 0.1 - 0.1;
-		return Math.max(currentBet, getBalance() * betPercent);
+		double betPercent = pokerHand.getHandValue() / 10.0 + Math.random() * 0.1 - 0.1; // Fixed bet with random deviation
+		return Math.max(currentBet, getBalance() * betPercent); // At least match bet
 	}
 
 	public int[] decideDiscard() {
