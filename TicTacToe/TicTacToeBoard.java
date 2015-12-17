@@ -18,6 +18,21 @@ public class TicTacToeBoard {
 	}
 
 	/**
+	* Compares two arrays
+	* @param a First array to compare
+	* @param b Second array to compare
+	* @return true if the arrays are equal, false if they are not equal
+	*/
+	private static boolean compareArrays(char[] a, char[] b) {
+		for(int i = 0; i < a.length; i++) {
+			if(a[i] != b[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	* Updates board in <code>TicTacToe</code> instance.
 	* b is the intended spot value, c is either 'X' or 'O'
 	* @param b <code>char</code> value containing the spot on the board '1'-'9'
