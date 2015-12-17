@@ -57,18 +57,18 @@ public class TicTacToeBoard {
 	*/
 	public char findBestMove() {
 		char move = findMove('O'); // Aggresive strategy
-		if (move != 'z') {
+		if(move != 'z') {
 			return move;
 		}
 		move = findMove('X'); // Defensive strategy
-		if (move != 'z') {
+		if(move != 'z') {
 			return move;
 		}
 
 		char k = '1';
-		for (int row = 0; row < 3; row++) {
-			for (int col = 0; col < 3; col++) {
-				if (board[row][col] != 'X' && board[row][col] != 'O') {
+		for(int row = 0; row < 3; row++) {
+			for(int col = 0; col < 3; col++) {
+				if(board[row][col] != 'X' && board[row][col] != 'O') {
 					return k;
 				}
 				k++;
@@ -85,10 +85,10 @@ public class TicTacToeBoard {
 	* If not win position exists, return 'z'.
 	*/
 	public char findMove(char c) {
-		for (int row = 0; row < 3; row++) {
+		for(int row = 0; row < 3; row++) {
 			// return move if 3 in a row possible
 		}
-		for (int col = 0; col < 3; col++) {
+		for(int col = 0; col < 3; col++) {
 			//return move if 3 in a col possible
 		}
 		//return move if a diagonal possible
@@ -98,21 +98,66 @@ public class TicTacToeBoard {
 
 	/**
 	* Checks board to see if game is over and there is a winner.
-	* @return 'X' or 'O' to indicate the winner, return 'z' if no
-	* winner but game is over due to no more spots open. Return 'y'
-	* otherwise, indicates no winner, game continues.
+	* @return 'X' or 'O' to indicate the winner, return 'z' if no winner.
+	* Game is over due to no more spots open. Return 'y' otherwise, indicates no winner, game continues.
 	*/
 	public char findWinner() {
+		char[] xWin = {'X', 'X', 'X'};
+		char[] oWin = {'O', 'O', 'O'};
+		for(int row = 0; row < board.length; row++) {
+			if(compareArrays(board[row], xWin)) {
+				return 'X';
+			}
+			if(compareArrays(board[row], oWin)) {
+				return 'O';
+			}
+		}
 
-		//Look for 3 in a col, return winning char
+		for(int row = 0; row < board.length; row++) {
+			int x = 0;
+			int o = 0;
+			for(int col = 0; col < board[row].length; col++) {
+				if(board[col][row] == 'X') {
+					x++;
+				}
+				else if(board[col][row] == 'O') {
+					o++;
+				}
 
-		//Look for 3 in a row, return winning char
+				if(x == 3) {
+					return 'X';
+				}
+				if(o == 3) {
+					return 'O';
+				}
+			}
+		}
 
-		//Look for diagonal, return winning char
+		boolean possibleMoves = false;
+		char[] diagonal1 = new char[3];
+		char[] diagonal2 = new char[3];
+		for(int row = 0; row < board.length; row++) {
+			for(int col = 0; col < board[row].length; col++) {
+				if(row == col) {
+					diagonal1[row] = board[row][col];
+				}
+				if(3 - row == col) {
+					diagonal1[row] = board[row][col];
+				}
+				if(board[row][col] != 'X' && board[row][col] != 'O') {
+					possibleMoves = true;
+				}
+			}
+		}
 
-		//Look for empty position, return 'y'
+		if(compareArrays(diagonal1, xWin) || compareArrays(diagonal2, xWin)) {
+			return 'X';
+		}
+		if(compareArrays(diagonal1, oWin) || compareArrays(diagonal2, oWin)) {
+			return 'O';
+		}
 
-		return 'z'; //no moves possible
+		return 'z'; // No moves possible, game ends
 	}
 
 	/**
