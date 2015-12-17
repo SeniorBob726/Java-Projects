@@ -19,31 +19,25 @@ public class TicTacToeBoard {
 
 	/**
 	* Updates board in <code>TicTacToe</code> instance.
-	* b is the intended spot value, c is the 'X' or 'O' value
-	* @param b  a <code>char</code> value
-	*             containing the spot on the board '1'-'9'
-	* @param c  a <code>char</code> value
-	*                  containing the move, 'X' or 'O'
-	* @return true if the move is valid and board was updated,
-	*         false otherwise.
+	* b is the intended spot value, c is either 'X' or 'O'
+	* @param b <code>char</code> value containing the spot on the board '1'-'9'
+	* @param c <code>char</code> value containing the move, 'X' or 'O'
+	* @return true if the move is valid and board was updated, false otherwise.
 	*/
 	public boolean updateBoard(char b, char c) {
 		//Add code here
 	}
 
-
-
-
 	/**
-	 * Finds the Best Move for the Computer to make in <code>TicTacToe</code> instance.
-	 * @return the char representing the best available spot. Valid spots are '1'-'9'.
-	 * If not available spots, return 'z'.
-	 */
+	* Finds the best move for the Computer to make in <code>TicTacToe</code> instance.
+	* @return char representing the best available spot. Valid spots are '1'-'9'.
+	* If no available spots, return 'z'.
+	*/
 	public char findBestMove() {
 
-		char move = findMove('O'); //go for the win
+		char move = findMove('O'); // Aggresive strategy
 		if (move != 'z') return move;
-		move = findMove('X'); //play defensively
+		move = findMove('X'); // Defensive strategy
 		if (move != 'z') return move;
 
 		char k = '1';
@@ -59,16 +53,12 @@ public class TicTacToeBoard {
 	}
 
 	/**
-	 * Finds the Win Position for the character passed in.
-	 * @param c  a <code>char</code> value
-	 *             containing either 'X' or 'O'
-	 * @return the win position for character passed in, '1'-'9'.
-	 * If not win position exists, return 'z'.
-	 */
-
+	* Finds the Win Position for the character passed in.
+	* @param c <code>char</code> value containing either 'X' or 'O'
+	* @return the win position for character passed in, '1'-'9'.
+	* If not win position exists, return 'z'.
+	*/
 	public char findMove(char c) {
-
-
 		for (int row = 0; row < 3; row++) {
 			// return move if 3 in a row possible
 		}
@@ -78,16 +68,14 @@ public class TicTacToeBoard {
 		//return move if a diagonal possible
 
 		//otherwise return 'z';
-
 	}
 
 	/**
-	 * Checks board to see if game is over and there is a winner.
-	 * @return 'X' or 'O' to indicate the winner, return 'z' if no
-	 * winner but game is over due to no more spots open. Return 'y'
-	 * otherwise, indicates no winner, game continues.
-	 */
-
+	* Checks board to see if game is over and there is a winner.
+	* @return 'X' or 'O' to indicate the winner, return 'z' if no
+	* winner but game is over due to no more spots open. Return 'y'
+	* otherwise, indicates no winner, game continues.
+	*/
 	public char findWinner() {
 
 		//Look for 3 in a col, return winning char
@@ -100,16 +88,16 @@ public class TicTacToeBoard {
 
 		return 'z'; //no moves possible
 	}
+
 	/**
-	 * Converts the board state to a string format in the form:
-	 *																		O | 2 | 3
-   																     -----------
- 																	      X | 5 | 6
-																	     -----------
- 																	      7 | 8 | 9
-	 *
-	 * @return a <code>String</code> containing the board state
-	 */
+	* Converts the board state to a string format in the form:
+	*	O | 2 | 3
+	*	---------
+	*	X | 5 | 6
+	*	---------
+	*	7 | 8 | 9
+	* @return a <code>String</code> containing the board state
+	*/
 @Override
 	public String toString() {
 
