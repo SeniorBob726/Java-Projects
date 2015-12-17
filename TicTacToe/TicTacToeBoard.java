@@ -25,7 +25,14 @@ public class TicTacToeBoard {
 	* @return true if the move is valid and board was updated, false otherwise.
 	*/
 	public boolean updateBoard(char b, char c) {
-		//Add code here
+		int a = Character.getNumericValue(b);
+		int row = a % 3;
+		int col = a / 3;
+		if(board[row][col] != 'X' && board[row][col] != 'O') {
+			board[row][col] = c;
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -46,7 +53,9 @@ public class TicTacToeBoard {
 		char k = '1';
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {
-				if (board[row][col] != 'X' && board[row][col] != 'O') return k;
+				if (board[row][col] != 'X' && board[row][col] != 'O') {
+					return k;
+				}
 				k++;
 			}
 		}
