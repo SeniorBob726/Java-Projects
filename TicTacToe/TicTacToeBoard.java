@@ -34,14 +34,16 @@ public class TicTacToeBoard {
 	* If no available spots, return 'z'.
 	*/
 	public char findBestMove() {
-
 		char move = findMove('O'); // Aggresive strategy
-		if (move != 'z') return move;
+		if (move != 'z') {
+			return move;
+		}
 		move = findMove('X'); // Defensive strategy
-		if (move != 'z') return move;
+		if (move != 'z') {
+			return move;
+		}
 
 		char k = '1';
-
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {
 				if (board[row][col] != 'X' && board[row][col] != 'O') return k;
