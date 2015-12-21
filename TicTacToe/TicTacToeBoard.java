@@ -69,6 +69,7 @@ public class TicTacToeBoard {
 		for(int row = 0; row < 3; row++) {
 			for(int col = 0; col < 3; col++) {
 				if(board[row][col] != 'X' && board[row][col] != 'O') {
+					System.out.println("Comp move " + k);
 					return k;
 				}
 				k++;
@@ -89,32 +90,32 @@ public class TicTacToeBoard {
 			char x = board[row][0];
 			char y = board[row][1];
 			char z = board[row][2];
-			if(y == z && y == c) {return x;}
-			else if(x == z && x == c) {return y;}
-			else if(x == y && x == c) {return z;}
+			if(y == z && y == c && x != 'X' && x != 'O') {return x;}
+			else if(x == z && x == c && y != 'X' && y != 'O') {return y;}
+			else if(x == y && x == c && z != 'X' && z != 'O') {return z;}
 		}
 		for(int col = 0; col < 3; col++) {
 			char x = board[0][col];
 			char y = board[1][col];
 			char z = board[2][col];
-			if(y == z && y == c) {return x;}
-			else if(x == z && x == c) {return y;}
-			else if(x == y && x == c) {return z;}
+			if(y == z && y == c && x != 'X' && x != 'O') {return x;}
+			else if(x == z && x == c && y != 'X' && y != 'O') {return y;}
+			else if(x == y && x == c && z != 'X' && z != 'O') {return z;}
 		}
 
 		char x = board[0][0];
 		char y = board[1][1];
 		char z = board[2][2];
-		if(y == z && y == c) {return x;}
-		else if(x == z && x == c) {return y;}
-		else if(x == y && x == c) {return z;}
+		if(y == z && y == c && x != 'X' && x != 'O') {return x;}
+		else if(x == z && x == c && y != 'X' && y != 'O') {return y;}
+		else if(x == y && x == c && z != 'X' && z != 'O') {return z;}
 
 		x = board[0][2];
 		y = board[1][1];
 		z = board[2][0];
-		if(y == z && y == c) {return x;}
-		else if(x == z && x == c) {return y;}
-		else if(x == y && x == c) {return z;}
+		if(y == z && y == c && x != 'X' && x != 'O') {return x;}
+		else if(x == z && x == c && y != 'X' && y != 'O') {return y;}
+		else if(x == y && x == c && z != 'X' && z != 'O') {return z;}
 
 		return 'z';
 	}
@@ -164,8 +165,8 @@ public class TicTacToeBoard {
 				if(row == col) {
 					diagonal1[row] = board[row][col];
 				}
-				if(3 - row == col) {
-					diagonal1[row] = board[row][col];
+				if(2 - row == col) {
+					diagonal2[row] = board[row][col];
 				}
 				if(board[row][col] != 'X' && board[row][col] != 'O') {
 					possibleMoves = true;
@@ -180,7 +181,7 @@ public class TicTacToeBoard {
 			return 'O';
 		}
 
-		return 'z'; // No moves possible, game ends
+		return possibleMoves ? 'z' : 'y'; // If no moves are possible, game ends
 	}
 
 	/**
@@ -196,6 +197,7 @@ public class TicTacToeBoard {
 	public String toString() {
 		String output = "";
 		for(char[] row : board) {
+			output += " ";
 			for(char c : row) {
 				output += c + " | ";
 			}
