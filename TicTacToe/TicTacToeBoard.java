@@ -86,23 +86,6 @@ public class TicTacToeBoard {
 	* If not win position exists, return 'z'.
 	*/
 	public char findMove(char c) {
-		for(int row = 0; row < 3; row++) {
-			char x = board[row][0];
-			char y = board[row][1];
-			char z = board[row][2];
-			if(y == z && y == c && x != 'X' && x != 'O') {return x;}
-			else if(x == z && x == c && y != 'X' && y != 'O') {return y;}
-			else if(x == y && x == c && z != 'X' && z != 'O') {return z;}
-		}
-		for(int col = 0; col < 3; col++) {
-			char x = board[0][col];
-			char y = board[1][col];
-			char z = board[2][col];
-			if(y == z && y == c && x != 'X' && x != 'O') {return x;}
-			else if(x == z && x == c && y != 'X' && y != 'O') {return y;}
-			else if(x == y && x == c && z != 'X' && z != 'O') {return z;}
-		}
-
 		char x = board[0][0];
 		char y = board[1][1];
 		char z = board[2][2];
@@ -116,6 +99,23 @@ public class TicTacToeBoard {
 		if(y == z && y == c && x != 'X' && x != 'O') {return x;}
 		else if(x == z && x == c && y != 'X' && y != 'O') {return y;}
 		else if(x == y && x == c && z != 'X' && z != 'O') {return z;}
+
+		for(int row = 0; row < 3; row++) {
+			x = board[row][0];
+			y = board[row][1];
+			z = board[row][2];
+			if(y == z && y == c && x != 'X' && x != 'O') {return x;}
+			else if(x == z && x == c && y != 'X' && y != 'O') {return y;}
+			else if(x == y && x == c && z != 'X' && z != 'O') {return z;}
+		}
+		for(int col = 0; col < 3; col++) {
+			x = board[0][col];
+			y = board[1][col];
+			z = board[2][col];
+			if(y == z && y == c && x != 'X' && x != 'O') {return x;}
+			else if(x == z && x == c && y != 'X' && y != 'O') {return y;}
+			else if(x == y && x == c && z != 'X' && z != 'O') {return z;}
+		}
 
 		return 'z';
 	}
