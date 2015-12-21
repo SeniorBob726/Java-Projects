@@ -79,21 +79,44 @@ public class TicTacToeBoard {
 	}
 
 	/**
-	* Finds the Win Position for the character passed in.
+	* Finds the win position for the character passed in.
 	* @param c <code>char</code> value containing either 'X' or 'O'
 	* @return the win position for character passed in, '1'-'9'.
 	* If not win position exists, return 'z'.
 	*/
 	public char findMove(char c) {
 		for(int row = 0; row < 3; row++) {
-			// return move if 3 in a row possible
+			char x = board[row][0];
+			char y = board[row][1];
+			char z = board[row][2];
+			if(y == z && y == c) {return x;}
+			else if(x == z && x == c) {return y;}
+			else if(x == y && x == c) {return z;}
 		}
 		for(int col = 0; col < 3; col++) {
-			//return move if 3 in a col possible
+			char x = board[0][col];
+			char y = board[1][col];
+			char z = board[2][col];
+			if(y == z && y == c) {return x;}
+			else if(x == z && x == c) {return y;}
+			else if(x == y && x == c) {return z;}
 		}
-		//return move if a diagonal possible
 
-		//otherwise return 'z';
+		char x = board[0][0];
+		char y = board[1][1];
+		char z = board[2][2];
+		if(y == z && y == c) {return x;}
+		else if(x == z && x == c) {return y;}
+		else if(x == y && x == c) {return z;}
+
+		x = board[0][2];
+		y = board[1][1];
+		z = board[2][0];
+		if(y == z && y == c) {return x;}
+		else if(x == z && x == c) {return y;}
+		else if(x == y && x == c) {return z;}
+
+		return 'z';
 	}
 
 	/**
