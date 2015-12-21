@@ -129,31 +129,19 @@ public class TicTacToeBoard {
 		char[] xWin = {'X', 'X', 'X'};
 		char[] oWin = {'O', 'O', 'O'};
 		for(int row = 0; row < board.length; row++) {
-			if(compareArrays(board[row], xWin)) {
-				return 'X';
-			}
-			if(compareArrays(board[row], oWin)) {
-				return 'O';
-			}
+			if(compareArrays(board[row], xWin)) {return 'X';}
+			if(compareArrays(board[row], oWin)) {return 'O';}
 		}
 
 		for(int row = 0; row < board.length; row++) {
 			int x = 0;
 			int o = 0;
 			for(int col = 0; col < board[row].length; col++) {
-				if(board[col][row] == 'X') {
-					x++;
-				}
-				else if(board[col][row] == 'O') {
-					o++;
-				}
+				if(board[col][row] == 'X') {x++;}
+				else if(board[col][row] == 'O') {o++;}
 
-				if(x == 3) {
-					return 'X';
-				}
-				if(o == 3) {
-					return 'O';
-				}
+				if(x == 3) {return 'X';}
+				if(o == 3) {return 'O';}
 			}
 		}
 
@@ -162,26 +150,16 @@ public class TicTacToeBoard {
 		char[] diagonal2 = new char[3];
 		for(int row = 0; row < board.length; row++) {
 			for(int col = 0; col < board[row].length; col++) {
-				if(row == col) {
-					diagonal1[row] = board[row][col];
-				}
-				if(2 - row == col) {
-					diagonal2[row] = board[row][col];
-				}
-				if(board[row][col] != 'X' && board[row][col] != 'O') {
-					possibleMoves = true;
-				}
+				if(row == col) {diagonal1[row] = board[row][col];}
+				if(2 - row == col) {diagonal2[row] = board[row][col];}
+				if(board[row][col] != 'X' && board[row][col] != 'O') {possibleMoves = true;}
 			}
 		}
 
-		if(compareArrays(diagonal1, xWin) || compareArrays(diagonal2, xWin)) {
-			return 'X';
-		}
-		if(compareArrays(diagonal1, oWin) || compareArrays(diagonal2, oWin)) {
-			return 'O';
-		}
+		if(compareArrays(diagonal1, xWin) || compareArrays(diagonal2, xWin)) {return 'X';}
+		if(compareArrays(diagonal1, oWin) || compareArrays(diagonal2, oWin)) {return 'O';}
 
-		return possibleMoves ? 'z' : 'y'; // If no moves are possible, game ends
+		return possibleMoves ? 'y' : 'z'; // If no moves are possible, game ends
 	}
 
 	/**

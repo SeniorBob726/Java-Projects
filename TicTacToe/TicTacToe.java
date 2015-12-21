@@ -53,7 +53,7 @@ public class TicTacToe {
 				System.out.println(gameBoard);
 				break;
 			}
-			else if(winner == 'y') {
+			else if(winner == 'z') {
 				System.out.println("Tie Game");
 				System.out.println(gameBoard);
 				break;
