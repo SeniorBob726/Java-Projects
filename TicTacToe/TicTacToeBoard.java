@@ -40,9 +40,9 @@ public class TicTacToeBoard {
 	* @return true if the move is valid and board was updated, false otherwise.
 	*/
 	public boolean updateBoard(char b, char c) {
-		int a = Character.getNumericValue(b);
-		int row = a % 3;
-		int col = a / 3;
+		int a = Character.getNumericValue(b) - 1;
+		int row = a / 3;
+		int col = a % 3;
 		if(board[row][col] != 'X' && board[row][col] != 'O') {
 			board[row][col] = c;
 			return true;
@@ -194,12 +194,14 @@ public class TicTacToeBoard {
 	*/
 @Override
 	public String toString() {
+		String output = "";
+		for(char[] row : board) {
+			for(char c : row) {
+				output += c + " | ";
+			}
+			output = output.substring(0, output.length() - 3) + "\n" + "-----------" + "\n";
+		}
 
-		/*return current board state e.g.  O | 2 | 3
-   																     -----------
- 																	      X | 5 | 6
-																	     -----------
- 																	      7 | 8 | 9 */
-
+		return output.substring(0, output.length() - 12);
 	}
 }
