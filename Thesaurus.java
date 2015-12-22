@@ -156,7 +156,9 @@ public class Thesaurus {
 			System.out.println("1) Enter a word to look up");
 			System.out.println("2) Add a word to Thesaurus");
 			System.out.println("3) View Thesaurus");
+			System.out.print(">");
 			String choice = reader.nextLine();
+			System.out.println();
 			int option = 0;
 			switch(choice) {
 				case "1":
@@ -194,7 +196,7 @@ public class Thesaurus {
 				String synonyms = reader.nextLine();
 
 				if(myThesaurus.addWord(word, synonyms) == false) {
-					System.out.println("- No room -");
+					System.out.println("- No room in Thesaurus -");
 				}
 			}
 			else if(option == 3) {
