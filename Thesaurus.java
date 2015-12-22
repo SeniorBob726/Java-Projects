@@ -53,14 +53,23 @@ public class Thesaurus {
 	public String findSynonyms(String w) {
 		int row = getRow(w);
 		for(int col = 0; col < words[row].length; col++) {
-			if(words[row][col].indexOf(w) != -1) {
+			if(words[row][col] != null && words[row][col].indexOf(w) != -1) {
 				return synonyms[row][col];
 			}
 		}
 
-		for(int col = 0; col < synonyms[row].length; col++) {
-			if(synonyms[row][col].indexOf(w) != -1) {
-				return synonyms[row][col];
+		for(row = 0; row < synonyms.length; row++) {
+			for(int col = 0; col < synonyms[row].length; col++) {
+				if(synonyms[row][col] != null && synonyms[row][col].indexOf(w) != -1) {
+					String[] syns = synonyms[row][col].split(", ");
+					String output = words[row][col] + ", ";
+					for(int i = 0; i < syns.length; i++) {
+						if(!syns[i].equals(w)) {
+							output += syns[i] + ", ";
+						}
+					}
+					return output.substring(0, output.length() - 2);
+				}
 			}
 		}
 
@@ -112,7 +121,7 @@ public class Thesaurus {
 		for(int row = 0; row < words.length; row++) {
 			for(int col = 0; col < words[row].length; col++) {
 				if(words[row][col] != null) {
-					output += words[row][col] + "\n";
+					output += "- " + words[row][col] + "\n";
 				}
 			}
 		}
@@ -143,6 +152,7 @@ public class Thesaurus {
 
 		Scanner reader = new Scanner(System.in);
 		while(true) {
+			System.out.println("Thesaurus");
 			System.out.println("1) Enter a word to look up");
 			System.out.println("2) Add a word to Thesaurus");
 			System.out.println("3) View Thesaurus");
@@ -171,7 +181,7 @@ public class Thesaurus {
 				if(word.indexOf(" ") > -1) {
 					word = word.substring(0, word.indexOf(" "));
 				}
-				System.out.println(myThesaurus.findSynonyms(word));
+				System.out.println("Synonyms: " + myThesaurus.findSynonyms(word));
 			}
 			else if(option == 2) {
 				System.out.print("Enter a word to add: ");
