@@ -148,7 +148,7 @@ public class Thesaurus {
 			{"distant, remote", "affable, welcoming"}
 		};
 
-		Thesaurus myThesaurus = new Thesaurus(starterWords, starterSyns);
+		Thesaurus thesaurus = new Thesaurus(starterWords, starterSyns);
 
 		Scanner reader = new Scanner(System.in);
 		while(true) {
@@ -183,7 +183,7 @@ public class Thesaurus {
 				if(word.indexOf(" ") > -1) {
 					word = word.substring(0, word.indexOf(" "));
 				}
-				System.out.println("Synonyms: " + myThesaurus.findSynonyms(word));
+				System.out.println("Synonyms: " + thesaurus.findSynonyms(word));
 			}
 			else if(option == 2) {
 				System.out.print("Enter a word to add: ");
@@ -195,12 +195,12 @@ public class Thesaurus {
 				System.out.print("Enter synonyms for " + word + ": ");
 				String synonyms = reader.nextLine();
 
-				if(myThesaurus.addWord(word, synonyms) == false) {
+				if(thesaurus.addWord(word, synonyms) == false) {
 					System.out.println("- No room in Thesaurus -");
 				}
 			}
 			else if(option == 3) {
-				System.out.println(myThesaurus);
+				System.out.println(thesaurus);
 			}
 		}
 	}
