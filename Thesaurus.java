@@ -54,7 +54,7 @@ public class Thesaurus {
 		int row = getRow(w);
 		for(int col = 0; col < words[row].length; col++) {
 			if(w.equals(words[row][col])) {
-				return synonyms[row][col];
+				return "Synonyms: " + synonyms[row][col];
 			}
 		}
 
