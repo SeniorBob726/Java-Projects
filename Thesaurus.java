@@ -101,14 +101,22 @@ public class Thesaurus {
 		}
 
 		if(size < words[row].length) {
-			for(int i = size; i >= 0; i--) {
-				if(words[row][i] != null) {
-					if(w.compareTo(words[row][i]) == 0) {
-						return false;
-					}
+			for(int k = size - 1; k >= 0; k--) {
+				if(w.compareTo(words[row][k]) == 0) {
+					return false;
+				}
+				else if(w.compareTo(words[row][k]) > 0) {
+					words[row][k + 1] = words[row][k];
+				}
+				else if(w.compareTo(words[row][k]) < 0) {
+					words[row][k + 1] = w;
+					return true;
 				}
 			}
 		}
+
+		words[row][size] = w;
+		return true;
 	}
 
 	/**
