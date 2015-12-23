@@ -61,11 +61,11 @@ public class Thesaurus {
 		for(row = 0; row < synonyms.length; row++) {
 			for(int col = 0; col < synonyms[row].length; col++) {
 				if(synonyms[row][col] != null && synonyms[row][col].indexOf(w) != -1) {
-					String[] syns = synonyms[row][col].split(", ");
+					String[] syns = synonyms[row][col].split(",");
 					String output = words[row][col] + ", ";
 					for(int i = 0; i < syns.length; i++) {
 						if(!w.equals(syns[i])) {
-							output += syns[i] + ", ";
+							output += syns[i].trim() + ", ";
 						}
 					}
 					return output.substring(0, output.length() - 2);
