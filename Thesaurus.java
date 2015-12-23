@@ -53,7 +53,7 @@ public class Thesaurus {
 	public String findSynonyms(String w) {
 		int row = getRow(w);
 		for(int col = 0; col < words[row].length; col++) {
-			if(words[row][col] != null && words[row][col].indexOf(w) != -1) {
+			if(w.equals(words[row][col])) {
 				return synonyms[row][col];
 			}
 		}
