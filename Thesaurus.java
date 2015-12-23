@@ -64,7 +64,7 @@ public class Thesaurus {
 					String[] syns = synonyms[row][col].split(", ");
 					String output = words[row][col] + ", ";
 					for(int i = 0; i < syns.length; i++) {
-						if(!syns[i].equals(w)) {
+						if(!w.equals(syns[i])) {
 							output += syns[i] + ", ";
 						}
 					}
