@@ -62,7 +62,7 @@ public class Thesaurus {
 			for(int col = 0; col < synonyms[row].length; col++) {
 				if(synonyms[row][col] != null && synonyms[row][col].indexOf(w) != -1) {
 					String[] syns = synonyms[row][col].split(",");
-					String output = words[row][col] + ", ";
+					String output = "Synonyms: " + words[row][col] + ", ";
 					for(int i = 0; i < syns.length; i++) {
 						if(!w.equals(syns[i])) {
 							output += syns[i].trim() + ", ";
@@ -189,7 +189,7 @@ public class Thesaurus {
 				if(word.indexOf(" ") > -1) {
 					word = word.substring(0, word.indexOf(" "));
 				}
-				System.out.println("Synonyms: " + thesaurus.findSynonyms(word));
+				System.out.println(thesaurus.findSynonyms(word));
 			}
 			else if(option == 2) {
 				System.out.print("Enter a word to add: ");
