@@ -198,7 +198,7 @@ public class Thesaurus {
 				if(word.indexOf(" ") > -1) {
 					word = word.substring(0, word.indexOf(" "));
 				}
-				System.out.print("Enter synonyms for " + word + ": ");
+				System.out.print("Enter synonyms for " + word + " separated by a comma: ");
 				String synonyms = reader.nextLine();
 
 				if(thesaurus.addWord(word, synonyms) == false) {
