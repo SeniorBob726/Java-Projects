@@ -101,22 +101,20 @@ public class Thesaurus {
 		}
 
 		if(size < words[row].length) {
-			for(int k = size - 1; k >= 0; k--) {
+			int k = size - 1;
+			while(k >= 0 && w.compareTo(words[row][k]) <= 0) {
 				if(w.compareTo(words[row][k]) == 0) {
 					return false;
 				}
-				else if(w.compareTo(words[row][k]) > 0) {
-					words[row][k + 1] = words[row][k];
-				}
-				else if(w.compareTo(words[row][k]) < 0) {
-					words[row][k + 1] = w;
-					return true;
-				}
+				words[row][k + 1] = words[row][k];
+				k--;
 			}
+			words[row][k + 1] = w;
+			synonyms[row][k + 1] = syns;
+			return true;
 		}
 
-		words[row][size] = w;
-		return true;
+		return false;
 	}
 
 	/**
