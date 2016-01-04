@@ -61,6 +61,7 @@ public class Vendor {
 	*/
 	public boolean makeSale() {
 		if(amountStocked > 0 && deposit >= pricePerUnit) {
+			amountStocked--;
 			change = deposit - pricePerUnit;
 			deposit = 0;
 			return true;
