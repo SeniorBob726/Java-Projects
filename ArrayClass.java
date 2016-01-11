@@ -17,7 +17,7 @@ public class ArrayClass {
 
 
 	// Return size
-	public int getSize() {
+	public int size() {
 		return size;
 	}
 
