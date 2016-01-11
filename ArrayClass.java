@@ -12,9 +12,7 @@ public class ArrayClass {
 
 	// No-args constructor, default capacity to 10, size to 0.
 	public ArrayClass() {
-		capacity = 10;
-		myArray = new int[capacity];
-		size = 0;
+		this(10);
 	}
 
 
