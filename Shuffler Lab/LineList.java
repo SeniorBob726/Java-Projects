@@ -36,13 +36,15 @@ public class LineList {
 	}
 
 	public void shuffle() {
-		for(int n = list.size(); n >= 2; n--) {
+		for(int n = list.size() - 1; n >= 2; n--) {
 			int index = (int) (Math.random() * n);
-			String temp = list.get(index);
+			String prevSwap = list.get(index);
+			String swap = list.get(n);
+
 			list.remove(index);
-			list.add(index, list.get(n));
+			list.add(index, swap);
 			list.remove(n);
-			list.add(n, temp);
+			list.add(n, prevSwap);
 		}
 	}
 }
