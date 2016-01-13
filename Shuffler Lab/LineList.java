@@ -34,4 +34,15 @@ public class LineList {
 			list.remove(index);
 		}
 	}
+
+	public void shuffle() {
+		for(int n = list.size(); n >= 2; n--) {
+			int index = (int) (Math.random() * n);
+			String temp = list.get(index);
+			list.remove(index);
+			list.add(index, list.get(n));
+			list.remove(n);
+			list.add(n, temp);
+		}
+	}
 }
