@@ -10,15 +10,26 @@ public class DocumentIndex extends ArrayList<IndexEntry> {
 	}
 
 	private int foundOrInserted(String word) {
-		int index = 0;
+		if(this.size() == 0) {
+			IndexEntry ie = new IndexEntry(word);
+			this.add(ie);
+			return 0;
+		}
 		for(int i = 0; i < this.size(); i++) {
 			String entryWord = this.get(i).getWord().toUpperCase();
 			if(word.toUpperCase().equals(entryWord)) {
 				return i;
 			}
+			else if(word.toUpperCase().compareTo(entryWord) < 0) {
+				IndexEntry ie = new IndexEntry(word);
+				this.add(i, ie);
+				return i;
+			}
 		}
 
-		return index;
+		IndexEntry ie = new IndexEntry(word);
+		this.add(ie);
+		return this.size() - 1;
 	}
 
 	public void addWord(String word, int num) {
