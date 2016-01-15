@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class DocumentIndex extends ArrayList<IndexEntry> {
 	public DocumentIndex() {
 		super();
