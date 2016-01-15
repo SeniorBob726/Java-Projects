@@ -24,4 +24,13 @@ public class DocumentIndex extends ArrayList<IndexEntry> {
 	public void addWord(String word, int num) {
 		this.get(foundOrInserted(word)).add(num);
 	}
+
+	public void addAllWords(String str, int num) {
+		String[] words = str.split("\\W+");
+		for(String s : words) {
+			if(!s.equals("")) {
+				addWord(s, num);
+			}
+		}
+	}
 }
