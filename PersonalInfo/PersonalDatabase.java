@@ -9,8 +9,10 @@ public class PersonalDatabase extends ArrayList<PersonalInfo> {
 		ArrayList<PersonalInfo> peopleInState = new ArrayList<PersonalInfo>();
 		for(PersonalInfo p : this) {
 			if(state.equals(p.getAddress().getState())) {
-				peopleInState
+				peopleInState.add(p);
 			}
 		}
+
+		return peopleInState;
 	}
 }
