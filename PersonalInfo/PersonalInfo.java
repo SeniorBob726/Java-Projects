@@ -8,10 +8,10 @@ public class PersonalInfo {
 	private ArrayList<String> emailAddresses;
 	private ArrayList<String> websites;
 
-	public PersonalInfo(String fn, String ln, String street, String city, String state, String county) {
+	public PersonalInfo(String fn, String ln, String street, String city, String state, String county, int zip) {
 		firstName = fn;
 		lastName = ln;
-		address = new Address(street, city, state, county);
+		address = new Address(street, city, state, county, zip);
 		phoneNumbers = new ArrayList<String>();
 		emailAddresses = new ArrayList<String>();
 		websites = new ArrayList<String>();
