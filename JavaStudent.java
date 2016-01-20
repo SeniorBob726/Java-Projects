@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class JavaStudent {
 	private String name;
 	private ArrayList<String> favoriteMovies;
