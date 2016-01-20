@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressReader {
@@ -121,15 +122,53 @@ public class AddressReader {
 			int choice = scanner.nextInt();
 			scanner.nextLine();
 
+			ArrayList<PersonalInfo> findResults = new ArrayList<PersonalInfo>();
 			switch(choice) {
 				case 1:
-					System.out.print("Enter a state: ");
+					System.out.print("Enter state: ");
 					String state = scanner.nextLine();
-					System.out.println(state);
 					for(PersonalInfo p : database.findPeopleFromState(state)) {
 						System.out.println(p);
 					}
+					findResults = database.findPeopleFromState(state);
+					for(int i = 0; i < findResults.size() && i < 10; i++) {
+						System.out.println(findResults.get(i));
+					}
 					break;
+				case 2:
+					System.out.print("Age Range\n - Enter lower age: ");
+					int lower = scanner.nextInt();
+					System.out.print(" - Enter upper age: ");
+					int upper = scanner.nextInt();
+					findResults = database.findPeopleBetweenAges(lower, upper);
+					for(int i = 0; i < findResults.size() && i < 10; i++) {
+						System.out.println(findResults.get(i));
+					}
+					break;
+				case 3:
+					System.out.print("Voting Affiliation by State\n - Enter state: ");
+					String st = scanner.nextLine();
+					System.out.print(" - Enter voting affiliation: ");
+					int vA = scanner.nextInt();
+					findResults = database.findVotingAffiliationsByState(st, vA);
+					for(int i = 0; i < findResults.size() && i < 10; i++) {
+						System.out.println(findResults.get(i));
+					}
+					break;
+				case 4:
+					System.out.print("Goodbye!");
+					System.exit(0);
+					break;
+			}
+			if(findResults.size() > 10) {
+				System.out.print("Showing first 10 matches. List all matches? [Y/N]: ");
+				String yn = scanner.next().toLowerCase();
+				scanner.nextLine();
+				if("y".equals(yn)) {
+					for(int i = 10; i < findResults.size(); i++) {
+						System.out.println(findResults.get(i));
+					}
+				}
 			}
 		}
 	}
