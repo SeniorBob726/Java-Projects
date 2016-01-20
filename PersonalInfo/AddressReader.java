@@ -123,7 +123,12 @@ public class AddressReader {
 
 			switch(choice) {
 				case 1:
-
+					System.out.print("Enter a state: ");
+					String state = scanner.nextLine();
+					System.out.println(state);
+					for(PersonalInfo p : database.findPeopleFromState(state)) {
+						System.out.println(p);
+					}
 					break;
 			}
 		}
