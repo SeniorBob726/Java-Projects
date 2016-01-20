@@ -44,6 +44,6 @@ public class JavaStudent {
 			output += mv + ", ";
 		}
 
-		return output.substring(0, substring.length() - 2);
+		return output.substring(0, output.length() - 2);
 	}
 }
