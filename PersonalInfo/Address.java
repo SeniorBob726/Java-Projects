@@ -13,23 +13,23 @@ public class Address {
 		zipcode = zip;
 	}
 
-	private String getStreet() {
+	public String getStreet() {
 		return street;
 	}
 
-	private String getCity() {
+	public String getCity() {
 		return city;
 	}
 
-	private String getCounty() {
+	public String getCounty() {
 		return county;
 	}
 
-	private String getState() {
+	public String getState() {
 		return state;
 	}
 
-	private String getZipcode() {
+	public String getZipcode() {
 		return zipcode;
 	}
 }
