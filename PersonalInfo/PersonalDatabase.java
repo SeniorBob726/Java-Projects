@@ -6,13 +6,24 @@ public class PersonalDatabase extends ArrayList<PersonalInfo> {
 	}
 
 	public ArrayList<PersonalInfo> findPeopleFromState(String state) {
-		ArrayList<PersonalInfo> peopleInState = new ArrayList<PersonalInfo>();
+		ArrayList<PersonalInfo> peopleFromState = new ArrayList<PersonalInfo>();
 		for(PersonalInfo p : this) {
 			if(state.equals(p.getAddress().getState())) {
-				peopleInState.add(p);
+				peopleFromState.add(p);
 			}
 		}
 
-		return peopleInState;
+		return peopleFromState;
+	}
+
+	public ArrayList<PersonalInfo> findPeopleBetweenAges(int lowerAge, int upperAge) {
+		ArrayList<PersonalInfo> peopleBetweenAges = new ArrayList<PersonalInfo>();
+		for(PersonalInfo p : this) {
+			if(lowerAge <= p.getAge() && p.getAge() <= upperAge) {
+				peopleBetweenAges.add(p);
+			}
+		}
+
+		return peopleBetweenAges;
 	}
 }
