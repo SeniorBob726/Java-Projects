@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class PersonalInfo {
 	private String firstName;
 	private String lastName;
+	private int age = 0;
+	private int votingAffiliation = 0;
 	private Address address;
 	private ArrayList<String> phoneNumbers;
 	private ArrayList<String> emailAddresses;
@@ -23,6 +25,22 @@ public class PersonalInfo {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int a) {
+		age = a;
+	}
+
+	public int getVotingAffiliation() {
+		return votingAffiliation;
+	}
+
+	public void setVotingAffiliation(int vA) {
+		votingAffiliation = vA;
 	}
 
 	public Address getAddress() {
