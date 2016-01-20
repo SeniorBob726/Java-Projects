@@ -72,15 +72,15 @@ public class PersonalInfo {
 	}
 
 	public String toString() {
-		String output = "Name: " + firstName + " " + lastName + "\n " + address + "\n Phone Numbers: ";
+		String output = "Name: " + firstName + " " + lastName + "\n - Age: " + age + "\n - Voting Affiliation: " + votingAffiliation + "\n - Address: " + address + "\n - Phone Numbers: ";
 		for(String pn : phoneNumbers) {
 			output += pn + ", ";
 		}
-		output = output.substring(0, output.length() - 2) + "\n Email Addresses: ";
+		output = output.substring(0, output.length() - 2) + "\n - Email Addresses: ";
 		for(String ea : emailAddresses) {
 			output += ea + ", ";
 		}
-		output = output.substring(0, output.length() - 2) + "\n Websites: ";
+		output = output.substring(0, output.length() - 2) + "\n - Websites: ";
 		for(String ea : emailAddresses) {
 			output += ea + ", ";
 		}
