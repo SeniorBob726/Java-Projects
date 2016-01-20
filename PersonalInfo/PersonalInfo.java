@@ -8,7 +8,7 @@ public class PersonalInfo {
 	private ArrayList<String> emailAddresses;
 	private ArrayList<String> websites;
 
-	public PersonalInfo(String fn, String ln, String street, String city, String state, String county, int zip) {
+	public PersonalInfo(String fn, String ln, String street, String city, String state, String county, String zip) {
 		firstName = fn;
 		lastName = ln;
 		address = new Address(street, city, county, state, zip);

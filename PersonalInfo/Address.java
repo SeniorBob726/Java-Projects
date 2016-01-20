@@ -3,9 +3,9 @@ public class Address {
 	private String city;
 	private String county;
 	private String state;
-	private int zipcode;
+	private String zipcode;
 
-	public Address(String str, String cty, String cnty, String st, int zip) {
+	public Address(String str, String cty, String cnty, String st, String zip) {
 		street = str;
 		city = cty;
 		county = cnty;
@@ -27,5 +27,9 @@ public class Address {
 
 	private String getState() {
 		return state;
+	}
+
+	private String getZipcode() {
+		return zipcode;
 	}
 }
