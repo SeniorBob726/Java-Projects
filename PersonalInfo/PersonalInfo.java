@@ -52,4 +52,21 @@ public class PersonalInfo {
 	public void addWebsite(String w) {
 		websites.add(w);
 	}
+
+	public String toString() {
+		String output = "Name: " + firstName + " " + lastName + "\n " + address + "\n Phone Numbers: ";
+		for(String pn : phoneNumbers) {
+			output += pn + ", ";
+		}
+		output = output.substring(0, output.length() - 2) + "\n Email Addresses: ";
+		for(String ea : emailAddresses) {
+			output += ea + ", ";
+		}
+		output = output.substring(0, output.length() - 2) + "\n Websites: ";
+		for(String ea : emailAddresses) {
+			output += ea + ", ";
+		}
+
+		return output.substring(0, output.length() - 2);
+	}
 }
