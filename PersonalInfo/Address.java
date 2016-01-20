@@ -1,15 +1,15 @@
 public class Address {
 	private String street;
 	private String city;
-	private String state;
 	private String county;
+	private String state;
 	private int zipcode;
 
-	public Address(String str, String cty, String st, String cnty, int zip) {
+	public Address(String str, String cty, String cnty, String st, int zip) {
 		street = str;
 		city = cty;
-		state = st;
 		county = cnty;
+		state = st;
 		zipcode = zip;
 	}
 
@@ -21,11 +21,11 @@ public class Address {
 		return city;
 	}
 
-	private String getState() {
-		return state;
-	}
-
 	private String getCounty() {
 		return county;
+	}
+
+	private String getState() {
+		return state;
 	}
 }

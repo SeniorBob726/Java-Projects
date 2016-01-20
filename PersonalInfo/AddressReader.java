@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class AddressReader {
 	public static void main(String[] args) throws IOException {
-		Scanner keyboard = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		String fileName;
 
 		// Open input file:
@@ -24,7 +24,7 @@ public class AddressReader {
 		}
 		else {
 			System.out.print("\nEnter input file name: ");
-			fileName = keyboard.nextLine().trim();
+			fileName = scanner.nextLine().trim();
 		}
 
 		BufferedReader inputFile = new BufferedReader(new FileReader(fileName), 1024);
@@ -50,7 +50,7 @@ public class AddressReader {
 			index = input.indexOf("\"", endIndex + 1);
 			endIndex = input.indexOf("\"", index + 1);
 
-			String lastName = input.substring(index + 1, endIndex);
+			String lName = input.substring(index + 1, endIndex);
 			index = input.indexOf("\"", endIndex + 1);
 			endIndex = input.indexOf("\"", index + 1);
 
@@ -91,7 +91,11 @@ public class AddressReader {
 			endIndex = input.indexOf("\"", index + 1);
 			String web = input.substring(index + 1, endIndex);
 
-			PersonalInfo info = new PersonalInfo(fName, lastName, address, city, county, state, zip, phone1, phone2, email, web);
+			PersonalInfo info = new PersonalInfo(fName, lName, address, city, county, state, zip);
+			info.addPhoneNumber(phone1);
+			info.addPhoneNumber(phone2);
+			info.addEmailAddress(email);
+			info.addWebsite(web);
 			database.add(info);
 			index = endIndex;
 		}
@@ -114,14 +118,14 @@ public class AddressReader {
 			System.out.println("3. Find Voters of an affiliation in a particular state");
 			System.out.println("4. Quit");
 
-			int choice = keyboard.nextInt();
-			keyboard.nextLine();
+			int choice = scanner.nextInt();
+			scanner.nextLine();
 
-			/*	switch(choice)
-			{
-				...
+			switch(choice) {
+				case 1:
+
+					break;
 			}
-			*/
 		}
 	}
 }

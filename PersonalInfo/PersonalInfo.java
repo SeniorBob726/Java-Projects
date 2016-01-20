@@ -11,7 +11,7 @@ public class PersonalInfo {
 	public PersonalInfo(String fn, String ln, String street, String city, String state, String county, int zip) {
 		firstName = fn;
 		lastName = ln;
-		address = new Address(street, city, state, county, zip);
+		address = new Address(street, city, county, state, zip);
 		phoneNumbers = new ArrayList<String>();
 		emailAddresses = new ArrayList<String>();
 		websites = new ArrayList<String>();
