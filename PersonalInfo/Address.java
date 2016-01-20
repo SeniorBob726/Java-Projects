@@ -10,4 +10,20 @@ public class Address {
 		state = st;
 		county = cnty;
 	}
+
+	private String getStreet() {
+		return street;
+	}
+
+	private String getCity() {
+		return city;
+	}
+
+	private String getState() {
+		return state;
+	}
+
+	private String getCounty() {
+		return county;
+	}
 }
