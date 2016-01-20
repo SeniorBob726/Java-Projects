@@ -32,4 +32,8 @@ public class Address {
 	public String getZipcode() {
 		return zipcode;
 	}
+
+	public String toString() {
+		return String.format("%s %s, %s, %s %s", street, city, county, state, zipcode);
+	}
 }
