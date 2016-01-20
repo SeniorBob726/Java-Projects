@@ -28,7 +28,7 @@ public class JavaStudent {
 	}
 
 	public void removeLongTitles() {
-		for(int i = favoriteMovies.size(); i >= 0; i--) {
+		for(int i = favoriteMovies.size() - 1; i >= 0; i--) {
 			if(favoriteMovies.get(i).length() > 6) {
 				favoriteMovies.remove(i);
 			}
