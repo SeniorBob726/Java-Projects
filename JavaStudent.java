@@ -6,6 +6,7 @@ public class JavaStudent {
 
 	public JavaStudent(String n, String mv1, String mv2, String mv3) {
 		name = n;
+		favoriteMovies = new ArrayList<String>();
 		favoriteMovies.add(mv1);
 		favoriteMovies.add(mv2);
 		favoriteMovies.add(mv3);
