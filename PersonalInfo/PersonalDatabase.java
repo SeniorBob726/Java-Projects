@@ -26,4 +26,15 @@ public class PersonalDatabase extends ArrayList<PersonalInfo> {
 
 		return peopleBetweenAges;
 	}
+
+	public ArrayList<PersonalInfo> findVotingAffiliationsByState(String state, int votingAffiliation) {
+		ArrayList<PersonalInfo> votingAffiliationsByState = new ArrayList<PersonalInfo>();
+		for(PersonalInfo p : this) {
+			if(state.equals(p.getAddress().getState()) && votingAffiliation == p.getVotingAffiliation()) {
+				votingAffiliationsByState.add(p);
+			}
+		}
+
+		return votingAffiliationsByState;
+	}
 }
