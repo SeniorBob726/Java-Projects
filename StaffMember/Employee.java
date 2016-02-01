@@ -18,10 +18,6 @@ public class Employee extends StaffMember {
 		wage = w;
 	}
 
-	public String getSSN() {
-		return ssn;
-	}
-
 	public double getWage() {
 		return wage;
 	}
