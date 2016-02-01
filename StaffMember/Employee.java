@@ -1,6 +1,6 @@
 public class Employee extends StaffMember {
-	private String ssn;
-	private double wage;
+	protected String ssn;
+	protected double wage;
 
 	public Employee(String name, String address, String phoneNumber, String s, double w) {
 		setName(name);
@@ -16,10 +16,6 @@ public class Employee extends StaffMember {
 
 	public void setWage(double w) {
 		wage = w;
-	}
-
-	public double getWage() {
-		return wage;
 	}
 
 	public double pay() {

@@ -11,7 +11,7 @@ public class Hourly extends Employee {
 	}
 
 	public double pay() {
-		double pay = getWage() * hours;
+		double pay = wage * hours;
 		hours = 0;
 		return pay;
 	}
