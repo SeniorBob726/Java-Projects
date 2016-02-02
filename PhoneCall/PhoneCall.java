@@ -1,17 +1,22 @@
 import java.util.ArrayList;
 
 public abstract class PhoneCall {
-	protected int phoneNumber;
-	protected double minutes;
-	protected double costPerMinute;
+	private int phoneNumber;
+	private int duration;
 
-	public PhoneCall() {
+	public PhoneCall(int min) {
 		phoneNumber = (int) (Math.random() * Math.pow(1, 10));
-		minutes = 0;
+		duration = min;
 	}
 
-	public double costForCall() {
-		return minutes * costPerMinute;
+	public abstract double getRate();
+
+	private int getDuration() {
+		return duration;
+	}
+
+	public String toString() {
+		return "";
 	}
 
 	public static void main(String[] args) {
