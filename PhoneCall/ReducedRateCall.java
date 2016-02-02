@@ -6,4 +6,8 @@ public class ReducedRateCall extends LongDistanceCall {
 	public double getRate() {
 		return 3.0;
 	}
+
+	public String toString() {
+		return super.toString() + "RR";
+	}
 }

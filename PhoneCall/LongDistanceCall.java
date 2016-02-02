@@ -6,4 +6,8 @@ public class LongDistanceCall extends PhoneCall {
 	public double getRate() {
 		return 6.0;
 	}
+
+	public String toString() {
+		return super.toString() + " LD";
+	}
 }
