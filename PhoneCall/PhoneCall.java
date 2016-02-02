@@ -1,22 +1,26 @@
 import java.util.ArrayList;
 
 public abstract class PhoneCall {
-	private int phoneNumber;
+	private long phoneNumber;
 	private int duration;
 
 	public PhoneCall(int min) {
-		phoneNumber = (int) (Math.random() * Math.pow(1, 10));
+		phoneNumber = (long) (Math.random() * Math.pow(10, 10));
 		duration = min;
 	}
 
 	public abstract double getRate();
 
-	private int getDuration() {
+	public int getDuration() {
 		return duration;
 	}
 
+	private int calculateCost() {
+		return (int) (duration * getRate());
+	}
+
 	public String toString() {
-		return "";
+		return String.format("%010d - Duration: %d Rate: %.1f Cost: %d", phoneNumber, duration, getRate(), calculateCost());
 	}
 
 	public static void main(String[] args) {
