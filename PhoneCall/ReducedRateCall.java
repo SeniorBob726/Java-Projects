@@ -4,7 +4,7 @@ public class ReducedRateCall extends LongDistanceCall {
 	}
 
 	public double getRate() {
-		return 3.0;
+		return super.getRate() / 2.0;
 	}
 
 	public String toString() {
