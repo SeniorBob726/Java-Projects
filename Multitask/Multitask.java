@@ -2,16 +2,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Multitask {
+	private ArrayList<MiniGame> games;
+
 	public static void main(String[] args) {
 		JFrame arcade = new JFrame();
 		arcade.setTitle("Multitask");
 		arcade.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel panel = new UserPanel();
-
 		Container pane = arcade.getContentPane();
-		pane.setLayout(new GridLayout(1, 1));
-		pane.add(panel);
+		pane.setLayout(new GridLayout(games.length() / 2, games.length())); // Figure out math for GridLayout
+
+		for(MiniGame game : games) {
+			pane.add(game);
+		}
 
 		arcade.pack();
 		arcade.setVisible(true);
