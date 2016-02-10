@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class GameHandler extends JPanel implements KeyListener {
+public class GameHandler extends JPanel implements ActionListener, KeyListener/*, JavaArcade */ {
 	private javax.swing.Timer timer; // Controls how often stats are checked
 	private int width, height;
 	private Font font;
@@ -48,6 +48,13 @@ public class GameHandler extends JPanel implements KeyListener {
 		g.drawString(Integer.toString(points), 5, fontMetrics.getMaxAscent());
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if(gameActive) {
+			points = (int) ((e.getWhen() - startTime) / 1000);
+			repaint();
+		}
+	}
+
 	public void keyTyped(KeyEvent e) {}
 	public void keyReleased(KeyEvent e) {}
 
@@ -55,9 +62,14 @@ public class GameHandler extends JPanel implements KeyListener {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_ENTER:
 				System.out.println("Enter");
+				timer.start();
+				startTime = System.currentTimeMillis();
+				gameActive = true;
 				break;
 			case KeyEvent.VK_SPACE:
 				System.out.println("Space");
+				timer.stop();
+				gameActive = false;
 				break;
 			case KeyEvent.VK_ESCAPE:
 				System.exit(0);
