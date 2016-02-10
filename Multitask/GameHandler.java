@@ -5,21 +5,29 @@ import java.util.ArrayList;
 
 public class GameHandler extends JPanel implements KeyListener {
 	private javax.swing.Timer timer; // Controls how often stats are checked
-	private boolean start = false;
+	private int width, height;
+	private Font font;
+	private FontMetrics fontMetrics;
+
+	private long startTime = 0;
+	private boolean gameActive = false;
 	private ArrayList<MiniGame> games;
 	private int points;
 
 	public GameHandler() {
-		points = 0;
+		font = new Font("Courier", Font.PLAIN, 14);
+		fontMetrics = this.getFontMetrics(font);
 
+		points = 0;
 		games = new ArrayList<MiniGame>(4);
 		games.add(new Balance());
 		// games.add(new Dodge());
 		// games.add(new Squares());
 		// games.add(new Helicopter());
 
-		int width = 600, height = 450;
-		//timer = new javax.swing.Timer(5, this);
+		width = 600;
+		height = 450;
+		timer = new javax.swing.Timer((int) (1000 / 60), this); // 60 ticks per second clock
 
 		addKeyListener(this); // Key controls
 
@@ -32,10 +40,12 @@ public class GameHandler extends JPanel implements KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		int fontSize = 14;
+		g.setColor(new Color(50, 50, 50));
+		g.fillRect(0, 0, width, fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent());
+
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Courier", Font.PLAIN, fontSize));
-		g.drawString("Points: " + points, (getWidth() / 2) - 30, getHeight() / 2 + 20);
+		g.setFont(font);
+		g.drawString(Integer.toString(points), 5, fontMetrics.getMaxAscent());
 	}
 
 	public void keyTyped(KeyEvent e) {}

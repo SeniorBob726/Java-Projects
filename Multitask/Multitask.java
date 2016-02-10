@@ -4,6 +4,7 @@ import java.awt.*;
 public class Multitask {
 	public static void main(String[] args) {
 		JFrame arcade = new JFrame("Multitask");
+		arcade.setResizable(false);
 		arcade.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Container pane = arcade.getContentPane();
