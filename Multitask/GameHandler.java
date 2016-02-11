@@ -37,6 +37,37 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		setPreferredSize(new Dimension(width, height));
 	}
 
+	public void startGame() {
+		timer.start();
+		gameActive = true;
+	}
+
+	public void endGame() {
+		timer.stop();
+		gameActive = false;
+	}
+
+	public void pauseGame() {
+		timer.stop();
+		gameActive = false;
+	}
+
+	public String getGameName() {
+
+	}
+
+	public int getHighScore() {
+
+	}
+
+	public String getInstructions() {
+
+	}
+
+	public String getCredits() {
+
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
