@@ -45,23 +45,23 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		this.add(Box.createVerticalStrut(fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent()), c);
 
 		c.fill = GridBagConstraints.BOTH;
-		c.weightx = 0.5;
-		c.weighty = 0.5;
-		c.gridx = 0;
-		c.gridy = 1;
-		this.add(new JButton("Button 1"), c);
+		c.weightx = 1;
+		c.weighty = 1;
+		if(games.size() >= 2) {
+			c.weightx = 0.5;
+		}
+		if(games.size() >= 3) {
+			c.weighty = 0.5;
+		}
 
-		c.gridx = 1;
-		c.gridy = 1;
-		this.add(new JButton("Button 2"), c);
+		for(int i = 0; i < games.size(); i++) {
+			if(games.size() == 3 && ) {
 
-		c.gridx = 0;
-		c.gridy = 2;
-		this.add(new JButton("Button 3"), c);
-
-		c.gridx = 1;
-		c.gridy = 2;
-		this.add(new JButton("Button 4"), c);
+			}
+			c.gridx = 0;
+			c.gridy = 1;
+			this.add(games.get(i), c);
+		}
 	}
 
 	public void startGame() {
