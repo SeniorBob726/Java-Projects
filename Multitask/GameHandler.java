@@ -36,6 +36,32 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		setFocusTraversalKeysEnabled(false);
 		setBackground(Color.GRAY);
 		setPreferredSize(new Dimension(width, height));
+
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+
+		c.gridx = 0;
+		c.gridy = 0;
+		this.add(Box.createVerticalStrut(fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent()), c);
+
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(new JButton("Button 1"), c);
+
+		c.gridx = 1;
+		c.gridy = 1;
+		this.add(new JButton("Button 2"), c);
+
+		c.gridx = 0;
+		c.gridy = 2;
+		this.add(new JButton("Button 3"), c);
+
+		c.gridx = 1;
+		c.gridy = 2;
+		this.add(new JButton("Button 4"), c);
 	}
 
 	public void startGame() {
