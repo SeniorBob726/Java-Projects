@@ -13,6 +13,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private boolean gameActive = false;
 	private ArrayList<MiniGame> games;
 	private int points;
+	private int highScore = 0;
 
 	public GameHandler() {
 		font = new Font("Courier", Font.PLAIN, 14);
@@ -53,19 +54,19 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public String getGameName() {
-
+		return "Multitask";
 	}
 
 	public int getHighScore() {
-
+		return highScore;
 	}
 
 	public String getInstructions() {
-
+		return "";
 	}
 
 	public String getCredits() {
-
+		return "";
 	}
 
 	public void paintComponent(Graphics g) {
