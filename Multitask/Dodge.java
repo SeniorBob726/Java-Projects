@@ -1,2 +1,2 @@
-public class Dodge implements MiniGame {
+public class Dodge extends MiniGame {
 }

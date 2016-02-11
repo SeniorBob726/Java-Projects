@@ -1,2 +1,2 @@
-public class Balance implements MiniGame {
+public class Balance extends MiniGame {
 }
