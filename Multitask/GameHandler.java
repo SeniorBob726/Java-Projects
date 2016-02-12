@@ -10,6 +10,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private FontMetrics fontMetrics;
 
 	private boolean rightKeyDown = false, leftKeyDown = false;
+	private boolean upLocked = false, downLocked = false;
 
 	private long startTime = 0;
 	private boolean gameActive = false;
@@ -24,6 +25,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
 		games.add(new Balance());
+		games.add(new Dodge());
 
 		width = 600;
 		height = 450;
@@ -167,23 +169,41 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	public void keyTyped(KeyEvent e) {}
 	public void keyReleased(KeyEvent e) {
-		switch (e.getKeyCode()) {
+		switch(e.getKeyCode()) {
 			case KeyEvent.VK_RIGHT:
 				rightKeyDown = false;
 				break;
 			case KeyEvent.VK_LEFT:
 				leftKeyDown = false;
 				break;
+			case KeyEvent.VK_UP:
+				upLocked = false;
+				break;
+			case KeyEvent.VK_DOWN:
+				downLocked = false;
+				break;
 		}
 	}
 
 	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
+		switch(e.getKeyCode()) {
 			case KeyEvent.VK_RIGHT:
 				rightKeyDown = true;
 				break;
 			case KeyEvent.VK_LEFT:
 				leftKeyDown = true;
+				break;
+			case KeyEvent.VK_UP:
+				if(!upLocked) {
+					((Dodge) games.get(1)).moveUp();
+					upLocked = true;
+				}
+				break;
+			case KeyEvent.VK_DOWN:
+				if(!downLocked) {
+					((Dodge) games.get(1)).moveDown();
+					downLocked = true;
+				}
 				break;
 			case KeyEvent.VK_ENTER:
 				System.out.println("Enter");
