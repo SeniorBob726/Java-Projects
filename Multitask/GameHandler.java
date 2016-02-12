@@ -125,6 +125,14 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			points = (int) ((e.getWhen() - startTime) / 1000);
 			for(MiniGame game : games) {
 				game.update();
+				if(game.gameOver()) {
+					System.out.println("Game Over");
+					System.out.println("Points: " + points);
+					timer.stop();
+					game.setBackground(Color.WHITE);
+					repaint();
+					return;
+				}
 			}
 
 			if(rightKeyDown) {
