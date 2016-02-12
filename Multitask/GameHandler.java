@@ -13,6 +13,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private boolean gameActive = false;
 	private ArrayList<MiniGame> games;
 	private int points;
+	private int highScore = 0;
 
 	public GameHandler() {
 		font = new Font("Courier", Font.PLAIN, 14);
@@ -35,6 +36,43 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		setFocusTraversalKeysEnabled(false);
 		setBackground(Color.GRAY);
 		setPreferredSize(new Dimension(width, height));
+
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+
+		c.gridx = 0;
+		c.gridy = 0;
+		this.add(Box.createVerticalStrut(fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent()), c);
+
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1;
+		c.weighty = 1;
+		c.gridx = 0;
+		c.gridy = 1;
+
+		for(int i = 0; i < games.size(); i++) {
+			if(games.size() == 2) {
+				c.gridx = i;
+				c.gridy = 1;
+			}
+			else if(games.size() == 3) {
+				if(i == 0) {
+					c.gridheight = 2;
+					c.gridx = 0;
+					c.gridy = 1;
+				}
+				else {
+					c.gridheight = 1;
+					c.gridx = 1;
+					c.gridy = i;
+				}
+			}
+			else if(games.size() == 4) {
+				c.gridx = i % 2;
+				c.gridy = (i == 0 ? 1 : i);
+			}
+			this.add(games.get(i), c);
+		}
 	}
 
 	public void startGame() {
@@ -53,19 +91,19 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public String getGameName() {
-
+		return "Multitask";
 	}
 
 	public int getHighScore() {
-
+		return highScore;
 	}
 
 	public String getInstructions() {
-
+		return "";
 	}
 
 	public String getCredits() {
-
+		return "";
 	}
 
 	public void paintComponent(Graphics g) {
