@@ -80,6 +80,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	public void startGame() {
 		timer.start();
+		startTime = System.currentTimeMillis();
 		gameActive = true;
 	}
 
@@ -168,14 +169,11 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				break;
 			case KeyEvent.VK_ENTER:
 				System.out.println("Enter");
-				timer.start();
-				startTime = System.currentTimeMillis();
-				gameActive = true;
+				startGame();
 				break;
 			case KeyEvent.VK_SPACE:
 				System.out.println("Space");
-				timer.stop();
-				gameActive = false;
+				endGame();
 				break;
 			case KeyEvent.VK_ESCAPE:
 				System.exit(0);
