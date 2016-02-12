@@ -36,6 +36,10 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		setBackground(Color.GRAY);
 		setPreferredSize(new Dimension(width, height));
 
+		constructLayout();
+	}
+
+	public void constructLayout() {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
@@ -72,6 +76,8 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			}
 			this.add(games.get(i), c);
 		}
+		this.validate();
+		this.repaint();
 	}
 
 	public void startGame() {
@@ -125,12 +131,15 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			points = (int) ((e.getWhen() - startTime) / 1000);
 			if(points == 15 && games.size() == 1) {
 				// games.add(new Dodge());
+				constructLayout();
 			}
 			else if(points == 70 && games.size() == 2) {
 				// games.add(new Squares());
+				constructLayout();
 			}
 			else if(points == 100 && games.size() == 3) {
 				// games.add(new Helicopter());
+				constructLayout();
 			}
 
 			for(MiniGame game : games) {
