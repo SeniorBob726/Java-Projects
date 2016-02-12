@@ -25,10 +25,11 @@ public class Balance extends MiniGame {
 
 	public void updateAngularVelocity(double av) {
 		angularVelocity += av * (1.0 + Math.abs(angle / 45));
-		angularVelocity = clamp(angularVelocity, -2, 2);
+		angularVelocity = clamp(angularVelocity, -1, 1);
 	}
 
 	public void reset() {
+		setBackground(new Color(231, 179, 179));
 		translationalVelocity = 0.001;
 		ballPosition = 0.0;
 		angle = 0.0;
@@ -37,15 +38,14 @@ public class Balance extends MiniGame {
 
 	public void update() {
 		angle += angularVelocity;
+		angle = clamp(angle, -45, 45);
 		ballPosition += translationalVelocity;
 
 		angularVelocity += ballPosition * 0.02;
 		angularVelocity *= 0.98; // Angular velocity decay
-		angularVelocity = clamp(angularVelocity, -2, 2);
+		angularVelocity = clamp(angularVelocity, -1, 1);
 
-		translationalVelocity += 0.00007 * angle;
-		translationalVelocity *= 0.96; // Translational velocity decay
-		translationalVelocity = clamp(translationalVelocity, -0.015, 0.015);
+		translationalVelocity = 0.0005 * angle;
 
 		ball.setFrame(-barHeight + ballPosition * barWidth / 2, -barHeight * 2.5, barHeight * 2, barHeight * 2);
 	}
@@ -70,7 +70,8 @@ public class Balance extends MiniGame {
 		g2d.setColor(new Color(176, 0, 0));
 		g2d.fill(ball);
 		g2d.dispose();
-		g.drawString("angularVelocity: " + angularVelocity, 0, 20);
-		g.drawString("translationalVelocity: " + translationalVelocity, 0, 40);
+		g.drawString("ballPosition: " + ballPosition, 0, 20);
+		g.drawString("angularVelocity: " + angularVelocity, 0, 40);
+		g.drawString("translationalVelocity: " + translationalVelocity, 0, 60);
 	}
 }
