@@ -1,4 +1,4 @@
-/* Java port of Icylime's Multitask */
+/* Java port of IcyLime's Multitask */
 
 import javax.swing.*;
 import java.awt.*;
