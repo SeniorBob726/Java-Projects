@@ -1,2 +1,2 @@
-public class Squares implements MiniGame {
+public class Squares extends MiniGame {
 }

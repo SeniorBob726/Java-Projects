@@ -1,2 +1,2 @@
-public class Helicopter implements MiniGame {
+public class Helicopter extends MiniGame {
 }
