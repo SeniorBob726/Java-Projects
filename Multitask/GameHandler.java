@@ -22,6 +22,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
 		games.add(new Balance());
+		games.add(new Balance());
 		// games.add(new Dodge());
 		// games.add(new Squares());
 		// games.add(new Helicopter());
@@ -120,6 +121,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	public void actionPerformed(ActionEvent e) {
 		if(gameActive) {
 			points = (int) ((e.getWhen() - startTime) / 1000);
+			for(MiniGame game : games) {
+				game.update();
+			}
 			repaint();
 		}
 	}
@@ -129,6 +133,12 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
+			case KeyEvent.VK_RIGHT:
+				((Balance) games.get(0)).updateAngularVelocity(0.5);
+				break;
+			case KeyEvent.VK_LEFT:
+				((Balance) games.get(0)).updateAngularVelocity(-0.5);
+				break;
 			case KeyEvent.VK_ENTER:
 				System.out.println("Enter");
 				timer.start();
