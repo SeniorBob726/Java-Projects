@@ -24,7 +24,6 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
 		games.add(new Balance());
-		games.add(new Balance());
 		// games.add(new Dodge());
 		// games.add(new Squares());
 		// games.add(new Helicopter());
@@ -140,10 +139,10 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			}
 
 			if(rightKeyDown) {
-				((Balance) games.get(0)).updateAngularVelocity(0.08);
+				((Balance) games.get(0)).updateAngularVelocity(0.07);
 			}
 			if(leftKeyDown) {
-				((Balance) games.get(0)).updateAngularVelocity(-0.08);
+				((Balance) games.get(0)).updateAngularVelocity(-0.07);
 			}
 
 			repaint();
