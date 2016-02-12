@@ -24,9 +24,6 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
 		games.add(new Balance());
-		// games.add(new Dodge());
-		// games.add(new Squares());
-		// games.add(new Helicopter());
 
 		width = 600;
 		height = 450;
@@ -126,6 +123,16 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	public void actionPerformed(ActionEvent e) {
 		if(gameActive) {
 			points = (int) ((e.getWhen() - startTime) / 1000);
+			if(points == 15 && games.size() == 1) {
+				// games.add(new Dodge());
+			}
+			else if(points == 70 && games.size() == 2) {
+				// games.add(new Squares());
+			}
+			else if(points == 100 && games.size() == 3) {
+				// games.add(new Helicopter());
+			}
+
 			for(MiniGame game : games) {
 				game.update();
 				if(game.gameOver()) {
