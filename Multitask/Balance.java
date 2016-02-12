@@ -75,9 +75,5 @@ public class Balance extends MiniGame {
 		g2d.setColor(new Color(176, 0, 0));
 		g2d.fill(ball);
 		g2d.dispose();
-		g.drawString("ballPosition: " + ballPosition, 0, 20);
-		g.drawString("translationalVelocity: " + translationalVelocity, 0, 40);
-		g.drawString("angle: " + angle, 0, 60);
-		g.drawString("angularVelocity: " + angularVelocity, 0, 80);
 	}
 }
