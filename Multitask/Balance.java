@@ -5,10 +5,10 @@ import java.awt.geom.Ellipse2D;
 
 public class Balance extends MiniGame {
 	private Ellipse2D ball;
-	private double translationalVelocity = 0.0;
-	private double ballPosition = 0.0;
-	private double angle = 0.0;
-	private double angularVelocity = 0.0;
+	private double translationalVelocity;
+	private double ballPosition;
+	private double angle;
+	private double angularVelocity;
 
 	private Rectangle2D bar;
 	private int barHeight = 12;
@@ -17,7 +17,7 @@ public class Balance extends MiniGame {
 	public Balance() {
 		bar = new Rectangle2D.Double(-barWidth / 2, -barHeight / 2, barWidth, barHeight);
 		ball = new Ellipse2D.Double(-barHeight, -barHeight * 2.5, barHeight * 2, barHeight * 2);
-		translationalVelocity = 0.001;
+		reset();
 
 		setFocusable(false);
 		setBackground(new Color(231, 179, 179));
@@ -26,6 +26,13 @@ public class Balance extends MiniGame {
 	public void updateAngularVelocity(double av) {
 		angularVelocity += av * (1.0 + Math.abs(angle / 45));
 		angularVelocity = clamp(angularVelocity, -2, 2);
+	}
+
+	public void reset() {
+		translationalVelocity = 0.001;
+		ballPosition = 0.0;
+		angle = 0.0;
+		angularVelocity = 0.0;
 	}
 
 	public void update() {
@@ -41,6 +48,10 @@ public class Balance extends MiniGame {
 		translationalVelocity = clamp(translationalVelocity, -0.015, 0.015);
 
 		ball.setFrame(-barHeight + ballPosition * barWidth / 2, -barHeight * 2.5, barHeight * 2, barHeight * 2);
+	}
+
+	public boolean gameOver() {
+		return ballPosition > 1 || ballPosition < -1;
 	}
 
 	public void paintComponent(Graphics g) {
