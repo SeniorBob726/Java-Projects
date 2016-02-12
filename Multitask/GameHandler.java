@@ -79,6 +79,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void startGame() {
+		for(MiniGame game : games) {
+			game.reset();
+		}
 		timer.start();
 		startTime = System.currentTimeMillis();
 		gameActive = true;
