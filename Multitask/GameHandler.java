@@ -9,6 +9,8 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private Font font;
 	private FontMetrics fontMetrics;
 
+	private boolean rightKeyDown = false, leftKeyDown = false;
+
 	private long startTime = 0;
 	private boolean gameActive = false;
 	private ArrayList<MiniGame> games;
@@ -124,20 +126,37 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			for(MiniGame game : games) {
 				game.update();
 			}
+
+			if(rightKeyDown) {
+				((Balance) games.get(0)).updateAngularVelocity(0.08);
+			}
+			if(leftKeyDown) {
+				((Balance) games.get(0)).updateAngularVelocity(-0.08);
+			}
+
 			repaint();
 		}
 	}
 
 	public void keyTyped(KeyEvent e) {}
-	public void keyReleased(KeyEvent e) {}
+	public void keyReleased(KeyEvent e) {
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_RIGHT:
+				rightKeyDown = false;
+				break;
+			case KeyEvent.VK_LEFT:
+				leftKeyDown = false;
+				break;
+		}
+	}
 
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_RIGHT:
-				((Balance) games.get(0)).updateAngularVelocity(0.5);
+				rightKeyDown = true;
 				break;
 			case KeyEvent.VK_LEFT:
-				((Balance) games.get(0)).updateAngularVelocity(-0.5);
+				leftKeyDown = true;
 				break;
 			case KeyEvent.VK_ENTER:
 				System.out.println("Enter");

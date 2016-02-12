@@ -17,25 +17,28 @@ public class Balance extends MiniGame {
 	public Balance() {
 		bar = new Rectangle2D.Double(-barWidth / 2, -barHeight / 2, barWidth, barHeight);
 		ball = new Ellipse2D.Double(-barHeight, -barHeight * 2.5, barHeight * 2, barHeight * 2);
+		translationalVelocity = 0.001;
+
 		setFocusable(false);
 		setBackground(new Color(231, 179, 179));
 	}
 
 	public void updateAngularVelocity(double av) {
-		angularVelocity += av;
+		angularVelocity += av * (1.0 + Math.abs(angle / 45));
+		angularVelocity = clamp(angularVelocity, -2, 2);
 	}
 
 	public void update() {
 		angle += angularVelocity;
 		ballPosition += translationalVelocity;
 
-		angularVelocity += Math.pow(ballPosition, 3);
+		angularVelocity += ballPosition * 0.02;
 		angularVelocity *= 0.98; // Angular velocity decay
-		angularVelocity = Math.max(-2, Math.min(2, angularVelocity)); // Clamp velocity between -2 and 2
+		angularVelocity = clamp(angularVelocity, -2, 2);
 
-		translationalVelocity += 0.0001 * angle;
-		translationalVelocity *= 0.98; // Translational velocity decay
-		translationalVelocity = Math.max(-0.015, Math.min(0.015, translationalVelocity)); // Clamp velocity between -0.015 and 0.015
+		translationalVelocity += 0.00007 * angle;
+		translationalVelocity *= 0.96; // Translational velocity decay
+		translationalVelocity = clamp(translationalVelocity, -0.015, 0.015);
 
 		ball.setFrame(-barHeight + ballPosition * barWidth / 2, -barHeight * 2.5, barHeight * 2, barHeight * 2);
 	}
