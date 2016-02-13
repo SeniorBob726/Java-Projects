@@ -2,14 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.GeneralPath;
+import java.util.ArrayList;
 
 public class Dodge extends MiniGame {
+	private GeneralPath barFrame;
+	private GeneralPath barCross;
+
 	private Rectangle2D bar;
 	private int barPosition = 0; // -2 (top) to 2 (bottom)
 	private int barHeight = 32;
 	private int barWidth = 8;
-	private GeneralPath barFrame;
-	private GeneralPath barCross;
+
+	private ArrayList<Spike> spikes;
 
 	public Dodge() {
 		bar = new Rectangle2D.Double(-barWidth / 2, -barHeight / 2, barWidth, barHeight);
@@ -30,6 +34,8 @@ public class Dodge extends MiniGame {
 		barCross.lineTo(barWidth / 2, barHeight * 0.5);
 		barCross.moveTo(-barWidth / 2, barHeight * 1.5);
 		barCross.lineTo(barWidth / 2, barHeight * 1.5);
+
+		spikes = new ArrayList<Spike>(2);
 
 		reset();
 
@@ -55,7 +61,14 @@ public class Dodge extends MiniGame {
 	}
 
 	public void update() {
-
+		if(spikes.size() < 2) {
+			double direction = 180 * (int) (Math.random() * 2);
+			double x = direction == 0 ? -getWidth() / 2 : getWidth() / 2;
+			spikes.add(new Spike(x, 0, direction, Math.random()));
+		}
+		for(Spike spike : spikes) {
+			spike.update();
+		}
 	}
 
 	public boolean gameOver() {
@@ -76,6 +89,9 @@ public class Dodge extends MiniGame {
 		bar.setFrame(-barWidth / 2, -barHeight / 2 + barHeight * barPosition, barWidth, barHeight);
 		g2d.fill(bar);
 		g2d.setColor(Color.BLACK);
+		for(Spike spike : spikes) {
+			g2d.fill(spike);
+		}
 		g2d.draw(barCross);
 		g2d.setStroke(new BasicStroke(2));
 		g2d.draw(barFrame);
