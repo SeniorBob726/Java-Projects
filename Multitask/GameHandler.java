@@ -13,6 +13,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private boolean upLocked = false, downLocked = false;
 
 	private long startTime = 0;
+	private long pauseTime = 0;
 	private boolean gameActive = false;
 	private boolean paused = false;
 	private ArrayList<MiniGame> games;
@@ -87,24 +88,34 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		for(MiniGame game : games) {
 			game.reset();
 		}
-		timer.start();
-		startTime = System.currentTimeMillis();
 		gameActive = true;
+		paused = false;
+		rightKeyDown = false;
+		leftKeyDown = false;
+		upLocked = false;
+		downLocked = false;
+		startTime = System.currentTimeMillis();
+		timer.start();
 	}
 
 	public void endGame() {
-		System.out.println("Game Over");
-		System.out.println("Points: " + points);
+		highScore = Math.max(highScore, points);
 		timer.stop();
 		gameActive = false;
+		System.out.println("Game Over");
+		System.out.println("Points: " + points);
+		System.out.println("High Score: " + highScore);
 	}
 
 	public void pauseGame() {
 		if(paused) {
+			startTime += System.currentTimeMillis() - pauseTime;
+			pauseTime = 0;
 			timer.start();
 			paused = false;
 		}
 		else {
+			pauseTime = System.currentTimeMillis();
 			timer.stop();
 			paused = true;
 		}
