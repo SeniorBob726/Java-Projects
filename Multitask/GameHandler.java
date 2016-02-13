@@ -93,6 +93,8 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void endGame() {
+		System.out.println("Game Over");
+		System.out.println("Points: " + points);
 		timer.stop();
 		gameActive = false;
 	}
@@ -154,11 +156,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			for(MiniGame game : games) {
 				game.update();
 				if(game.gameOver()) {
-					System.out.println("Game Over");
-					System.out.println("Points: " + points);
-					timer.stop();
 					game.setBackground(Color.WHITE);
 					repaint();
+					endGame();
 					return;
 				}
 			}
