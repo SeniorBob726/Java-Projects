@@ -4,6 +4,7 @@ import java.awt.geom.Path2D;
 
 public class Spike extends Path2D.Double {
 	public Spike(double direction, double length) {
+		direction *= Math.PI / 180;
 		double base = 2 * length / 3;
 		double r = length / 2;
 		moveTo(r * Math.cos(direction), r * Math.sin(direction));

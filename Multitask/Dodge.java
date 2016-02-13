@@ -79,7 +79,7 @@ public class Dodge extends MiniGame {
 		// g2d.draw(barCross);
 		// g2d.setStroke(new BasicStroke(2));
 		// g2d.draw(barFrame);
-		g2d.fill(new Spike(2 * Math.PI));
+		g2d.fill(new Spike(50));
 		g2d.dispose();
 	}
 }
