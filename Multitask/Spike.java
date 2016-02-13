@@ -3,12 +3,16 @@ import java.awt.*;
 import java.awt.geom.Path2D;
 
 public class Spike extends Path2D.Double {
-	private int base = 24;
-
-	public Spike(int direction) { // 0 = up, 1 = right, 2 = down, 3 = left
-		moveTo(points[0].getX(), points[0].getY());
-		lineTo(points[1].getX(), points[1].getY());
-		lineTo(points[2].getX(), points[2].getY());
+	public Spike(double direction, double length) {
+		double base = 2 * length / 3;
+		double r = length / 2;
+		moveTo(r * Math.cos(direction), r * Math.sin(direction));
+		lineTo(-r * Math.cos(direction) - length / 3 * Math.sin(direction), -r * Math.sin(direction) + length / 3 * Math.cos(direction));
+		lineTo(-r * Math.cos(direction) + length / 3 * Math.sin(direction), -r * Math.sin(direction) - length / 3 * Math.cos(direction));
 		closePath();
+	}
+
+	public Spike(double direction) {
+		this(direction, 30);
 	}
 }
