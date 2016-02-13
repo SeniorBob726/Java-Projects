@@ -164,10 +164,10 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			}
 
 			if(rightKeyDown) {
-				((Balance) games.get(0)).updateAngularVelocity(0.07);
+				((Balance) games.get(0)).updateAngularVelocity(0.09);
 			}
 			if(leftKeyDown) {
-				((Balance) games.get(0)).updateAngularVelocity(-0.07);
+				((Balance) games.get(0)).updateAngularVelocity(-0.09);
 			}
 
 			repaint();
