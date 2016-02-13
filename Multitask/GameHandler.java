@@ -14,6 +14,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	private long startTime = 0;
 	private boolean gameActive = false;
+	private boolean paused = false;
 	private ArrayList<MiniGame> games;
 	private int points;
 	private int highScore = 0;
@@ -97,8 +98,14 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void pauseGame() {
-		timer.stop();
-		gameActive = false;
+		if(paused) {
+			timer.start();
+			paused = false;
+		}
+		else {
+			timer.stop();
+			paused = true;
+		}
 	}
 
 	public String getGameName() {
@@ -203,6 +210,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		}
 		if(gameActive) {
 			switch(e.getKeyCode()) {
+				case KeyEvent.VK_P:
+					pauseGame();
+					break;
 				case KeyEvent.VK_RIGHT:
 					rightKeyDown = true;
 					break;
