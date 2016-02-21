@@ -70,6 +70,7 @@ public class Dodge extends MiniGame {
 			spikes.add(new Spike(x, 0, direction, Math.random()));
 		}
 		for(Spike spike : spikes) {
+	public void update(long elapsedms) {
 			spike.update();
 		}
 	}

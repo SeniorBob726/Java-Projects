@@ -153,7 +153,8 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	public void actionPerformed(ActionEvent e) {
 		if(gameActive) {
-			points = (int) ((System.nanoTime() - startTime) * Math.pow(10, -9)); // Points = seconds from start
+			long elapsedns = System.nanoTime() - startTime;
+			points = (int) (elapsedns * Math.pow(10, -9)); // Points = seconds from start
 			if(points == 15 && games.size() == 1) {
 				// games.add(new Dodge());
 				constructLayout();
@@ -167,8 +168,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				constructLayout();
 			}
 
+			long elapsedms = elapsedns * Math.pow(10, -6);
 			for(MiniGame game : games) {
-				game.update();
+				game.update(elapsedms);
 				if(game.gameOver()) {
 					game.setBackground(Color.WHITE);
 					repaint();
