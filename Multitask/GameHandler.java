@@ -82,8 +82,13 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				}
 			}
 			else if(games.size() == 4) { // Four cells - 2x2 grid, equal sizing
-				c.gridx = i % 2;
-				c.gridy = (i == 0 ? 1 : i);
+				if(i == 0 || i == 3) {
+					c.gridx = 0;
+				}
+				else {
+					c.gridx = 1;
+				}
+				c.gridy = (i <= 1 ? 1 : 2);
 			}
 			this.add(games.get(i), c);
 		}
