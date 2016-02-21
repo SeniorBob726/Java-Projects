@@ -37,12 +37,10 @@ public class Spike extends Path2D.Double {
 		double rc = radius * tc / speed;
 		double rs = radius * ts / speed;
 
-		moveTo(rc, rs);
-		lineTo(-rc - rs, rc - rs);
-		lineTo(-rc + rs, -rc - rs);
+		moveTo(rc + x, rs + y);
+		lineTo(-rc - rs + x, rc - rs + y);
+		lineTo(-rc + rs + x, -rc - rs + y);
 		closePath();
-
-		update();
 	}
 
 	public void update() {
