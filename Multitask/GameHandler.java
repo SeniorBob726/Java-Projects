@@ -4,8 +4,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class GameHandler extends JPanel implements ActionListener, KeyListener/*, JavaArcade */ {
-	private javax.swing.Timer timer; // Game clock
 	private int width, height;
+	private JLabel headerBar;
+	private javax.swing.Timer timer; // Game clock
 	private Font font;
 	private FontMetrics fontMetrics;
 
@@ -31,7 +32,11 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 		width = 600;
 		height = 450;
-		timer = new javax.swing.Timer((int) (1000 / 60), this); // 60 ticks per second
+		headerBar = new JLabel(Integer.toString(points));
+		headerBar.setForeground(Color.WHITE);
+		headerBar.setBackground(new Color(50, 50, 50));
+		headerBar.setOpaque(true);
+		timer = new javax.swing.Timer(1000 / 60, this); // 60 ticks per second
 
 		addKeyListener(this); // Key controls
 
@@ -46,9 +51,12 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = 2;
 		c.gridx = 0;
 		c.gridy = 0;
-		this.add(Box.createVerticalStrut(fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent()), c); // Create spacer for top bar
+		this.add(headerBar, c); // Add headerBar with points display
+		c.gridwidth = 1;
 
 		// Single cell
 		c.fill = GridBagConstraints.BOTH;
@@ -140,12 +148,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		g.setColor(new Color(50, 50, 50));
-		g.fillRect(0, 0, width, fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent());
-
-		g.setColor(Color.WHITE);
-		g.setFont(font);
-		g.drawString(Integer.toString(points), 5, fontMetrics.getMaxAscent());
+		headerBar.setText(Integer.toString(points));
 	}
 
 	public void actionPerformed(ActionEvent e) {
