@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class GameHandler extends JPanel implements ActionListener, KeyListener/*, JavaArcade */ {
 	private int width, height;
-	private JLabel headerBar;
+	private JLabel pointLabel;
 	private javax.swing.Timer timer; // Game clock
 	private Font font;
 	private FontMetrics fontMetrics;
@@ -32,10 +32,10 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 		width = 600;
 		height = 450;
-		headerBar = new JLabel(Integer.toString(points));
-		headerBar.setForeground(Color.WHITE);
-		headerBar.setBackground(new Color(50, 50, 50));
-		headerBar.setOpaque(true);
+		pointLabel = new JLabel(Integer.toString(points));
+		pointLabel.setForeground(Color.WHITE);
+		pointLabel.setBackground(new Color(50, 50, 50));
+		pointLabel.setOpaque(true);
 		timer = new javax.swing.Timer(1000 / 60, this); // 60 ticks per second
 
 		addKeyListener(this); // Key controls
@@ -55,7 +55,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		c.gridwidth = 2;
 		c.gridx = 0;
 		c.gridy = 0;
-		this.add(headerBar, c); // Add headerBar with points display
+		this.add(pointLabel, c); // Add pointLabel with points display
 		c.gridwidth = 1;
 
 		// Single cell
@@ -148,7 +148,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		headerBar.setText(Integer.toString(points));
+		pointLabel.setText(Integer.toString(points));
 	}
 
 	public void actionPerformed(ActionEvent e) {
