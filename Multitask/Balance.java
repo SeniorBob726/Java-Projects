@@ -4,6 +4,8 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D;
 
 public class Balance extends MiniGame {
+	private final Color bgColor = new Color(231, 179, 179);
+
 	private Ellipse2D ball;
 	private double translationalVelocity;
 	private double ballPosition;
@@ -22,7 +24,7 @@ public class Balance extends MiniGame {
 		reset();
 
 		setFocusable(false);
-		setBackground(new Color(231, 179, 179));
+		setBackground(bgColor);
 	}
 
 	public void updateAngularVelocity(double av) {
@@ -30,7 +32,7 @@ public class Balance extends MiniGame {
 	}
 
 	public void reset() {
-		setBackground(new Color(231, 179, 179));
+		setBackground(bgColor);
 		translationalVelocity = 0.0;
 		ballPosition = 0.0;
 		angle = 0.0;

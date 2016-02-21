@@ -5,6 +5,8 @@ import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
 public class Dodge extends MiniGame {
+	private final Color bgColor = new Color(179, 194, 225);
+
 	private GeneralPath barFrame;
 	private GeneralPath barCross;
 
@@ -41,7 +43,7 @@ public class Dodge extends MiniGame {
 		reset();
 
 		setFocusable(false);
-		setBackground(new Color(179, 194, 225));
+		setBackground(bgColor);
 	}
 
 	public void moveUp() {
@@ -57,7 +59,7 @@ public class Dodge extends MiniGame {
 	}
 
 	public void reset() {
-		setBackground(new Color(179, 194, 225));
+		setBackground(bgColor);
 		barPosition = 0;
 	}
 

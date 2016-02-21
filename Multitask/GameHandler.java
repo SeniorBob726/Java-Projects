@@ -37,7 +37,6 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
-		setBackground(Color.GRAY);
 		setPreferredSize(new Dimension(width, height));
 
 		constructLayout();
