@@ -94,7 +94,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		leftKeyDown = false;
 		upLocked = false;
 		downLocked = false;
-		startTime = System.currentTimeMillis();
+		startTime = System.nanoTime();
 		timer.start();
 	}
 
@@ -109,13 +109,13 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	public void pauseGame() {
 		if(paused) {
-			startTime += System.currentTimeMillis() - pauseTime;
+			startTime += System.nanoTime() - pauseTime;
 			pauseTime = 0;
 			timer.start();
 			paused = false;
 		}
 		else {
-			pauseTime = System.currentTimeMillis();
+			pauseTime = System.nanoTime();
 			timer.stop();
 			paused = true;
 		}
@@ -150,7 +150,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	public void actionPerformed(ActionEvent e) {
 		if(gameActive) {
-			points = (int) ((e.getWhen() - startTime) / 1000);
+			points = (int) ((System.nanoTime() - startTime) * Math.pow(10, -9));
 			if(points == 15 && games.size() == 1) {
 				// games.add(new Dodge());
 				constructLayout();
