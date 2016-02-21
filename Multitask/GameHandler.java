@@ -168,7 +168,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				constructLayout();
 			}
 
-			long elapsedms = elapsedns * Math.pow(10, -6);
+			long elapsedms = (long) (elapsedns * Math.pow(10, -6));
 			for(MiniGame game : games) {
 				game.update(elapsedms);
 				if(game.gameOver()) {
