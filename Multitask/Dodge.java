@@ -13,9 +13,10 @@ public class Dodge extends MiniGame {
 	private int barHeight = 32;
 	private int barWidth = 8;
 
-	private ArrayList<Spike> spikes;
+	private ArrayList<Spike> spikes; // Contains active spikes
 
 	public Dodge() {
+		// Store base graphics
 		bar = new Rectangle2D.Double(-barWidth / 2, -barHeight / 2, barWidth, barHeight);
 
 		barFrame = new GeneralPath();
@@ -83,7 +84,7 @@ public class Dodge extends MiniGame {
 
 		Graphics2D g2d = (Graphics2D) g.create();
 
-		g2d.translate(centerX, centerY);
+		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 
 		g2d.setColor(new Color(0, 51, 153));
 		bar.setFrame(-barWidth / 2, -barHeight / 2 + barHeight * barPosition, barWidth, barHeight);

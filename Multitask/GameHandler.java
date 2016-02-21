@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class GameHandler extends JPanel implements ActionListener, KeyListener/*, JavaArcade */ {
-	private javax.swing.Timer timer; // Controls how often stats are checked
+	private javax.swing.Timer timer; // Game clock
 	private int width, height;
 	private Font font;
 	private FontMetrics fontMetrics;
@@ -16,7 +16,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private long pauseTime = 0;
 	private boolean gameActive = false;
 	private boolean paused = false;
-	private ArrayList<MiniGame> games;
+	private ArrayList<MiniGame> games; // Contains active MiniGames
 	private int points;
 	private int highScore = 0;
 
@@ -31,7 +31,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 		width = 600;
 		height = 450;
-		timer = new javax.swing.Timer((int) (1000 / 60), this); // 60 ticks per second clock
+		timer = new javax.swing.Timer((int) (1000 / 60), this); // 60 ticks per second
 
 		addKeyListener(this); // Key controls
 
@@ -43,14 +43,15 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		constructLayout();
 	}
 
-	public void constructLayout() {
+	public void constructLayout() { // Layout MiniGame panels
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
 		c.gridx = 0;
 		c.gridy = 0;
-		this.add(Box.createVerticalStrut(fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent()), c);
+		this.add(Box.createVerticalStrut(fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent()), c); // Create spacer for top bar
 
+		// Single cell
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.weighty = 1;
@@ -58,11 +59,11 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		c.gridy = 1;
 
 		for(int i = 0; i < games.size(); i++) {
-			if(games.size() == 2) {
+			if(games.size() == 2) { // Two cells - side by side, equal sizing
 				c.gridx = i;
 				c.gridy = 1;
 			}
-			else if(games.size() == 3) {
+			else if(games.size() == 3) { // Three cells - 2x2 grid, first cell takes two rows
 				if(i == 0) {
 					c.gridheight = 2;
 					c.gridx = 0;
@@ -74,7 +75,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 					c.gridy = i;
 				}
 			}
-			else if(games.size() == 4) {
+			else if(games.size() == 4) { // Four cells - 2x2 grid, equal sizing
 				c.gridx = i % 2;
 				c.gridy = (i == 0 ? 1 : i);
 			}
@@ -94,7 +95,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		leftKeyDown = false;
 		upLocked = false;
 		downLocked = false;
-		startTime = System.nanoTime();
+		startTime = System.nanoTime(); // Set startTime with nanosecond precision
 		timer.start();
 	}
 
@@ -109,7 +110,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	public void pauseGame() {
 		if(paused) {
-			startTime += System.nanoTime() - pauseTime;
+			startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
 			pauseTime = 0;
 			timer.start();
 			paused = false;
@@ -150,7 +151,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	public void actionPerformed(ActionEvent e) {
 		if(gameActive) {
-			points = (int) ((System.nanoTime() - startTime) * Math.pow(10, -9));
+			points = (int) ((System.nanoTime() - startTime) * Math.pow(10, -9)); // Points = seconds from start
 			if(points == 15 && games.size() == 1) {
 				// games.add(new Dodge());
 				constructLayout();
@@ -231,13 +232,13 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 					leftKeyDown = true;
 					break;
 				case KeyEvent.VK_UP:
-					if(!upLocked) {
+					if(!upLocked) { // Lock key to only trigger once on keyDown
 						((Dodge) games.get(1)).moveUp();
 						upLocked = true;
 					}
 					break;
 				case KeyEvent.VK_DOWN:
-					if(!downLocked) {
+					if(!downLocked) { // Lock key to only trigger once on keyDown
 						((Dodge) games.get(1)).moveDown();
 						downLocked = true;
 					}

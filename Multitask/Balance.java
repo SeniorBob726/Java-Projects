@@ -15,8 +15,10 @@ public class Balance extends MiniGame {
 	private int barWidth = 200;
 
 	public Balance() {
+		// Store base graphics
 		bar = new Rectangle2D.Double(-barWidth / 2, -barHeight / 2, barWidth, barHeight);
 		ball = new Ellipse2D.Double(-barHeight, -barHeight * 2.5, barHeight * 2, barHeight * 2);
+
 		reset();
 
 		setFocusable(false);
@@ -36,7 +38,7 @@ public class Balance extends MiniGame {
 	}
 
 	public void update() {
-		angle += angularVelocity + ballPosition * 0.5;
+		angle += angularVelocity + ballPosition * 0.5; // Angle is affected by angularVelocity and ballPosition
 		angle = clamp(angle, -50, 50);
 
 		ballPosition += translationalVelocity;
@@ -44,7 +46,7 @@ public class Balance extends MiniGame {
 
 		angularVelocity *= 0.96; // Angular velocity decay
 
-		if(angularVelocity < 0.5 && angularVelocity >= 0) {
+		if(angularVelocity < 0.5 && angularVelocity >= 0) { // Prevent perfectly balanced ball
 			angularVelocity += 0.001;
 		}
 		if(angularVelocity > -0.5 && angularVelocity < 0) {
@@ -67,7 +69,7 @@ public class Balance extends MiniGame {
 
 		Graphics2D g2d = (Graphics2D) g.create();
 
-		g2d.translate(centerX, centerY);
+		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 		g2d.rotate(Math.toRadians(angle), 0, 0);
 
 		g2d.setColor(Color.BLACK);
