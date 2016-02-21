@@ -11,8 +11,8 @@ public class Balance extends MiniGame {
 	private double angularVelocity;
 
 	private Rectangle2D bar;
-	private int barHeight = 12;
-	private int barWidth = 200;
+	private final int barHeight = 12;
+	private final int barWidth = 200;
 
 	public Balance() {
 		// Store base graphics

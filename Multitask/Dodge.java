@@ -10,8 +10,8 @@ public class Dodge extends MiniGame {
 
 	private Rectangle2D bar;
 	private int barPosition = 0; // -2 (top) to 2 (bottom)
-	private int barHeight = 32;
-	private int barWidth = 8;
+	private final int barHeight = 32;
+	private final int barWidth = 8;
 
 	private ArrayList<Spike> spikes; // Contains active spikes
 
