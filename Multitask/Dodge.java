@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.GeneralPath;
-import java.util.ArrayList;
 
 public class Dodge extends MiniGame {
 	private final Color bgColor = new Color(179, 194, 225);
@@ -15,7 +14,8 @@ public class Dodge extends MiniGame {
 	private final int barHeight = 32;
 	private final int barWidth = 8;
 
-	private ArrayList<Spike> spikes; // Contains active spikes
+	private long spikeOneTime, spikeTwoTime; // Spike creation timers
+	private Spike[] spikes; // Contains active spikes
 
 	public Dodge() {
 		// Store base graphics
@@ -38,7 +38,9 @@ public class Dodge extends MiniGame {
 		barCross.moveTo(-barWidth / 2, barHeight * 1.5);
 		barCross.lineTo(barWidth / 2, barHeight * 1.5);
 
-		spikes = new ArrayList<Spike>(2);
+		spikes = new Spike[2];
+		spikeOneTime = (long) (15.5 * 1000.0);
+		spikeTwoTime = (long) (18 * 1000.0);
 
 		reset();
 
@@ -63,19 +65,39 @@ public class Dodge extends MiniGame {
 		barPosition = 0;
 	}
 
-	public void update() {
-		if(spikes.size() < 2) {
-			double direction = 180 * (int) (Math.random() * 2);
-			double x = direction == 0 ? -getWidth() / 2 : getWidth() / 2;
-			spikes.add(new Spike(x, 0, direction, Math.random()));
+	public Spike createSpike() {
+		double direction = 180 * (int) (Math.random() * 2);
+		double x = getWidth() / 3.0;
+		if(direction == 0) {
+			x *= -1;
+		}
+		int lane = (int) (Math.random() * 6 - 3.0);
+		double speed = Math.random() * 0.2 + 1;
+		return new Spike(x, lane * barHeight, direction, speed);
+	}
+
+	public void update(long elapsedms) {
+		if(elapsedms >= spikeOneTime) {
+			spikes[0] = createSpike();
+			spikeOneTime += 5000;
+		}
+		if(elapsedms >= spikeTwoTime) {
+			spikes[1] = createSpike();
+			spikeTwoTime += 5000;
 		}
 		for(Spike spike : spikes) {
-	public void update(long elapsedms) {
-			spike.update();
+			if(spike != null) {
+				spike.update();
+			}
 		}
 	}
 
 	public boolean gameOver() {
+		for(Spike spike : spikes) {
+			if(spike != null && spike.intersects(bar)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -94,7 +116,9 @@ public class Dodge extends MiniGame {
 		g2d.fill(bar);
 		g2d.setColor(Color.BLACK);
 		for(Spike spike : spikes) {
-			g2d.fill(spike);
+			if(spike != null) {
+				g2d.fill(spike);
+			}
 		}
 		g2d.draw(barCross);
 		g2d.setStroke(new BasicStroke(2));

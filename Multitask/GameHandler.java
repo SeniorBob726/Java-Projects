@@ -28,7 +28,6 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
 		games.add(new Balance());
-		games.add(new Dodge());
 
 		width = 600;
 		height = 450;
@@ -156,7 +155,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			long elapsedns = System.nanoTime() - startTime;
 			points = (int) (elapsedns * Math.pow(10, -9)); // Points = seconds from start
 			if(points == 15 && games.size() == 1) {
-				// games.add(new Dodge());
+				games.add(new Dodge());
 				constructLayout();
 			}
 			else if(points == 70 && games.size() == 2) {
