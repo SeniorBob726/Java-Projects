@@ -9,6 +9,8 @@ public class Capture extends MiniGame {
 	private AffineTransform at;
 	private final Color bgColor = new Color(192, 230, 192);
 
+	private long nextBox;
+
 	private Rectangle2D box;
 	private Point2D boxPosition;
 	private final int boxSide = 32;
@@ -20,9 +22,9 @@ public class Capture extends MiniGame {
 
 		// Store base graphics
 		box = new Rectangle2D.Double(-boxSide / 2, -boxSide / 2, boxSide, boxSide);
+		nextBox = (long) (70.5 * 1000.0);
 
-		squares = new Square[4];
-		squares[0] = new Square(110, 70, boxSide);
+		squares = new Square[5];
 
 		reset();
 
@@ -31,7 +33,9 @@ public class Capture extends MiniGame {
 	}
 
 	public Square createSquare() {
-		return null;
+		double x = (Math.random() - 0.5) * (getWidth() - boxSide);
+		double y = (Math.random() - 0.5) * (getHeight() - boxSide);
+		return new Square(x, y, boxSide);
 	}
 
 	public void reset() {
@@ -44,7 +48,16 @@ public class Capture extends MiniGame {
 	}
 
 	public void update(long elapsedms) {
-
+		for(int i = 0; i < squares.length; i++) {
+			if(squares[i] == null && elapsedms >= nextBox) {
+				squares[i] = createSquare();
+				nextBox += Math.random() * 7000 + 3000;
+			}
+			else if(squares[i] != null && squares[i].getBox().intersects(box.getX(), box.getY(), box.getWidth(), box.getHeight())) {
+				squares[i].stopCountdown();
+				squares[i] = null;
+			}
+		}
 	}
 
 	public boolean gameOver() {
@@ -93,10 +106,9 @@ public class Capture extends MiniGame {
 				g2d.draw(square.getBox());
 				String num = Integer.toString(square.getCountdown());
 				Rectangle2D bounds = fontMetrics.getStringBounds(num, g2d);
-				g2d.draw(bounds);
 				double w = square.getBox().getWidth() / 2;
-				int x = (int) (square.getBox().getX() + w + bounds.getX());
-				int y = (int) (square.getBox().getY() + w - bounds.getY());
+				int x = (int) (square.getBox().getX() + w + bounds.getX() - bounds.getWidth() / 2);
+				int y = (int) (square.getBox().getY() + w - bounds.getY() - bounds.getHeight() / 2);
 				g2d.drawString(num, x, y);
 			}
 		}
