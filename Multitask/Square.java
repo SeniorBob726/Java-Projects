@@ -15,6 +15,14 @@ public class Square implements ActionListener {
 		countdown = 10;
 	}
 
+	public void startCountdown() {
+		return lifespan.start();
+	}
+
+	public void stopCountdown() {
+		return lifespan.stop();
+	}
+
 	public Rectangle2D getBox() {
 		return box;
 	}

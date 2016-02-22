@@ -12,6 +12,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 	private boolean rightKeyDown = false, leftKeyDown = false;
 	private boolean upLocked = false, downLocked = false;
+	private boolean wKeyDown = false, aKeyDown = false, sKeyDown = false, dKeyDown = false;
 
 	private long startTime = 0;
 	private long pauseTime = 0;
@@ -108,6 +109,10 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		leftKeyDown = false;
 		upLocked = false;
 		downLocked = false;
+		wKeyDown = false;
+		aKeyDown = false;
+		sKeyDown = false;
+		dKeyDown = false;
 		startTime = System.nanoTime(); // Set startTime with nanosecond precision
 		timer.start();
 	}
@@ -195,6 +200,18 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			if(leftKeyDown) {
 				((Balance) games.get(0)).updateAngularVelocity(-0.09);
 			}
+			if(wKeyDown) {
+				((Capture) games.get(2)).moveBox(0, -1);
+			}
+			if(aKeyDown) {
+				((Capture) games.get(2)).moveBox(-1, 0);
+			}
+			if(sKeyDown) {
+				((Capture) games.get(2)).moveBox(0, 1);
+			}
+			if(dKeyDown) {
+				((Capture) games.get(2)).moveBox(1, 0);
+			}
 
 			repaint();
 		}
@@ -215,6 +232,18 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 					break;
 				case KeyEvent.VK_DOWN:
 					downLocked = false;
+					break;
+				case KeyEvent.VK_W:
+					wKeyDown = false;
+					break;
+				case KeyEvent.VK_A:
+					aKeyDown = false;
+					break;
+				case KeyEvent.VK_S:
+					sKeyDown = false;
+					break;
+				case KeyEvent.VK_D:
+					dKeyDown = false;
 					break;
 			}
 		}
@@ -256,6 +285,18 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 						((Dodge) games.get(1)).moveDown();
 						downLocked = true;
 					}
+					break;
+				case KeyEvent.VK_W:
+					wKeyDown = true;
+					break;
+				case KeyEvent.VK_A:
+					aKeyDown = true;
+					break;
+				case KeyEvent.VK_S:
+					sKeyDown = true;
+					break;
+				case KeyEvent.VK_D:
+					dKeyDown = true;
 					break;
 			}
 		}
