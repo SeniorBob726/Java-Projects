@@ -44,7 +44,8 @@ public class Capture extends MiniGame {
 	}
 
 	public void moveBox(double x, double y) {
-		boxPosition.setLocation(boxPosition.getX() + x, boxPosition.getY() + y);
+		boxPosition.setLocation(clamp(boxPosition.getX() + x, -getWidth() / 2 + boxSide / 2, getWidth() / 2 - boxSide / 2),
+								clamp(boxPosition.getY() + y, -getHeight() / 2 + boxSide / 2, getHeight() / 2 - boxSide / 2));
 	}
 
 	public void update(long elapsedms) {
