@@ -48,6 +48,11 @@ public class Capture extends MiniGame {
 	}
 
 	public boolean gameOver() {
+		for(Square square : squares) {
+			if(square != null && square.isDead()) {
+				return true;
+			}
+		}
 		return false;
 	}
 

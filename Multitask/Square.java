@@ -31,6 +31,10 @@ public class Square implements ActionListener {
 		return countdown;
 	}
 
+	public boolean isDead() {
+		return countdown <= 0;
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		countdown--;
 	}
