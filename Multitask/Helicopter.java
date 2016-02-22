@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 
 public class Helicopter extends MiniGame {
 	private AffineTransform at;
-	private final Color bgColor = new Color(192, 230, 192);
+	private static final Color bgColor = new Color(192, 230, 192);
 
 	private long nextBar;
 

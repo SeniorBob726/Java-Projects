@@ -4,7 +4,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D;
 
 public class Balance extends MiniGame {
-	private final Color bgColor = new Color(231, 179, 179);
+	private static final Color bgColor = new Color(231, 179, 179);
 
 	private Ellipse2D ball;
 	private double translationalVelocity;
@@ -13,8 +13,8 @@ public class Balance extends MiniGame {
 	private double angularVelocity;
 
 	private Rectangle2D bar;
-	private final int barHeight = 12;
-	private final int barWidth = 200;
+	private static final int barHeight = 12;
+	private static final int barWidth = 200;
 
 	public Balance() {
 		// Store base graphics

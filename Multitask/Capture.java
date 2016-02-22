@@ -7,13 +7,13 @@ import java.awt.geom.AffineTransform;
 public class Capture extends MiniGame {
 	private FontMetrics fontMetrics;
 	private AffineTransform at;
-	private final Color bgColor = new Color(192, 230, 192);
+	private static final Color bgColor = new Color(192, 230, 192);
 
 	private long nextBox;
 
 	private Rectangle2D box;
 	private Point2D boxPosition;
-	private final int boxSide = 32;
+	private static final int boxSide = 32;
 
 	private Square[] squares; // Contains active squares
 

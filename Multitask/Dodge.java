@@ -4,15 +4,15 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.GeneralPath;
 
 public class Dodge extends MiniGame {
-	private final Color bgColor = new Color(179, 194, 225);
+	private static final Color bgColor = new Color(179, 194, 225);
 
 	private GeneralPath barFrame;
 	private GeneralPath barCross;
 
 	private Rectangle2D bar;
 	private int barPosition = 0; // -2 (top) to 2 (bottom)
-	private final int barHeight = 32;
-	private final int barWidth = 8;
+	private static final int barHeight = 32;
+	private static final int barWidth = 8;
 
 	private long spikeOneTime, spikeTwoTime; // Spike creation timers
 	private Spike[] spikes; // Contains active spikes
