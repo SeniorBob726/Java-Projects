@@ -133,6 +133,10 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			timer.stop();
 			paused = true;
 		}
+
+		for(MiniGame game : games) {
+			game.pause(paused);
+		}
 	}
 
 	public String getGameName() {
