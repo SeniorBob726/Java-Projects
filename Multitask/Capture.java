@@ -5,6 +5,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.AffineTransform;
 
 public class Capture extends MiniGame {
+	private FontMetrics fontMetrics;
 	private AffineTransform at;
 	private final Color bgColor = new Color(192, 230, 192);
 
@@ -14,9 +15,14 @@ public class Capture extends MiniGame {
 
 	private Square[] squares; // Contains active squares
 
-	public Capture() {
+	public Capture(FontMetrics fm) {
+		fontMetrics = fm;
+
 		// Store base graphics
-		box = new Rectangle2D.Double(-boxSide / 2, -boxSide / 2, boxSide / 2, boxSide / 2);
+		box = new Rectangle2D.Double(-boxSide / 2, -boxSide / 2, boxSide, boxSide);
+
+		squares = new Square[4];
+		squares[0] = new Square(110, 70, boxSide);
 
 		reset();
 
@@ -34,11 +40,7 @@ public class Capture extends MiniGame {
 	}
 
 	public void update(long elapsedms) {
-		for(Square square : squares) {
-			if(square != null) {
-				square.update();
-			}
-		}
+
 	}
 
 	public boolean gameOver() {
@@ -56,13 +58,20 @@ public class Capture extends MiniGame {
 		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 
 		g2d.setColor(new Color(0, 153, 0));
-		box.setFrame(-boxSide / 2 + boxPosition.getX(), -boxSide / 2 + boxPosition.getY(), boxSide / 2 + boxPosition.getX(), boxSide / 2 + boxPosition.getY());
+		box.setFrame(-boxSide / 2 + boxPosition.getX(), -boxSide / 2 + boxPosition.getY(), boxSide, boxSide);
 		g2d.fill(box);
 		g2d.setColor(Color.BLACK);
 		g2d.setStroke(new BasicStroke(3));
 		for(Square square : squares) {
 			if(square != null) {
-				g2d.draw(square);
+				g2d.draw(square.getBox());
+				String num = Integer.toString(square.getCountdown());
+				Rectangle2D bounds = fontMetrics.getStringBounds(num, g2d);
+				g2d.draw(bounds);
+				double w = square.getBox().getWidth() / 2;
+				int x = (int) (square.getBox().getX() + w + bounds.getX());
+				int y = (int) (square.getBox().getY() + w - bounds.getY());
+				g2d.drawString(num, x, y);
 			}
 		}
 		g2d.dispose();
