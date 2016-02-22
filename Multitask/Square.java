@@ -16,11 +16,11 @@ public class Square implements ActionListener {
 	}
 
 	public void startCountdown() {
-		return lifespan.start();
+		lifespan.start();
 	}
 
 	public void stopCountdown() {
-		return lifespan.stop();
+		lifespan.stop();
 	}
 
 	public Rectangle2D getBox() {
