@@ -56,15 +56,6 @@ public class Dodge extends MiniGame {
 		}
 	}
 
-	public void reset() {
-		setBackground(bgColor);
-		barPosition = 0;
-
-		spikes = new Spike[2];
-		spikeOneTime = (long) (15.5 * 1000.0);
-		spikeTwoTime = (long) (18 * 1000.0);
-	}
-
 	public Spike createSpike() {
 		double direction = 180 * (int) (Math.random() * 2);
 		double x = getWidth() / 3.0;
@@ -74,6 +65,15 @@ public class Dodge extends MiniGame {
 		int lane = (int) (Math.random() * 6 - 3.0);
 		double speed = Math.random() * 0.2 + 1;
 		return new Spike(x, lane * barHeight, direction, speed);
+	}
+
+	public void reset() {
+		setBackground(bgColor);
+		barPosition = 0;
+
+		spikes = new Spike[2];
+		spikeOneTime = (long) (15.5 * 1000.0);
+		spikeTwoTime = (long) (18 * 1000.0);
 	}
 
 	public void update(long elapsedms) {
@@ -90,6 +90,10 @@ public class Dodge extends MiniGame {
 				spike.update();
 			}
 		}
+	}
+
+	public void pause(boolean paused) {
+		// Nothing to pause
 	}
 
 	public boolean gameOver() {

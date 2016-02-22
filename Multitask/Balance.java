@@ -59,6 +59,10 @@ public class Balance extends MiniGame {
 		ball.setFrame(-barHeight + ballPosition * barWidth / 2, -barHeight * 2.5, barHeight * 2, barHeight * 2);
 	}
 
+	public void pause(boolean paused) {
+		// Nothing to pause
+	}
+
 	public boolean gameOver() {
 		return ballPosition > 1 || ballPosition < -1;
 	}

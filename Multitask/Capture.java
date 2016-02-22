@@ -30,13 +30,13 @@ public class Capture extends MiniGame {
 		setBackground(bgColor);
 	}
 
+	public Square createSquare() {
+		return null;
+	}
+
 	public void reset() {
 		setBackground(bgColor);
 		boxPosition = new Point2D.Double(0, 0);
-	}
-
-	public Square createSquare() {
-		return null;
 	}
 
 	public void moveBox(double x, double y) {
@@ -49,6 +49,19 @@ public class Capture extends MiniGame {
 
 	public boolean gameOver() {
 		return false;
+	}
+
+	public void pause(boolean paused) {
+		if(paused) {
+			for(Square square : squares) {
+				square.stopCountdown();
+			}
+		}
+		else {
+			for(Square square : squares) {
+				square.startCountdown();
+			}
+		}
 	}
 
 	public void paintComponent(Graphics g) {
