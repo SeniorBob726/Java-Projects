@@ -38,10 +38,6 @@ public class Dodge extends MiniGame {
 		barCross.moveTo(-barWidth / 2, barHeight * 1.5);
 		barCross.lineTo(barWidth / 2, barHeight * 1.5);
 
-		spikes = new Spike[2];
-		spikeOneTime = (long) (15.5 * 1000.0);
-		spikeTwoTime = (long) (18 * 1000.0);
-
 		reset();
 
 		setFocusable(false);
@@ -63,6 +59,10 @@ public class Dodge extends MiniGame {
 	public void reset() {
 		setBackground(bgColor);
 		barPosition = 0;
+
+		spikes = new Spike[2];
+		spikeOneTime = (long) (15.5 * 1000.0);
+		spikeTwoTime = (long) (18 * 1000.0);
 	}
 
 	public Spike createSpike() {
