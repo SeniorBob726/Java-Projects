@@ -29,8 +29,6 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
 		games.add(new Balance());
-		games.add(new Dodge());
-		games.add(new Capture(fontMetrics));
 
 		width = 600;
 		height = 450;
@@ -175,7 +173,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				constructLayout();
 			}
 			else if(points == 70 && games.size() == 2) {
-				// games.add(new Capture());
+				games.add(new Capture(fontMetrics));
 				constructLayout();
 			}
 			else if(points == 100 && games.size() == 3) {
