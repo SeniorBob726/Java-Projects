@@ -202,17 +202,19 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			if(leftKeyDown) {
 				((Balance) games.get(0)).updateAngularVelocity(-0.09);
 			}
-			if(wKeyDown) {
-				((Capture) games.get(2)).moveBox(0, -1.2);
-			}
-			if(aKeyDown) {
-				((Capture) games.get(2)).moveBox(-1.2, 0);
-			}
-			if(sKeyDown) {
-				((Capture) games.get(2)).moveBox(0, 1.2);
-			}
-			if(dKeyDown) {
-				((Capture) games.get(2)).moveBox(1.2, 0);
+			if(games.size() >= 3) {
+				if(wKeyDown) {
+					((Capture) games.get(2)).moveBox(0, -1.2);
+				}
+				if(aKeyDown) {
+					((Capture) games.get(2)).moveBox(-1.2, 0);
+				}
+				if(sKeyDown) {
+					((Capture) games.get(2)).moveBox(0, 1.2);
+				}
+				if(dKeyDown) {
+					((Capture) games.get(2)).moveBox(1.2, 0);
+				}
 			}
 
 			repaint();
@@ -277,13 +279,13 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 					leftKeyDown = true;
 					break;
 				case KeyEvent.VK_UP:
-					if(!upLocked) { // Lock key to only trigger once on keyDown
+					if(games.size() >= 2 && !upLocked) { // Lock key to only trigger once on keyDown
 						((Dodge) games.get(1)).moveUp();
 						upLocked = true;
 					}
 					break;
 				case KeyEvent.VK_DOWN:
-					if(!downLocked) { // Lock key to only trigger once on keyDown
+					if(games.size() >= 2 && !downLocked) { // Lock key to only trigger once on keyDown
 						((Dodge) games.get(1)).moveDown();
 						downLocked = true;
 					}
