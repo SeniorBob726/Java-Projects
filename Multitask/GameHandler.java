@@ -22,7 +22,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private int points;
 	private int highScore = 0;
 
-	public GameHandler() {
+	public GameHandler(int w, int h) {
 		font = new Font("Courier", Font.PLAIN, 14);
 		fontMetrics = this.getFontMetrics(font);
 
@@ -30,8 +30,8 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		games = new ArrayList<MiniGame>(4);
 		games.add(new Balance());
 
-		width = 600;
-		height = 450;
+		width = w;
+		height = h;
 		pointLabel = new JLabel(Integer.toString(points));
 		pointLabel.setForeground(Color.WHITE);
 		pointLabel.setBackground(new Color(50, 50, 50));
@@ -45,6 +45,10 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		setPreferredSize(new Dimension(width, height));
 
 		constructLayout();
+	}
+
+	public GameHandler() {
+		this(600, 450);
 	}
 
 	public void constructLayout() { // Layout MiniGame panels
