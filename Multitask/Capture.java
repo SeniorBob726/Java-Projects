@@ -52,7 +52,7 @@ public class Capture extends MiniGame {
 		for(int i = 0; i < squares.length; i++) {
 			if(squares[i] == null && elapsedms >= nextBox) {
 				squares[i] = createSquare();
-				nextBox += Math.random() * 7000 + 3000;
+				nextBox += Math.random() * 4000 + 1000;
 			}
 			else if(squares[i] != null && squares[i].getBox().intersects(box.getX(), box.getY(), box.getWidth(), box.getHeight())) {
 				squares[i].stopCountdown();
