@@ -54,12 +54,16 @@ public class Capture extends MiniGame {
 	public void pause(boolean paused) {
 		if(paused) {
 			for(Square square : squares) {
-				square.stopCountdown();
+				if(square != null) {
+					square.stopCountdown();
+				}
 			}
 		}
 		else {
 			for(Square square : squares) {
-				square.startCountdown();
+				if(square != null) {
+					square.startCountdown();
+				}
 			}
 		}
 	}
