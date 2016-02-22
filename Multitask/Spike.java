@@ -25,7 +25,7 @@ public class Spike extends Path2D.Double {
 	}
 
 	public Spike(double x, double y, double dir, double sp) {
-		this(x, y, dir, sp, 12);
+		this(x, y, dir, sp, 8);
 	}
 
 	public double getSpeed() {
