@@ -44,7 +44,7 @@ public class Helicopter extends MiniGame {
 	}
 
 	public void reset() {
-		System.out.println("Helicopter - Reset");
+		System.out.println("Reset - Helicopter");
 		setBackground(bgColor);
 
 		helicopterPosition = 0;
@@ -72,15 +72,15 @@ public class Helicopter extends MiniGame {
 
 	public void pause(boolean paused) {
 		if(paused) {
-			System.out.println("Helicopter - Pause");
+			System.out.println("Pause - Helicopter");
 		}
 		else {
-			System.out.println("Helicopter - Resume");
+			System.out.println("Resume - Helicopter");
 		}
 	}
 
 	public boolean gameOver() {
-		//System.out.println("Helicopter - Game Over");
+		//System.out.println("Game Over - Helicopter");
 		return false;
 	}
 

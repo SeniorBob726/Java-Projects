@@ -106,7 +106,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void startGame() {
-		System.out.println("Game - Start");
+		System.out.println("Start - Game");
 		for(MiniGame game : games) {
 			game.reset();
 		}
@@ -125,21 +125,22 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void endGame() {
-		System.out.println("Game - End");
+		System.out.println("End - Game");
 		highScore = Math.max(highScore, points);
 		timer.stop();
 		gameActive = false;
 	}
 
 	public void pauseGame() {
-		System.out.println("Game - Pause");
 		if(paused) {
+			System.out.println("Resume - Game");
 			startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
 			pauseTime = 0;
 			timer.start();
 			paused = false;
 		}
 		else {
+			System.out.println("Pause - Game");
 			pauseTime = System.nanoTime();
 			timer.stop();
 			paused = true;
@@ -264,11 +265,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
 			case KeyEvent.VK_ENTER:
-				System.out.println("Enter");
 				startGame();
 				break;
 			case KeyEvent.VK_SPACE:
-				System.out.println("Space");
 				endGame();
 				break;
 			case KeyEvent.VK_ESCAPE:
