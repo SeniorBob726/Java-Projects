@@ -52,6 +52,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void constructLayout() { // Layout MiniGame panels
+		/* BUG: Small black box is drawn in headerBar. */
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
