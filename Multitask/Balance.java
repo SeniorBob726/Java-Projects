@@ -32,7 +32,9 @@ public class Balance extends MiniGame {
 	}
 
 	public void reset() {
+		System.out.println("Balance - Reset");
 		setBackground(bgColor);
+
 		translationalVelocity = 0.0;
 		ballPosition = 0.0;
 		angle = 0.0;
@@ -60,10 +62,16 @@ public class Balance extends MiniGame {
 	}
 
 	public void pause(boolean paused) {
-		// Nothing to pause
+		if(paused) {
+			System.out.println("Balance - Pause");
+		}
+		else {
+			System.out.println("Balance - Resume");
+		}
 	}
 
 	public boolean gameOver() {
+		System.out.println("Balance - Game Over");
 		return ballPosition > 1 || ballPosition < -1;
 	}
 

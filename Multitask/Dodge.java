@@ -68,6 +68,7 @@ public class Dodge extends MiniGame {
 	}
 
 	public void reset() {
+		System.out.println("Dodge - Reset");
 		setBackground(bgColor);
 		barPosition = 0;
 
@@ -93,10 +94,16 @@ public class Dodge extends MiniGame {
 	}
 
 	public void pause(boolean paused) {
-		// Nothing to pause
+		if(paused) {
+			System.out.println("Dodge - Pause");
+		}
+		else {
+			System.out.println("Dodge - Resume");
+		}
 	}
 
 	public boolean gameOver() {
+		System.out.println("Dodge - Game Over");
 		for(Spike spike : spikes) {
 			if(spike != null && spike.intersects(bar)) {
 				return true;

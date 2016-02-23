@@ -39,6 +39,7 @@ public class Capture extends MiniGame {
 	}
 
 	public void reset() {
+		System.out.println("Capture - Reset");
 		setBackground(bgColor);
 		boxPosition = new Point2D.Double(0, 0);
 	}
@@ -61,17 +62,9 @@ public class Capture extends MiniGame {
 		}
 	}
 
-	public boolean gameOver() {
-		for(Square square : squares) {
-			if(square != null && square.isDead()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public void pause(boolean paused) {
 		if(paused) {
+			System.out.println("Capture - Pause");
 			for(Square square : squares) {
 				if(square != null) {
 					square.stopCountdown();
@@ -79,12 +72,23 @@ public class Capture extends MiniGame {
 			}
 		}
 		else {
+			System.out.println("Capture - Resume");
 			for(Square square : squares) {
 				if(square != null) {
 					square.startCountdown();
 				}
 			}
 		}
+	}
+
+	public boolean gameOver() {
+		System.out.println("Capture - Game Over");
+		for(Square square : squares) {
+			if(square != null && square.isDead()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void paintComponent(Graphics g) {
