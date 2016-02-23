@@ -120,6 +120,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		aKeyDown = false;
 		sKeyDown = false;
 		dKeyDown = false;
+		games = new ArrayList<MiniGame>(4);
+		games.add(new Balance());
+		constructLayout();
 		startTime = System.nanoTime(); // Set startTime with nanosecond precision
 		timer.start();
 	}
