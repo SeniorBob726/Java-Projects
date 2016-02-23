@@ -101,7 +101,12 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		this.repaint();
 	}
 
+	public boolean running() {
+		return gameActive && !paused;
+	}
+
 	public void startGame() {
+		System.out.println("Game - Start");
 		for(MiniGame game : games) {
 			game.reset();
 		}
@@ -120,15 +125,14 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void endGame() {
+		System.out.println("Game - End");
 		highScore = Math.max(highScore, points);
 		timer.stop();
 		gameActive = false;
-		System.out.println("Game Over");
-		System.out.println("Points: " + points);
-		System.out.println("High Score: " + highScore);
 	}
 
 	public void pauseGame() {
+		System.out.println("Game - Pause");
 		if(paused) {
 			startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
 			pauseTime = 0;
@@ -150,16 +154,20 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		return "Multitask";
 	}
 
-	public int getHighScore() {
-		return highScore;
+	public String getPoints() {
+		return Integer.toString(points);
+	}
+
+	public String getHighScore() {
+		return Integer.toString(highScore);
 	}
 
 	public String getInstructions() {
-		return "";
+		return "Use the left and right arrow keys to balance the ball on the bar.\nUse the up and down arrow keys to avoid the spikes.\nUse the WASD keys to get all the squares before they disappear.\nUse the spacebar to avoid hitting the bars.";
 	}
 
 	public String getCredits() {
-		return "";
+		return "Original game written in ActionScript by IcyLime.\nJava port by Taha.";
 	}
 
 	public void paintComponent(Graphics g) {
