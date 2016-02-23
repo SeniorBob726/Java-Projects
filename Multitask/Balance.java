@@ -71,8 +71,11 @@ public class Balance extends MiniGame {
 	}
 
 	public boolean gameOver() {
-		System.out.println("Balance - Game Over");
-		return ballPosition > 1 || ballPosition < -1;
+		if(ballPosition > 1 || ballPosition < -1) {
+			System.out.println("Balance - Game Over");
+			return true;
+		}
+		return false;
 	}
 
 	public void paintComponent(Graphics g) {

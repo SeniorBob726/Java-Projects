@@ -103,9 +103,9 @@ public class Dodge extends MiniGame {
 	}
 
 	public boolean gameOver() {
-		System.out.println("Dodge - Game Over");
 		for(Spike spike : spikes) {
 			if(spike != null && spike.intersects(bar)) {
+				System.out.println("Dodge - Game Over");
 				return true;
 			}
 		}

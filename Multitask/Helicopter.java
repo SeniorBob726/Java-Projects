@@ -80,7 +80,7 @@ public class Helicopter extends MiniGame {
 	}
 
 	public boolean gameOver() {
-		System.out.println("Helicopter - Game Over");
+		//System.out.println("Helicopter - Game Over");
 		return false;
 	}
 

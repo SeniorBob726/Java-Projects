@@ -84,9 +84,9 @@ public class Capture extends MiniGame {
 	}
 
 	public boolean gameOver() {
-		System.out.println("Capture - Game Over");
 		for(Square square : squares) {
 			if(square != null && square.isDead()) {
+				System.out.println("Capture - Game Over");
 				return true;
 			}
 		}
