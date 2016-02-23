@@ -9,22 +9,21 @@ public class Capture extends MiniGame {
 	private AffineTransform at;
 	private static final Color bgColor = new Color(192, 230, 192);
 
-	private long nextBox;
-
 	private Rectangle2D box;
 	private Point2D boxPosition;
 	private static final int boxSide = 32;
 
 	private Square[] squares; // Contains active squares
+	private long nextSquare;
 
 	public Capture(FontMetrics fm) {
 		fontMetrics = fm;
 
 		// Store base graphics
 		box = new Rectangle2D.Double(-boxSide / 2, -boxSide / 2, boxSide, boxSide);
-		nextBox = (long) (70.5 * 1000.0);
 
 		squares = new Square[5];
+		nextSquare = (long) (70.5 * 1000.0);
 
 		reset();
 
@@ -42,6 +41,9 @@ public class Capture extends MiniGame {
 		System.out.println("Capture - Reset");
 		setBackground(bgColor);
 		boxPosition = new Point2D.Double(0, 0);
+
+		squares = new Square[5];
+		nextSquare = (long) (70.5 * 1000.0);
 	}
 
 	public void moveBox(double x, double y) {
@@ -51,9 +53,9 @@ public class Capture extends MiniGame {
 
 	public void update(long elapsedms) {
 		for(int i = 0; i < squares.length; i++) {
-			if(squares[i] == null && elapsedms >= nextBox) {
+			if(squares[i] == null && elapsedms >= nextSquare) {
 				squares[i] = createSquare();
-				nextBox += Math.random() * 4000 + 1000;
+				nextSquare += Math.random() * 4000 + 1000;
 			}
 			else if(squares[i] != null && squares[i].getBox().intersects(box.getX(), box.getY(), box.getWidth(), box.getHeight())) {
 				squares[i].stopCountdown();
