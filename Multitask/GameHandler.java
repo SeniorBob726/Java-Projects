@@ -13,6 +13,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private boolean rightKeyDown = false, leftKeyDown = false;
 	private boolean upLocked = false, downLocked = false;
 	private boolean wKeyDown = false, aKeyDown = false, sKeyDown = false, dKeyDown = false;
+	private boolean spacebarDown = false;
 
 	private long startTime = 0;
 	private long pauseTime = 0;
@@ -28,6 +29,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
+		games.add(new Balance());
 
 		width = w;
 		height = h;
@@ -120,6 +122,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		aKeyDown = false;
 		sKeyDown = false;
 		dKeyDown = false;
+		spacebarDown = false;
 		games.clear();
 		games.add(new Balance());
 		constructLayout();
@@ -184,16 +187,16 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		if(gameActive) {
 			long elapsedns = System.nanoTime() - startTime;
 			points = (int) (elapsedns * Math.pow(10, -9)); // Points = seconds from start
-			if(points == 15 && games.size() == 1) {
+			if(points == 1 && games.size() == 1) {
 				games.add(new Dodge());
 				constructLayout();
 			}
-			else if(points == 70 && games.size() == 2) {
+			else if(points == 1 && games.size() == 2) {
 				games.add(new Capture(fontMetrics));
 				constructLayout();
 			}
-			else if(points == 100 && games.size() == 3) {
-				// games.add(new Helicopter());
+			else if(points == 1 && games.size() == 3) {
+				games.add(new Helicopter());
 				constructLayout();
 			}
 
@@ -228,6 +231,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 					((Capture) games.get(2)).moveBox(1.2, 0);
 				}
 			}
+			if(games.size() >= 4 && spacebarDown) {
+				((Helicopter) games.get(3)).increaseLift();
+			}
 
 			repaint();
 		}
@@ -261,6 +267,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				case KeyEvent.VK_D:
 					dKeyDown = false;
 					break;
+				case KeyEvent.VK_SPACE:
+					spacebarDown = false;
+					break;
 			}
 		}
 	}
@@ -270,10 +279,8 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			case KeyEvent.VK_ENTER:
 				startGame();
 				break;
-			case KeyEvent.VK_SPACE:
-				endGame();
-				break;
 			case KeyEvent.VK_ESCAPE:
+				endGame();
 				System.exit(0);
 				break;
 		}
@@ -311,6 +318,9 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 					break;
 				case KeyEvent.VK_D:
 					dKeyDown = true;
+					break;
+				case KeyEvent.VK_SPACE:
+					spacebarDown = true;
 					break;
 			}
 		}

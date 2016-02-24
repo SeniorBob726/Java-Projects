@@ -9,10 +9,12 @@ public class Helicopter extends MiniGame {
 	private static final Color bgColor = new Color(192, 230, 192);
 
 	private long nextBar;
+	private static final double gravity = -2.0;
 
 	private Path2D helicopter;
 	private Rectangle2D hB;
 	private double helicopterPosition;
+	private double helicopterVelocity;
 
 	private Bar[] bars; // Contains active bars
 
@@ -50,15 +52,14 @@ public class Helicopter extends MiniGame {
 		helicopterPosition = 0;
 	}
 
-	public void moveUp() {
-
-	}
-
-	public void moveDown() {
-
+	public void increaseLift() {
+		helicopterVelocity += 0.1;
 	}
 
 	public void update(long elapsedms) {
+		helicopterPosition += helicopterVelocity;
+		helicopterVelocity += gravity;
+
 		for(int i = 0; i < bars.length; i++) {
 			if(bars[i] == null && elapsedms >= nextBar) {
 				bars[i] = createBar();
