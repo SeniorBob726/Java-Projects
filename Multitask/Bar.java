@@ -13,6 +13,6 @@ public class Bar extends Rectangle2D.Double {
 	}
 
 	public void update() {
-		setRect(getX(), getY() - 1, width, length);
+		setRect(getX() - 1, getY(), width, length);
 	}
 }
