@@ -43,7 +43,7 @@ public class Capture extends MiniGame {
 		boxPosition = new Point2D.Double(0, 0);
 
 		squares = new Square[5];
-		nextSquare = (long) (70.5 * 1000.0);
+		nextSquare = (long) (40.5 * 1000.0);
 	}
 
 	public void moveBox(double x, double y) {
