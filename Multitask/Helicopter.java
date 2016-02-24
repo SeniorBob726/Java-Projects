@@ -66,14 +66,18 @@ public class Helicopter extends MiniGame {
 		}
 		helicopterPosition = clamp(helicopterPosition, topHeight, bottomHeight);
 
-		Rectangle2D hB = helicopter.getBounds();
 		for(int i = 0; i < bars.length; i++) {
 			if(bars[i] == null && elapsedms >= nextBar) {
 				bars[i] = createBar();
-				nextBar += Math.random() * 4000 + 1000;
+				nextBar += 6000;
 			}
-			else if(bars[i] != null && bars[i].intersects(hB.getX(), hB.getY(), hB.getWidth(), hB.getHeight())) {
-				bars[i] = null;
+			else if(bars[i] != null) {
+				if(bars[i].getY() < -getWidth() / 2 - 5) {
+					bars[i] = null;
+				}
+				else {
+					bars[i].update();
+				}
 			}
 		}
 	}
@@ -88,7 +92,13 @@ public class Helicopter extends MiniGame {
 	}
 
 	public boolean gameOver() {
-		//System.out.println("Game Over - Helicopter");
+		System.out.println("Game Over - Helicopter");
+		Rectangle2D hB = helicopter.getBounds();
+		for(int i = 0; i < bars.length; i++) {
+			if(bars[i].intersects(hB.getX(), hB.getY(), hB.getWidth(), hB.getHeight())) {
+				return true;
+			}
+		}
 		return false;
 	}
 
