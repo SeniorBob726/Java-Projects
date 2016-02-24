@@ -97,9 +97,8 @@ public class Helicopter extends MiniGame {
 	}
 
 	public boolean gameOver() {
-		Rectangle2D hB = helicopter.getBounds();
 		for(int i = 0; i < bars.length; i++) {
-			if(bars[i] != null && bars[i].intersects(hB.getX(), hB.getY(), hB.getWidth(), hB.getHeight())) {
+			if(bars[i] != null && helicopter.intersects(bars[i])) {
 				System.out.println("Game Over - Helicopter");
 				return true;
 			}
