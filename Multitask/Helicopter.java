@@ -53,9 +53,9 @@ public class Helicopter extends MiniGame {
 
 	public void drawHelicopter() {
 		helicopter.reset();
-		helicopter.moveTo(10, 0 + helicopterPosition);
-		helicopter.lineTo(-10, 10 + helicopterPosition);
-		helicopter.lineTo(-10, -10 + helicopterPosition);
+		helicopter.moveTo(40 - getWidth() / 2, helicopterPosition);
+		helicopter.lineTo(20 - getWidth() / 2, 10 + helicopterPosition);
+		helicopter.lineTo(20 - getWidth() / 2, -10 + helicopterPosition);
 		helicopter.closePath();
 	}
 
