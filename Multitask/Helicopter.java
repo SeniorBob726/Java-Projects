@@ -1,33 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.AffineTransform;
 
 public class Helicopter extends MiniGame {
-	private AffineTransform at;
 	private static final Color bgColor = new Color(192, 230, 192);
 
 	private long nextBar;
 	private static final double gravity = -2.0;
 
-	private Path2D helicopter;
-	private Rectangle2D hB;
+	private Polygon helicopter;
 	private double helicopterPosition;
 	private double helicopterVelocity;
 
 	private Bar[] bars; // Contains active bars
 
 	public Helicopter() {
-		at = new AffineTransform();
-
 		// Store base graphics
-		helicopter = new Path2D.Double();
-		helicopter.moveTo(8, 0);
-		helicopter.lineTo(-8, 8);
-		helicopter.lineTo(-8, -8);
-		helicopter.closePath();
-		hB = helicopter.getBounds();
+		int[] xPoints = {8, -8, -8};
+		int[] yPoints = {0, 8, -8};
+		helicopter = new Polygon(xPoints, yPoints, 3);
 
 		nextBar = (long) (1.5 * 1000.0);
 
@@ -61,6 +52,7 @@ public class Helicopter extends MiniGame {
 		helicopterVelocity += gravity;
 
 		for(int i = 0; i < bars.length; i++) {
+			Rectangle2D hB = helicopter.getBounds();
 			if(bars[i] == null && elapsedms >= nextBar) {
 				bars[i] = createBar();
 				nextBar += Math.random() * 4000 + 1000;
@@ -96,10 +88,7 @@ public class Helicopter extends MiniGame {
 		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 
 		g2d.setColor(new Color(0, 153, 0));
-		System.out.println(-getWidth() / 2 + 10);
-		at.setToTranslation(-getWidth() / 2 + 10, helicopterPosition);
-		helicopter.transform(at);
-		g2d.fill(helicopter);
+		g2d.fillPolygon(helicopter);
 		g2d.setColor(Color.BLACK);
 		g2d.setStroke(new BasicStroke(3));
 		for(Bar bar : bars) {
