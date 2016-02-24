@@ -6,7 +6,7 @@ public class Helicopter extends MiniGame {
 	private static final Color bgColor = new Color(192, 230, 192);
 
 	private long nextBar;
-	private static final double gravity = -2.0;
+	private static final double gravity = 0.05;
 
 	private Polygon helicopter;
 	private double helicopterPosition;
@@ -21,7 +21,6 @@ public class Helicopter extends MiniGame {
 		helicopter = new Polygon(xPoints, yPoints, 3);
 
 		nextBar = (long) (1.5 * 1000.0);
-
 		bars = new Bar[5];
 
 		reset();
@@ -41,15 +40,24 @@ public class Helicopter extends MiniGame {
 		setBackground(bgColor);
 
 		helicopterPosition = 0;
+		helicopterVelocity = 0;
 	}
 
 	public void increaseLift() {
-		helicopterVelocity += 0.1;
+		helicopterVelocity -= 0.12;
 	}
 
 	public void update(long elapsedms) {
 		helicopterPosition += helicopterVelocity;
 		helicopterVelocity += gravity;
+		helicopterVelocity = clamp(helicopterVelocity, -2, 2);
+
+		double topHeight = -getHeight() / 2 + 8;
+		double bottomHeight = getHeight() / 2 - 8;
+		if(helicopterPosition < topHeight || helicopterPosition > bottomHeight) {
+			helicopterVelocity = 0;
+		}
+		helicopterPosition = clamp(helicopterPosition, topHeight, bottomHeight);
 
 		for(int i = 0; i < bars.length; i++) {
 			Rectangle2D hB = helicopter.getBounds();
