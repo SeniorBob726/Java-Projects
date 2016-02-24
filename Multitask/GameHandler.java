@@ -187,15 +187,15 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		if(gameActive) {
 			long elapsedns = System.nanoTime() - startTime;
 			points = (int) (elapsedns * Math.pow(10, -9)); // Points = seconds from start
-			if(points == 1 && games.size() == 1) {
+			if(points == 15 && games.size() == 1) {
 				games.add(new Dodge());
 				constructLayout();
 			}
-			else if(points == 1 && games.size() == 2) {
+			else if(points == 40 && games.size() == 2) {
 				games.add(new Capture(fontMetrics));
 				constructLayout();
 			}
-			else if(points == 1 && games.size() == 3) {
+			else if(points == 80 && games.size() == 3) {
 				games.add(new Helicopter());
 				constructLayout();
 			}

@@ -23,7 +23,7 @@ public class Capture extends MiniGame {
 		box = new Rectangle2D.Double(-boxSide / 2, -boxSide / 2, boxSide, boxSide);
 
 		squares = new Square[5];
-		nextSquare = (long) (70.5 * 1000.0);
+		nextSquare = (long) (40.5 * 1000.0);
 
 		reset();
 

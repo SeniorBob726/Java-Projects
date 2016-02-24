@@ -11,7 +11,7 @@ public class Dodge extends MiniGame {
 
 	private Rectangle2D bar;
 	private int barPosition = 0; // -2 (top) to 2 (bottom)
-	private static final int barHeight = 32;
+	private static final int barHeight = 30;
 	private static final int barWidth = 8;
 
 	private long spikeOneTime, spikeTwoTime; // Spike creation timers
@@ -63,7 +63,7 @@ public class Dodge extends MiniGame {
 			x *= -1;
 		}
 		int lane = (int) (Math.random() * 6 - 3.0);
-		double speed = Math.random() * 0.2 + 1;
+		double speed = Math.random() * 0.2 + 0.8;
 		return new Spike(x, lane * barHeight, direction, speed);
 	}
 

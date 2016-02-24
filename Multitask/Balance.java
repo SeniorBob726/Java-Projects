@@ -42,7 +42,7 @@ public class Balance extends MiniGame {
 	}
 
 	public void update(long elapsedms) {
-		angle += angularVelocity + ballPosition * 0.5; // Angle is affected by angularVelocity and ballPosition
+		angle += angularVelocity + ballPosition * 0.4; // Angle is affected by angularVelocity and ballPosition
 		angle = clamp(angle, -50, 50);
 
 		ballPosition += translationalVelocity;

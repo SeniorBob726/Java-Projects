@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 
 public class Helicopter extends MiniGame {
 	private AffineTransform at;
-	private static final Color bgColor = new Color(192, 230, 192);
+	private static final Color bgColor = new Color(225, 194, 240);
 
 	private static final double gravity = 0.05;
 
@@ -22,13 +22,13 @@ public class Helicopter extends MiniGame {
 
 		// Store base graphics
 		helicopter = new Path2D.Double();
-		helicopter.moveTo(8, 0);
-		helicopter.lineTo(-8, 8);
-		helicopter.lineTo(-8, -8);
+		helicopter.moveTo(10, 0);
+		helicopter.lineTo(-10, 10);
+		helicopter.lineTo(-10, -10);
 		helicopter.closePath();
 
 		bars = new Bar[5];
-		nextBar = (long) (1.5 * 1000.0);
+		nextBar = (long) (80.5 * 1000.0);
 
 		reset();
 
@@ -59,8 +59,8 @@ public class Helicopter extends MiniGame {
 		helicopterVelocity += gravity;
 		helicopterVelocity = clamp(helicopterVelocity, -2, 2);
 
-		double topHeight = -getHeight() / 2 + 8;
-		double bottomHeight = getHeight() / 2 - 8;
+		double topHeight = -getHeight() / 2 + 10;
+		double bottomHeight = getHeight() / 2 - 10;
 		if(helicopterPosition < topHeight || helicopterPosition > bottomHeight) {
 			helicopterVelocity = 0;
 		}
@@ -69,7 +69,7 @@ public class Helicopter extends MiniGame {
 		for(int i = 0; i < bars.length; i++) {
 			if(bars[i] == null && elapsedms >= nextBar) {
 				bars[i] = createBar();
-				nextBar += 6000;
+				nextBar += 5000;
 			}
 			else if(bars[i] != null) {
 				if(bars[i].getY() < -getWidth() / 2 - 5) {
@@ -112,8 +112,8 @@ public class Helicopter extends MiniGame {
 
 		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 
-		g2d.setColor(new Color(0, 153, 0));
-		if(helicopterPosition > -getHeight() / 2 + 8 && helicopterPosition < getHeight() / 2 - 8) {
+		g2d.setColor(new Color(153, 51, 204));
+		if(helicopterPosition > -getHeight() / 2 + 10 && helicopterPosition < getHeight() / 2 - 10) {
 			at.setToTranslation(0, helicopterVelocity);
 			helicopter.transform(at);
 		}
@@ -122,7 +122,7 @@ public class Helicopter extends MiniGame {
 		g2d.setStroke(new BasicStroke(3));
 		for(Bar bar : bars) {
 			if(bar != null) {
-				g2d.draw(bar);
+				g2d.fill(bar);
 			}
 		}
 		g2d.dispose();
