@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class GameHandler extends JPanel implements ActionListener, KeyListener/*, JavaArcade */ {
+public class GameHandler extends JPanel implements ActionListener, KeyListener/*, ArcadeFriendly*/ {
 	private int width, height;
 	private JLabel pointLabel;
 	private javax.swing.Timer timer; // Game clock
@@ -130,7 +130,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		timer.start();
 	}
 
-	public void endGame() {
+	public void stopGame() {
 		System.out.println("End - Game");
 		highScore = Math.max(highScore, points);
 		timer.stop();
@@ -161,8 +161,8 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		return "Multitask";
 	}
 
-	public String getPoints() {
-		return Integer.toString(points);
+	public int getPoints() {
+		return points;
 	}
 
 	public String getHighScore() {
@@ -206,7 +206,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				if(game.gameOver()) {
 					game.setBackground(Color.WHITE);
 					repaint();
-					endGame();
+					stopGame();
 					return;
 				}
 			}
@@ -280,7 +280,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				startGame();
 				break;
 			case KeyEvent.VK_ESCAPE:
-				endGame();
+				stopGame();
 				System.exit(0);
 				break;
 		}
