@@ -29,7 +29,6 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
-		games.add(new Balance());
 
 		width = w;
 		height = h;
@@ -45,7 +44,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		setFocusTraversalKeysEnabled(false);
 		setPreferredSize(new Dimension(width, height));
 
-		constructLayout();
+		resetGame();
 	}
 
 	public GameHandler() {
@@ -107,11 +106,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		return gameActive && !paused;
 	}
 
-	public void startGame() {
-		System.out.println("Start - Game");
-		for(MiniGame game : games) {
-			game.reset();
-		}
+	public void resetGame() {
 		gameActive = true;
 		paused = false;
 		rightKeyDown = false;
@@ -126,6 +121,11 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		games.clear();
 		games.add(new Balance());
 		constructLayout();
+	}
+
+	public void startGame() {
+		System.out.println("Start - Game");
+		resetGame();
 		startTime = System.nanoTime(); // Set startTime with nanosecond precision
 		timer.start();
 	}
