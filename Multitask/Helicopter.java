@@ -11,8 +11,8 @@ public class Helicopter extends MiniGame {
 	private static final double gravity = 0.05;
 
 	private Path2D helicopter;
-	private double helicopterPosition;
-	private double helicopterVelocity;
+	private double helicopterPosition = 0;
+	private double helicopterVelocity = 0;
 
 	private Bar[] bars; // Contains active bars
 	private long nextBar;
@@ -22,10 +22,7 @@ public class Helicopter extends MiniGame {
 
 		// Store base graphics
 		helicopter = new Path2D.Double();
-		helicopter.moveTo(10, 0);
-		helicopter.lineTo(-10, 10);
-		helicopter.lineTo(-10, -10);
-		helicopter.closePath();
+		drawHelicopter();
 
 		reset();
 
@@ -45,7 +42,7 @@ public class Helicopter extends MiniGame {
 
 		helicopterPosition = 0;
 		helicopterVelocity = 0;
-		nextBar = (long) (80.5 * 1000.0);
+		nextBar = (long) (1.5 * 1000.0);
 
 		bars = new Bar[5];
 	}
@@ -54,17 +51,25 @@ public class Helicopter extends MiniGame {
 		helicopterVelocity -= 0.12;
 	}
 
+	public void drawHelicopter() {
+		helicopter.reset();
+		helicopter.moveTo(10, 0 + helicopterPosition);
+		helicopter.lineTo(-10, 10 + helicopterPosition);
+		helicopter.lineTo(-10, -10 + helicopterPosition);
+		helicopter.closePath();
+	}
+
 	public void update(long elapsedms) {
 		helicopterPosition += helicopterVelocity;
 		helicopterVelocity += gravity;
 		helicopterVelocity = clamp(helicopterVelocity, -2, 2);
 
-		double topHeight = -getHeight() / 2 + 10;
-		double bottomHeight = getHeight() / 2 - 10;
+		double topHeight = -getHeight() / 2 + 15;
+		double bottomHeight = getHeight() / 2 - 15;
 		if(helicopterPosition < topHeight || helicopterPosition > bottomHeight) {
 			helicopterVelocity = 0;
+			helicopterPosition = clamp(helicopterPosition, topHeight, bottomHeight);
 		}
-		helicopterPosition = clamp(helicopterPosition, topHeight, bottomHeight);
 
 		for(int i = 0; i < bars.length; i++) {
 			if(bars[i] == null && elapsedms >= nextBar) {
@@ -92,10 +97,10 @@ public class Helicopter extends MiniGame {
 	}
 
 	public boolean gameOver() {
-		System.out.println("Game Over - Helicopter");
 		Rectangle2D hB = helicopter.getBounds();
 		for(int i = 0; i < bars.length; i++) {
 			if(bars[i] != null && bars[i].intersects(hB.getX(), hB.getY(), hB.getWidth(), hB.getHeight())) {
+				System.out.println("Game Over - Helicopter");
 				return true;
 			}
 		}
@@ -113,13 +118,11 @@ public class Helicopter extends MiniGame {
 		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 
 		g2d.setColor(new Color(153, 51, 204));
-		if(helicopterPosition > -getHeight() / 2 + 10 && helicopterPosition < getHeight() / 2 - 10) {
-			at.setToTranslation(0, helicopterVelocity);
-			helicopter.transform(at);
-		}
+		drawHelicopter();
 		g2d.fill(helicopter);
 		g2d.setColor(Color.BLACK);
-		g2d.setStroke(new BasicStroke(3));
+		g2d.fillRect(-centerX, -centerY - 5, getWidth(), 10);
+		g2d.fillRect(-centerX, centerY - 5, getWidth(), 10);
 		for(Bar bar : bars) {
 			if(bar != null) {
 				g2d.fill(bar);
