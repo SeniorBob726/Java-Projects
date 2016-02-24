@@ -32,7 +32,7 @@ public class Helicopter extends MiniGame {
 
 	public Bar createBar() {
 		double x = getWidth() / 2;
-		double y = (Math.random() - 0.5) * getHeight();
+		double y = (Math.random() - 0.5) * (getHeight() - 50) - 20;
 		return new Bar(x, y);
 	}
 
