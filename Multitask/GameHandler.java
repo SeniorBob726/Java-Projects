@@ -28,7 +28,6 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
-		games.add(new Balance());
 
 		width = w;
 		height = h;
@@ -52,7 +51,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void constructLayout() { // Layout MiniGame panels
-		/* BUG: Small black box is drawn in headerBar. */
+		this.removeAll();
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
@@ -121,7 +120,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		aKeyDown = false;
 		sKeyDown = false;
 		dKeyDown = false;
-		games = new ArrayList<MiniGame>(4);
+		games.clear();
 		games.add(new Balance());
 		constructLayout();
 		startTime = System.nanoTime(); // Set startTime with nanosecond precision
