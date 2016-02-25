@@ -107,7 +107,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void resetGame() {
-		gameActive = true;
+		gameActive = false;
 		paused = false;
 		rightKeyDown = false;
 		leftKeyDown = false;
@@ -118,16 +118,27 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		sKeyDown = false;
 		dKeyDown = false;
 		spacebarDown = false;
+		timer.stop();
 		games.clear();
 		games.add(new Balance());
 		constructLayout();
 	}
 
 	public void startGame() {
-		System.out.println("Start - Game");
-		resetGame();
-		startTime = System.nanoTime(); // Set startTime with nanosecond precision
-		timer.start();
+		if(paused) {
+			System.out.println("Resume - Game");
+			startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
+			pauseTime = 0;
+			timer.start();
+			paused = false;
+		}
+		else {
+			System.out.println("Start - Game");
+			resetGame();
+			startTime = System.nanoTime(); // Set startTime with nanosecond precision
+			timer.start();
+			gameActive = true;
+		}
 	}
 
 	public void stopGame() {
@@ -138,19 +149,10 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void pauseGame() {
-		if(paused) {
-			System.out.println("Resume - Game");
-			startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
-			pauseTime = 0;
-			timer.start();
-			paused = false;
-		}
-		else {
-			System.out.println("Pause - Game");
-			pauseTime = System.nanoTime();
-			timer.stop();
-			paused = true;
-		}
+		System.out.println("Pause - Game");
+		pauseTime = System.nanoTime();
+		timer.stop();
+		paused = true;
 
 		for(MiniGame game : games) {
 			game.pause(paused);
