@@ -57,7 +57,6 @@ public class Balance extends MiniGame {
 			angularVelocity -= 0.0003;
 		}
 
-
 		ball.setFrame(-barHeight + ballPosition * barWidth / 2, -barHeight * 2.5, barHeight * 2, barHeight * 2);
 	}
 

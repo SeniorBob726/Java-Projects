@@ -19,7 +19,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private long pauseTime = 0;
 	private boolean gameActive = false;
 	private boolean paused = false;
-	private ArrayList<MiniGame> games; // Contains active MiniGames
+	private ArrayList<MiniGame> games; // Contains active MiniGames, Polymorphism is used here
 	private int points;
 	private int highScore = 0;
 
@@ -133,7 +133,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				timer.start();
 				paused = false;
 
-				for(MiniGame game : games) {
+				for(MiniGame game : games) { // Polymorphism
 					game.pause(paused);
 				}
 			}
@@ -164,7 +164,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			timer.stop();
 			paused = true;
 
-			for(MiniGame game : games) {
+			for(MiniGame game : games) { // Polymorphism
 				game.pause(paused);
 			}
 		}
@@ -214,7 +214,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 			}
 
 			long elapsedms = (long) (elapsedns * Math.pow(10, -6));
-			for(MiniGame game : games) {
+			for(MiniGame game : games) { // Polymorphism
 				game.update(elapsedms);
 				if(game.gameOver()) {
 					game.setBackground(Color.WHITE);
