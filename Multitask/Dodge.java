@@ -58,7 +58,7 @@ public class Dodge extends MiniGame {
 
 	public Spike createSpike() {
 		double direction = 180 * (int) (Math.random() * 2);
-		double x = getWidth() / 3.0;
+		double x = getWidth() * 0.5 - 30;
 		if(direction == 0) {
 			x *= -1;
 		}
@@ -80,11 +80,11 @@ public class Dodge extends MiniGame {
 	public void update(long elapsedms) {
 		if(elapsedms >= spikeOneTime) {
 			spikes[0] = createSpike();
-			spikeOneTime += getWidth() / spikes[0].getSpeed() / 5;
+			spikeOneTime += 16 * getWidth();
 		}
 		if(elapsedms >= spikeTwoTime) {
 			spikes[1] = createSpike();
-			spikeOneTime += getWidth() / spikes[1].getSpeed() / 5;
+			spikeTwoTime += 16 * getWidth();
 		}
 		for(Spike spike : spikes) {
 			if(spike != null) {
