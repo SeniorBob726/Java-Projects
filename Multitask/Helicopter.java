@@ -52,10 +52,13 @@ public class Helicopter extends MiniGame {
 	}
 
 	public void drawHelicopter() {
+		double c = Math.cos(-helicopterVelocity * 0.1);
+		double s = Math.sin(-helicopterVelocity * 0.1);
+		double xOffset = 30 - getWidth() / 2;
 		helicopter.reset();
-		helicopter.moveTo(40 - getWidth() / 2, helicopterPosition);
-		helicopter.lineTo(20 - getWidth() / 2, 10 + helicopterPosition);
-		helicopter.lineTo(20 - getWidth() / 2, -10 + helicopterPosition);
+		helicopter.moveTo(10 * c + xOffset, -10 * s + helicopterPosition);
+		helicopter.lineTo(-10 * c + 10 * s + xOffset, 10 * s + 10 * c + helicopterPosition);
+		helicopter.lineTo(-10 * c - 10 * s + xOffset, 10 * s - 10 * c + helicopterPosition);
 		helicopter.closePath();
 	}
 
@@ -66,9 +69,9 @@ public class Helicopter extends MiniGame {
 
 		double topHeight = -getHeight() / 2 + 15;
 		double bottomHeight = getHeight() / 2 - 15;
-		if(helicopterPosition < topHeight || helicopterPosition > bottomHeight) {
-			helicopterVelocity = 0;
+		if(helicopterPosition < topHeight || helicopterPosition >= bottomHeight) {
 			helicopterPosition = clamp(helicopterPosition, topHeight, bottomHeight);
+			helicopterVelocity = 0;
 		}
 
 		for(int i = 0; i < bars.length; i++) {
