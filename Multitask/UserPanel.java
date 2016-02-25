@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class GameHandler extends JPanel implements ActionListener, KeyListener/*, ArcadeFriendly*/ {
+public class UserPanel extends JPanel implements ActionListener, KeyListener, ArcadeFriendly {
 	private int width, height;
 	private JLabel pointLabel;
 	private javax.swing.Timer timer; // Game clock
@@ -23,7 +23,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	private int points;
 	private int highScore = 0;
 
-	public GameHandler(int w, int h) {
+	public UserPanel(int w, int h) {
 		font = new Font("Courier", Font.PLAIN, 14);
 		fontMetrics = this.getFontMetrics(font);
 
@@ -47,7 +47,7 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 		resetGame();
 	}
 
-	public GameHandler() {
+	public UserPanel() {
 		this(600, 450);
 	}
 
