@@ -125,19 +125,21 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void startGame() {
-		if(paused) {
-			System.out.println("Resume - Game");
-			startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
-			pauseTime = 0;
-			timer.start();
-			paused = false;
-		}
-		else {
-			System.out.println("Start - Game");
-			resetGame();
-			startTime = System.nanoTime(); // Set startTime with nanosecond precision
-			timer.start();
-			gameActive = true;
+		if(!gameActive) {
+			if(paused) {
+				System.out.println("Resume - Game");
+				startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
+				pauseTime = 0;
+				timer.start();
+				paused = false;
+			}
+			else {
+				System.out.println("Start - Game");
+				resetGame();
+				startTime = System.nanoTime(); // Set startTime with nanosecond precision
+				timer.start();
+				gameActive = true;
+			}
 		}
 	}
 
