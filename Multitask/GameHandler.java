@@ -142,20 +142,25 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 	}
 
 	public void stopGame() {
-		System.out.println("End - Game");
-		highScore = Math.max(highScore, points);
-		timer.stop();
-		gameActive = false;
+		if(gameActive) {
+			System.out.println("End - Game");
+			highScore = Math.max(highScore, points);
+			timer.stop();
+			gameActive = false;
+			paused = false;
+		}
 	}
 
 	public void pauseGame() {
-		System.out.println("Pause - Game");
-		pauseTime = System.nanoTime();
-		timer.stop();
-		paused = true;
+		if(running()) {
+			System.out.println("Pause - Game");
+			pauseTime = System.nanoTime();
+			timer.stop();
+			paused = true;
 
-		for(MiniGame game : games) {
-			game.pause(paused);
+			for(MiniGame game : games) {
+				game.pause(paused);
+			}
 		}
 	}
 
