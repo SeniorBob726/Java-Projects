@@ -132,6 +132,10 @@ public class GameHandler extends JPanel implements ActionListener, KeyListener/*
 				pauseTime = 0;
 				timer.start();
 				paused = false;
+
+				for(MiniGame game : games) {
+					game.pause(paused);
+				}
 			}
 			else {
 				System.out.println("Start - Game");

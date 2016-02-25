@@ -80,11 +80,11 @@ public class Dodge extends MiniGame {
 	public void update(long elapsedms) {
 		if(elapsedms >= spikeOneTime) {
 			spikes[0] = createSpike();
-			spikeOneTime += 5000;
+			spikeOneTime += getWidth() / spikes[0].getSpeed() / 5;
 		}
 		if(elapsedms >= spikeTwoTime) {
 			spikes[1] = createSpike();
-			spikeTwoTime += 5000;
+			spikeOneTime += getWidth() / spikes[1].getSpeed() / 5;
 		}
 		for(Spike spike : spikes) {
 			if(spike != null) {

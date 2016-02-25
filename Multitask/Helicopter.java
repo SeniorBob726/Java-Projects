@@ -42,7 +42,7 @@ public class Helicopter extends MiniGame {
 
 		helicopterPosition = 0;
 		helicopterVelocity = 0;
-		nextBar = (long) (1.5 * 1000.0);
+		nextBar = (long) (80.5 * 1000.0);
 
 		bars = new Bar[5];
 	}
