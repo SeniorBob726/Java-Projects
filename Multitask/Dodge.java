@@ -4,7 +4,8 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.GeneralPath;
 
 public class Dodge extends MiniGame {
-	private static final Color bgColor = new Color(179, 194, 225);
+	public static Color fgColor = new Color(0, 51, 153);
+	public static Color bgColor = new Color(179, 194, 225);
 
 	private GeneralPath barFrame;
 	private GeneralPath barCross;
@@ -122,7 +123,7 @@ public class Dodge extends MiniGame {
 
 		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 
-		g2d.setColor(new Color(0, 51, 153));
+		g2d.setColor(fgColor);
 		bar.setFrame(-barWidth / 2, -barHeight / 2 + barHeight * barPosition, barWidth, barHeight);
 		g2d.fill(bar);
 		g2d.setColor(Color.BLACK);

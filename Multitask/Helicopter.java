@@ -6,7 +6,8 @@ import java.awt.geom.AffineTransform;
 
 public class Helicopter extends MiniGame {
 	private AffineTransform at;
-	private static final Color bgColor = new Color(225, 194, 240);
+	public static Color fgColor = new Color(153, 51, 204);
+	public static Color bgColor = new Color(225, 194, 240);
 
 	private static final double gravity = 0.05;
 
@@ -119,7 +120,7 @@ public class Helicopter extends MiniGame {
 
 		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 
-		g2d.setColor(new Color(153, 51, 204));
+		g2d.setColor(fgColor);
 		drawHelicopter();
 		g2d.fill(helicopter);
 		g2d.setColor(Color.BLACK);

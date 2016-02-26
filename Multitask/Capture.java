@@ -7,7 +7,8 @@ import java.awt.geom.AffineTransform;
 public class Capture extends MiniGame {
 	private FontMetrics fontMetrics;
 	private AffineTransform at;
-	private static final Color bgColor = new Color(192, 230, 192);
+	public static Color fgColor = new Color(0, 153, 0);
+	public static Color bgColor = new Color(192, 230, 192);
 
 	private Rectangle2D box;
 	private Point2D boxPosition;
@@ -103,7 +104,7 @@ public class Capture extends MiniGame {
 
 		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 
-		g2d.setColor(new Color(0, 153, 0));
+		g2d.setColor(fgColor);
 		box.setFrame(-boxSide / 2 + boxPosition.getX(), -boxSide / 2 + boxPosition.getY(), boxSide, boxSide);
 		g2d.fill(box);
 		g2d.setColor(Color.BLACK);
