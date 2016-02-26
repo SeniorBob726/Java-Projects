@@ -4,15 +4,20 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.AffineTransform;
 
 public class Bar extends Rectangle2D.Double {
-	private static final double speed = 1;
 	private static final double length = 40;
 	private static final double width = 5;
+	private static double speed = 1.0;
 
-	public Bar(double x, double y) {
+	public Bar(double x, double y, double sp) {
 		super(x, y, width, length);
+		speed = sp;
 	}
 
 	public void update() {
-		setRect(getX() - 1, getY(), width, length);
+		setRect(getX() - speed, getY(), width, length);
+	}
+
+	public void k() {
+		speed = 0.4;
 	}
 }

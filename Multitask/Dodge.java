@@ -4,12 +4,13 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.GeneralPath;
 
 public class Dodge extends MiniGame {
-	public static Color fgColor = new Color(0, 51, 153);
-	public static Color bgColor = new Color(179, 194, 225);
+	private static Color fgColor = new Color(0, 51, 153);
+	private static Color bgColor = new Color(179, 194, 225);
 
 	private GeneralPath barFrame;
 	private GeneralPath barCross;
 
+	public double kc = 1.0;
 	private Rectangle2D bar;
 	private int barPosition = 0; // -2 (top) to 2 (bottom)
 	private static final int barHeight = 30;
@@ -64,13 +65,15 @@ public class Dodge extends MiniGame {
 			x *= -1;
 		}
 		int lane = (int) (Math.random() * 6 - 3.0);
-		double speed = Math.random() * 0.2 + 0.8;
-		return new Spike(x, lane * barHeight, direction, speed);
+		return new Spike(x, lane * barHeight, direction, 1.0 * kc);
 	}
 
 	public void reset() {
 		System.out.println("Reset - Dodge");
+		fgColor = new Color(0, 51, 153);
+		bgColor = new Color(179, 194, 225);
 		setBackground(bgColor);
+		kc = 1.0;
 		barPosition = 0;
 
 		spikes = new Spike[2];
@@ -111,6 +114,18 @@ public class Dodge extends MiniGame {
 			}
 		}
 		return false;
+	}
+
+	public void k() {
+		fgColor = new Color(48, 48, 48);
+		bgColor = new Color(193, 193, 193);
+		setBackground(bgColor);
+		kc = 0.4;
+		for(Spike s : spikes) {
+			if(s != null) {
+				s.k();
+			}
+		}
 	}
 
 	public void paintComponent(Graphics g) {

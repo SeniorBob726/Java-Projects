@@ -6,6 +6,8 @@ public abstract class MiniGame extends JPanel {
 	public abstract void pause(boolean paused);
 	public abstract boolean gameOver();
 
+	public abstract void k();
+
 	public double clamp(double value, double min, double max) {
 		return Math.max(min, Math.min(max, value));
 	}

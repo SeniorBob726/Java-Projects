@@ -8,9 +8,9 @@ public class Square implements ActionListener {
 	private javax.swing.Timer lifespan; // Lifespan clock
 	private int countdown;
 
-	public Square(double x, double y, double s) {
+	public Square(double x, double y, double s, int tickLength) {
 		box = new Rectangle2D.Double(x - s / 2, y - s / 2, s, s);
-		lifespan = new javax.swing.Timer(1000, this); // Tick once every second
+		lifespan = new javax.swing.Timer(tickLength, this);
 		lifespan.start();
 		countdown = 10;
 	}
@@ -21,6 +21,12 @@ public class Square implements ActionListener {
 
 	public void stopCountdown() {
 		lifespan.stop();
+	}
+
+	public void k() {
+		lifespan.stop();
+		lifespan.setDelay(2500);
+		lifespan.start();
 	}
 
 	public Rectangle2D getBox() {

@@ -7,9 +7,10 @@ import java.awt.geom.AffineTransform;
 public class Capture extends MiniGame {
 	private FontMetrics fontMetrics;
 	private AffineTransform at;
-	public static Color fgColor = new Color(0, 153, 0);
-	public static Color bgColor = new Color(192, 230, 192);
+	private static Color fgColor = new Color(0, 153, 0);
+	private static Color bgColor = new Color(192, 230, 192);
 
+	private double kc = 1.0;
 	private Rectangle2D box;
 	private Point2D boxPosition;
 	private static final int boxSide = 32;
@@ -35,12 +36,15 @@ public class Capture extends MiniGame {
 	public Square createSquare() {
 		double x = (Math.random() - 0.5) * (getWidth() - boxSide);
 		double y = (Math.random() - 0.5) * (getHeight() - boxSide);
-		return new Square(x, y, boxSide);
+		return new Square(x, y, boxSide, (int) (1000 / kc));
 	}
 
 	public void reset() {
 		System.out.println("Reset - Capture");
+		fgColor = new Color(0, 153, 0);
+		bgColor = new Color(192, 230, 192);
 		setBackground(bgColor);
+		kc = 1.0;
 		boxPosition = new Point2D.Double(0, 0);
 
 		squares = new Square[5];
@@ -56,7 +60,7 @@ public class Capture extends MiniGame {
 		for(int i = 0; i < squares.length; i++) {
 			if(squares[i] == null && elapsedms >= nextSquare) {
 				squares[i] = createSquare();
-				nextSquare += Math.random() * 4000 + 1000;
+				nextSquare += (Math.random() * 4000 + 1000) / kc;
 			}
 			else if(squares[i] != null && squares[i].getBox().intersects(box.getX(), box.getY(), box.getWidth(), box.getHeight())) {
 				squares[i].stopCountdown();
@@ -92,6 +96,18 @@ public class Capture extends MiniGame {
 			}
 		}
 		return false;
+	}
+
+	public void k() {
+		fgColor = new Color(109, 109, 109);
+		bgColor = new Color(219, 219, 219);
+		setBackground(bgColor);
+		kc = 0.4;
+		for(Square s : squares) {
+			if(s != null) {
+				s.k();
+			}
+		}
 	}
 
 	public void paintComponent(Graphics g) {

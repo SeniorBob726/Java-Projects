@@ -15,6 +15,8 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private boolean wKeyDown = false, aKeyDown = false, sKeyDown = false, dKeyDown = false;
 	private boolean spacebarDown = false;
 
+	private int kp = 0;
+	private final int[] kc = {KeyEvent.VK_UP, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_B, KeyEvent.VK_A};
 	private long startTime = 0;
 	private long pauseTime = 0;
 	private boolean gameActive = false;
@@ -107,6 +109,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	}
 
 	public void resetGame() {
+		kp = 0;
 		gameActive = false;
 		paused = false;
 		rightKeyDown = false;
@@ -200,14 +203,17 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			points = (int) (elapsedns * Math.pow(10, -9)); // Points = seconds from start
 			if(points == 15 && games.size() == 1) {
 				games.add(new Dodge());
+				if(kp==-1){k();};
 				constructLayout();
 			}
 			else if(points == 40 && games.size() == 2) {
 				games.add(new Capture(fontMetrics));
+				if(kp==-1){k();};
 				constructLayout();
 			}
 			else if(points == 80 && games.size() == 3) {
 				games.add(new Helicopter());
+				if(kp==-1){k();};
 				constructLayout();
 			}
 
@@ -230,16 +236,16 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			}
 			if(games.size() >= 3) {
 				if(wKeyDown) {
-					((Capture) games.get(2)).moveBox(0, -1.2);
+					((Capture) games.get(2)).moveBox(0, -1.3);
 				}
 				if(aKeyDown) {
-					((Capture) games.get(2)).moveBox(-1.2, 0);
+					((Capture) games.get(2)).moveBox(-1.3, 0);
 				}
 				if(sKeyDown) {
-					((Capture) games.get(2)).moveBox(0, 1.2);
+					((Capture) games.get(2)).moveBox(0, 1.3);
 				}
 				if(dKeyDown) {
-					((Capture) games.get(2)).moveBox(1.2, 0);
+					((Capture) games.get(2)).moveBox(1.3, 0);
 				}
 			}
 			if(games.size() >= 4 && spacebarDown) {
@@ -252,7 +258,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 	public void keyTyped(KeyEvent e) {}
 	public void keyReleased(KeyEvent e) {
-		if(gameActive) {
+		if(running()) {
 			switch(e.getKeyCode()) {
 				case KeyEvent.VK_RIGHT:
 					rightKeyDown = false;
@@ -292,7 +298,8 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				System.exit(0);
 				break;
 		}
-		if(gameActive) {
+		if(running()) {
+			if(kp!=-1){if(e.getKeyCode()==kc[kp]){kp++;if(kp==kc.length){k();kp = -1;}}else{kp = 0;}}
 			switch(e.getKeyCode()) {
 				case KeyEvent.VK_P:
 					pauseGame();
@@ -332,5 +339,20 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 					break;
 			}
 		}
+	}
+
+	public void k() {
+		for(MiniGame g : games) {
+			g.k();
+		}
+
+		/*Balance.fgColor = new Color(37, 37, 37);
+		Balance.bgColor = new Color(190, 190, 190);
+		Dodge.fgColor = new Color(48, 48, 48);
+		Dodge.bgColor = new Color(193, 193, 193);
+		Capture.fgColor = new Color(109, 109, 109);
+		Capture.bgColor = new Color(219, 219, 219);
+		Helicopter.fgColor = new Color(84, 84, 84);
+		Helicopter.bgColor = new Color(204, 204, 204);*/
 	}
 }

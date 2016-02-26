@@ -6,11 +6,11 @@ import java.awt.geom.AffineTransform;
 public class Spike extends Path2D.Double {
 	private AffineTransform at;
 	private final double direction;
-	private final double speed;
 	private final double radius;
+	private double speed;
 
-	private final double tc;
-	private final double ts;
+	private double tc;
+	private double ts;
 
 	public Spike(double x, double y, double dir, double sp, double r) {
 		at = new AffineTransform();
@@ -45,5 +45,11 @@ public class Spike extends Path2D.Double {
 	public void update() {
 		at.setToTranslation(tc, ts);
 		transform(at);
+	}
+
+	public void k() {
+		speed = 0.4;
+		tc = speed * Math.cos(direction * Math.PI / 180);
+		ts = speed * Math.sin(direction * Math.PI / 180);
 	}
 }

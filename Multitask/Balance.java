@@ -4,8 +4,8 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D;
 
 public class Balance extends MiniGame {
-	public static Color fgColor = new Color(176, 0, 0);
-	public static Color bgColor = new Color(231, 179, 179);
+	private static Color fgColor = new Color(176, 0, 0);
+	private static Color bgColor = new Color(231, 179, 179);
 
 	private Ellipse2D ball;
 	private double translationalVelocity;
@@ -13,6 +13,7 @@ public class Balance extends MiniGame {
 	private double angle;
 	private double angularVelocity;
 
+	private double kc = 1.0;
 	private Rectangle2D bar;
 	private static final int barHeight = 12;
 	private static final int barWidth = 200;
@@ -34,8 +35,11 @@ public class Balance extends MiniGame {
 
 	public void reset() {
 		System.out.println("Reset - Balance");
+		fgColor = new Color(176, 0, 0);
+		bgColor = new Color(231, 179, 179);
 		setBackground(bgColor);
 
+		kc = 1.0;
 		translationalVelocity = 0.0;
 		ballPosition = 0.0;
 		angle = 0.0;
@@ -43,11 +47,11 @@ public class Balance extends MiniGame {
 	}
 
 	public void update(long elapsedms) {
-		angle += angularVelocity + ballPosition * 0.45; // Angle is affected by angularVelocity and ballPosition
+		angle += angularVelocity + 0.45 * ballPosition * kc; // Angle is affected by angularVelocity and ballPosition
 		angle = clamp(angle, -50, 50);
 
 		ballPosition += translationalVelocity;
-		translationalVelocity = 0.0006 * angle;
+		translationalVelocity = 0.0006 * angle * kc;
 
 		angularVelocity *= 0.96; // Angular velocity decay
 
@@ -76,6 +80,13 @@ public class Balance extends MiniGame {
 			return true;
 		}
 		return false;
+	}
+
+	public void k() {
+		fgColor = new Color(37, 37, 37);
+		bgColor = new Color(190, 190, 190);
+		setBackground(bgColor);
+		kc = 0.4;
 	}
 
 	public void paintComponent(Graphics g) {
