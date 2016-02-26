@@ -289,9 +289,6 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
-			case KeyEvent.VK_ENTER:
-				startGame();
-				break;
 			case KeyEvent.VK_ESCAPE:
 				stopGame();
 				System.exit(0);
