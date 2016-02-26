@@ -116,17 +116,7 @@ public class Dodge extends MiniGame {
 		return false;
 	}
 
-	public void k() {
-		fgColor = new Color(48, 48, 48);
-		bgColor = new Color(193, 193, 193);
-		setBackground(bgColor);
-		kc = 0.4;
-		for(Spike s : spikes) {
-			if(s != null) {
-				s.k();
-			}
-		}
-	}
+	public void k(){fgColor=new Color(48,48,48);bgColor=new Color(193,193,193);setBackground(bgColor);kc=0.4;for(Spike s:spikes){if(s!=null){s.k();}}}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

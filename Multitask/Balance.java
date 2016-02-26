@@ -82,12 +82,7 @@ public class Balance extends MiniGame {
 		return false;
 	}
 
-	public void k() {
-		fgColor = new Color(37, 37, 37);
-		bgColor = new Color(190, 190, 190);
-		setBackground(bgColor);
-		kc = 0.4;
-	}
+	public void k(){fgColor=new Color(37,37,37);bgColor=new Color(190,190,190);setBackground(bgColor);kc=0.4;}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

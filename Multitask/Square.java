@@ -23,11 +23,7 @@ public class Square implements ActionListener {
 		lifespan.stop();
 	}
 
-	public void k() {
-		lifespan.stop();
-		lifespan.setDelay(2500);
-		lifespan.start();
-	}
+	public void k(){lifespan.stop();lifespan.setDelay(2500);lifespan.start();}
 
 	public Rectangle2D getBox() {
 		return box;

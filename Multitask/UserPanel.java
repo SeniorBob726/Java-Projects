@@ -341,18 +341,5 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		}
 	}
 
-	public void k() {
-		for(MiniGame g : games) {
-			g.k();
-		}
-
-		/*Balance.fgColor = new Color(37, 37, 37);
-		Balance.bgColor = new Color(190, 190, 190);
-		Dodge.fgColor = new Color(48, 48, 48);
-		Dodge.bgColor = new Color(193, 193, 193);
-		Capture.fgColor = new Color(109, 109, 109);
-		Capture.bgColor = new Color(219, 219, 219);
-		Helicopter.fgColor = new Color(84, 84, 84);
-		Helicopter.bgColor = new Color(204, 204, 204);*/
-	}
+	public void k(){for(MiniGame g:games){g.k();}}
 }

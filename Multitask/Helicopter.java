@@ -114,12 +114,7 @@ public class Helicopter extends MiniGame {
 		return false;
 	}
 
-	public void k() {
-		fgColor = new Color(84, 84, 84);
-		bgColor = new Color(204, 204, 204);
-		setBackground(bgColor);
-		kc = 0.4;
-	}
+	public void k(){fgColor=new Color(84,84,84);bgColor=new Color(204,204,204);setBackground(bgColor);kc=0.4;}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -47,9 +47,5 @@ public class Spike extends Path2D.Double {
 		transform(at);
 	}
 
-	public void k() {
-		speed = 0.4;
-		tc = speed * Math.cos(direction * Math.PI / 180);
-		ts = speed * Math.sin(direction * Math.PI / 180);
-	}
+	public void k(){speed=0.4;tc=speed*Math.cos(direction*Math.PI/180);ts=speed*Math.sin(direction*Math.PI/180);}
 }

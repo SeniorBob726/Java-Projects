@@ -17,7 +17,5 @@ public class Bar extends Rectangle2D.Double {
 		setRect(getX() - speed, getY(), width, length);
 	}
 
-	public void k() {
-		speed = 0.4;
-	}
+	public void k(){speed = 0.4;}
 }
