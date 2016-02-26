@@ -11,7 +11,7 @@ public class Multitask {
 		Container pane = arcade.getContentPane();
 		pane.setLayout(new GridLayout(1, 1));
 
-		JPanel game = new GameHandler();
+		JPanel game = new UserPanel();
 		pane.add(game);
 
 		arcade.pack();
