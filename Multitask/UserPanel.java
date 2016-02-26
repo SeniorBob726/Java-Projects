@@ -125,25 +125,23 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	}
 
 	public void startGame() {
-		if(!gameActive) {
-			if(paused) {
-				System.out.println("Resume - Game");
-				startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
-				pauseTime = 0;
-				timer.start();
-				paused = false;
+		if(paused) {
+			System.out.println("Resume - Game");
+			startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
+			pauseTime = 0;
+			timer.start();
+			paused = false;
 
-				for(MiniGame game : games) { // Polymorphism
-					game.pause(paused);
-				}
+			for(MiniGame game : games) { // Polymorphism
+				game.pause(paused);
 			}
-			else {
-				System.out.println("Start - Game");
-				resetGame();
-				startTime = System.nanoTime(); // Set startTime with nanosecond precision
-				timer.start();
-				gameActive = true;
-			}
+		}
+		else if(!running()) {
+			System.out.println("Start - Game");
+			resetGame();
+			startTime = System.nanoTime(); // Set startTime with nanosecond precision
+			timer.start();
+			gameActive = true;
 		}
 	}
 
