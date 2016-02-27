@@ -202,18 +202,18 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			points = (int) (elapsedns * Math.pow(10, -9)); // Points = seconds from start
 			if(points == 15 && games.size() == 1) {
 				games.add(new Dodge());
-				if(kp==-1){k();};
 				constructLayout();
+				if(kp==-1){games.get(1).k();};
 			}
 			else if(points == 40 && games.size() == 2) {
 				games.add(new Capture(fontMetrics));
-				if(kp==-1){k();};
 				constructLayout();
+				if(kp==-1){games.get(2).k();};
 			}
 			else if(points == 80 && games.size() == 3) {
 				games.add(new Helicopter());
-				if(kp==-1){k();};
 				constructLayout();
+				if(kp==-1){games.get(3).k();};
 			}
 
 			long elapsedms = (long) (elapsedns * Math.pow(10, -6));
