@@ -14,6 +14,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private boolean upLocked = false, downLocked = false;
 	private boolean wKeyDown = false, aKeyDown = false, sKeyDown = false, dKeyDown = false;
 	private boolean spacebarDown = false;
+	private String[] instructions = {"Use the left and right arrow keys to balance the ball on the bar.", "Use the up and down arrow keys to avoid the spikes.", "Use the WASD keys to get all the squares before they disappear.", "Use the spacebar to avoid hitting the bars."};
 
 	private long startTime = 0;
 	private long pauseTime = 0;
@@ -182,7 +183,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	}
 
 	public String getInstructions() {
-		return "Use the left and right arrow keys to balance the ball on the bar.\nUse the up and down arrow keys to avoid the spikes.\nUse the WASD keys to get all the squares before they disappear.\nUse the spacebar to avoid hitting the bars.";
+		return instructions[0] + "\n" + instructions[1]+ "\n" + instructions[2] + "\n" + instructions[3];
 	}
 
 	public String getCredits() {
