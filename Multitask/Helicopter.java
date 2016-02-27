@@ -9,7 +9,7 @@ public class Helicopter extends MiniGame {
 	private static Color fgColor = new Color(153, 51, 204);
 	private static Color bgColor = new Color(225, 194, 240);
 
-	private static final double gravity = 0.05;
+	private static final double gravity = 0.06;
 
 	private double kc = 1.0;
 	private Path2D helicopter;

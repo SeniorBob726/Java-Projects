@@ -15,8 +15,6 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private boolean wKeyDown = false, aKeyDown = false, sKeyDown = false, dKeyDown = false;
 	private boolean spacebarDown = false;
 
-	private int kp = 0;
-	private final int[] kc = {KeyEvent.VK_UP, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_B, KeyEvent.VK_A};
 	private long startTime = 0;
 	private long pauseTime = 0;
 	private boolean gameActive = false;
@@ -341,5 +339,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		}
 	}
 
+	private int kp = 0;
+	private final int[] kc = {KeyEvent.VK_UP, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_B, KeyEvent.VK_A};
 	public void k(){for(MiniGame g:games){g.k();}}
 }
