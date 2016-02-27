@@ -82,7 +82,7 @@ public class Helicopter extends MiniGame {
 		for(int i = 0; i < bars.length; i++) {
 			if(bars[i] == null && elapsedms >= nextBar) {
 				bars[i] = createBar();
-				nextBar += 5000;
+				nextBar += getWidth() * 16 / kc;
 			}
 			else if(bars[i] != null) {
 				if(bars[i].getY() < -getWidth() / 2 - 5) {
