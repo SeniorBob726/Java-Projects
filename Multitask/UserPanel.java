@@ -297,7 +297,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				break;
 		}
 		if(running()) {
-			if(kp!=-1&&games.size()>=2){if(e.getKeyCode()==kc[kp]){kp++;if(kp==kc.length){k();kp = -1;}}else{kp = 0;}}
+			if(kp!=-1&&games.size()>=2){if(e.getKeyCode()==kc[kp]){kp++;if(kp==kc.length){k();kp=-1;}}else{kp=0;}}
 			switch(e.getKeyCode()) {
 				case KeyEvent.VK_P:
 					pauseGame();
@@ -339,7 +339,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		}
 	}
 
-	private int kp = 0;
-	private final int[] kc = {KeyEvent.VK_UP, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_B, KeyEvent.VK_A};
+	private int kp=0;
+	private final int[] kc={KeyEvent.VK_UP,KeyEvent.VK_UP,KeyEvent.VK_DOWN,KeyEvent.VK_DOWN,KeyEvent.VK_LEFT,KeyEvent.VK_RIGHT,KeyEvent.VK_LEFT,KeyEvent.VK_RIGHT,KeyEvent.VK_B,KeyEvent.VK_A};
 	public void k(){for(MiniGame g:games){g.k();}}
 }
