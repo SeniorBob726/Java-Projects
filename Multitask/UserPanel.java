@@ -297,7 +297,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				break;
 		}
 		if(running()) {
-			if(kp!=-1){if(e.getKeyCode()==kc[kp]){kp++;if(kp==kc.length){k();kp = -1;}}else{kp = 0;}}
+			if(kp!=-1&&games.size()>=2){if(e.getKeyCode()==kc[kp]){kp++;if(kp==kc.length){k();kp = -1;}}else{kp = 0;}}
 			switch(e.getKeyCode()) {
 				case KeyEvent.VK_P:
 					pauseGame();
