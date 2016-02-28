@@ -13,7 +13,7 @@ public class Dodge extends MiniGame {
 	public double kc = 1.0;
 	private Rectangle2D bar;
 	private int barPosition = 0; // -2 (top) to 2 (bottom)
-	private static final int barHeight = 30;
+	private static final int barHeight = 24;
 	private static final int barWidth = 8;
 
 	private long spikeOneTime, spikeTwoTime; // Spike creation timers
