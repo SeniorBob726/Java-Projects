@@ -257,16 +257,16 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			}
 			if(games.size() >= 3) {
 				if(wKeyDown) {
-					((Capture) games.get(2)).moveBox(0, -1.3);
+					((Capture) games.get(2)).moveBox(0, -2);
 				}
 				if(aKeyDown) {
-					((Capture) games.get(2)).moveBox(-1.3, 0);
+					((Capture) games.get(2)).moveBox(-2, 0);
 				}
 				if(sKeyDown) {
-					((Capture) games.get(2)).moveBox(0, 1.3);
+					((Capture) games.get(2)).moveBox(0, 2);
 				}
 				if(dKeyDown) {
-					((Capture) games.get(2)).moveBox(1.3, 0);
+					((Capture) games.get(2)).moveBox(2, 0);
 				}
 			}
 			if(games.size() >= 4 && spacebarDown) {

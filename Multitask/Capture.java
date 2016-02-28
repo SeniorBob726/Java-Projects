@@ -13,7 +13,7 @@ public class Capture extends MiniGame {
 	private double kc = 1.0;
 	private Rectangle2D box;
 	private Point2D boxPosition;
-	private static final int boxSide = 32;
+	private static final int boxSide = 16;
 
 	private Square[] squares; // Contains active squares
 	private long nextSquare;
