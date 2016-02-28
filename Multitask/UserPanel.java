@@ -16,6 +16,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private boolean wKeyDown = false, aKeyDown = false, sKeyDown = false, dKeyDown = false;
 	private boolean spacebarDown = false;
 
+	private long instructionDelay = 0;
 	private boolean gameInstructions = false;
 	private String[] instructions = {"Use the left and right arrow keys to balance the ball on the bar.", "Use the up and down arrow keys to avoid the spikes.", "Use the WASD keys to get all the squares before they disappear.", "Use the spacebar to avoid hitting the bars."};
 
@@ -224,12 +225,14 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	public void actionPerformed(ActionEvent e) {
 		if(gameActive) {
 			long elapsedns = System.nanoTime() - startTime;
-			points = (int) (elapsedns * Math.pow(10, -9)); // Points = seconds from start
+			long elapsedms = (long) (elapsedns * Math.pow(10, -6));
+			points = (int) (elapsedms / 1000); // Points = seconds from start
 			if(points == 15 && games.size() == 1) {
 				games.add(new Dodge());
 				constructLayout();
 				if(kp==-1){games.get(1).k();};
 				gameInstructions = true;
+				instructionDelay = System.nanoTime();
 				pauseGame();
 			}
 			else if(points == 40 && games.size() == 2) {
@@ -237,6 +240,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				constructLayout();
 				if(kp==-1){games.get(2).k();};
 				gameInstructions = true;
+				instructionDelay = System.nanoTime();
 				pauseGame();
 			}
 			else if(points == 80 && games.size() == 3) {
@@ -244,10 +248,10 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				constructLayout();
 				if(kp==-1){games.get(3).k();};
 				gameInstructions = true;
+				instructionDelay = System.nanoTime();
 				pauseGame();
 			}
 
-			long elapsedms = (long) (elapsedns * Math.pow(10, -6));
 			for(MiniGame game : games) { // Polymorphism
 				game.update(elapsedms);
 				if(game.gameOver()) {
@@ -329,8 +333,10 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				break;
 		}
 		if(gameInstructions) {
-			gameInstructions = false;
-			startGame();
+			if((System.nanoTime() - instructionDelay) * Math.pow(10, -9) >= 2) { // Wait two seconds for key input to dismiss instructions
+				gameInstructions = false;
+				startGame();
+			}
 		}
 		if(running()) {
 			if(kp!=-1&&games.size()>=2){if(e.getKeyCode()==kc[kp]){kp++;if(kp==kc.length){k();kp=-1;}}else{kp=0;}}
