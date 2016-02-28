@@ -15,13 +15,13 @@ public class Capture extends MiniGame {
 	private double kc = 1.0;
 	private Rectangle2D box;
 	private Point2D boxPosition;
-	private static final int boxSide = 16;
+	private static final int boxSide = 20;
 
 	private Square[] squares; // Contains active squares
 	private long nextSquare;
 
 	public Capture() {
-		font = new Font("Verdana", Font.BOLD, 14);
+		font = new Font("Verdana", Font.BOLD, 15);
 		fontMetrics = this.getFontMetrics(font);
 
 		// Store base graphics
