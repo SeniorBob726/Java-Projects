@@ -5,6 +5,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.AffineTransform;
 
 public class Capture extends MiniGame {
+	private Font font;
 	private FontMetrics fontMetrics;
 	private AffineTransform at;
 	private static Color fgColor = new Color(0, 153, 0);
@@ -18,8 +19,9 @@ public class Capture extends MiniGame {
 	private Square[] squares; // Contains active squares
 	private long nextSquare;
 
-	public Capture(FontMetrics fm) {
-		fontMetrics = fm;
+	public Capture() {
+		font = new Font("Verdana", Font.PLAIN, 14);
+		fontMetrics = this.getFontMetrics(font);
 
 		// Store base graphics
 		box = new Rectangle2D.Double(-boxSide / 2, -boxSide / 2, boxSide, boxSide);
@@ -114,6 +116,7 @@ public class Capture extends MiniGame {
 		box.setFrame(-boxSide / 2 + boxPosition.getX(), -boxSide / 2 + boxPosition.getY(), boxSide, boxSide);
 		g2d.fill(box);
 		g2d.setColor(Color.BLACK);
+		g2d.setFont(font);
 		g2d.setStroke(new BasicStroke(3));
 		for(Square square : squares) {
 			if(square != null) {

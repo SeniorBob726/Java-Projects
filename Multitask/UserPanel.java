@@ -272,7 +272,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				pauseGame();
 			}
 			else if(points == 40 && games.size() == 2) {
-				games.add(new Capture(fontMetrics));
+				games.add(new Capture());
 				constructLayout();
 				if(kp==-1){games.get(2).k();};
 				gameInstructions = true;
