@@ -247,14 +247,16 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		super.paintChildren(g);
 
 		if(gameInstructions) {
-			g.setFont(font);
-			g.setColor(new Color(255, 255, 255, (int) (0.7 * 255)));
-			g.fillRect(getWidth() / 4, 30, getWidth() / 2, getHeight() / 3);
+			Graphics2D g2d = (Graphics2D) g.create();
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2d.setFont(font);
+			g2d.setColor(new Color(255, 255, 255, (int) (0.7 * 255)));
+			g2d.fillRect(getWidth() / 4, 30, getWidth() / 2, getHeight() / 3);
 
-			g.setColor(Color.BLACK);
+			g2d.setColor(Color.BLACK);
 			String instruction = instructions[games.size() - 1];
-			int height = drawWrappingText(g, instruction, getWidth() / 4 + 15, 45 + fontMetrics.getAscent(), getWidth() / 2 - 30);
-			drawWrappingText(g, "Any key to continue", getWidth() / 4 + 15, 15 + getHeight() / 3, getWidth() / 2 - 30);
+			int height = drawWrappingText(g2d, instruction, getWidth() / 4 + 15, 45 + fontMetrics.getAscent(), getWidth() / 2 - 30);
+			drawWrappingText(g2d, "Any key to continue", getWidth() / 4 + 15, 15 + getHeight() / 3, getWidth() / 2 - 30);
 		}
 	}
 
