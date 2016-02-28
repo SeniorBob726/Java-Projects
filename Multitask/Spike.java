@@ -14,7 +14,7 @@ public class Spike extends Path2D.Double {
 
 	public Spike(double x, double y, double dir, double sp, double r) {
 		position = new Point2D.Double(x, y);
-		direction = dir;
+		direction = dir % 360;
 		speed = sp;
 		radius = r;
 
@@ -28,8 +28,12 @@ public class Spike extends Path2D.Double {
 		this(x, y, dir, sp, 8);
 	}
 
-	public double getSpeed() {
-		return speed;
+	public Point2D getPosition() {
+		return position;
+	}
+
+	public double getDirection() {
+		return direction;
 	}
 
 	public void draw(double x, double y) {
