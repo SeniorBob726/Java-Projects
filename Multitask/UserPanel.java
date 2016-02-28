@@ -27,7 +27,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private int highScore = 0;
 
 	public UserPanel(int w, int h) {
-		font = new Font("Courier", Font.PLAIN, 14);
+		font = new Font(this.getFont().getFamily(), Font.PLAIN, 16);
 		fontMetrics = this.getFontMetrics(font);
 
 		points = 0;
