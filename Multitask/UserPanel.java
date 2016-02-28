@@ -18,6 +18,9 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private long instructionDelay = 0;
 	private boolean gameInstructions = false;
 	private String[] instructions = {"Use the left and right arrow keys to balance the ball on the bar.", "Use the up and down arrow keys to avoid the spikes.", "Use the WASD keys to get all the squares before they disappear.", "Use the spacebar to avoid hitting the bars."};
+	private final String anyKeyToContinue = "ANY KEY TO CONTINUE";
+	private Font aktcFont;
+	private final int aktcWidth;
 
 	private long startTime = 0;
 	private long pauseTime = 0;
@@ -29,7 +32,9 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 	public UserPanel(int w, int h) {
 		font = new Font("Verdana", Font.PLAIN, 18);
+		aktcFont = new Font("Verdana", Font.PLAIN, 12);
 		fontMetrics = this.getFontMetrics(font);
+		aktcWidth = this.getFontMetrics(aktcFont).stringWidth(anyKeyToContinue);
 
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
@@ -242,12 +247,14 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2d.setFont(font);
 			g2d.setColor(new Color(255, 255, 255, (int) (0.7 * 255)));
-			g2d.fillRect(getWidth() / 4, 30, getWidth() / 2, getHeight() / 3);
+			int boxWidth = Math.max(getWidth() / 2, aktcWidth + 30);
+			g2d.fillRect((getWidth() - boxWidth) / 2, 30, boxWidth, getHeight() / 3);
 
 			g2d.setColor(Color.BLACK);
 			String instruction = instructions[games.size() - 1];
-			int height = drawWrappingText(g2d, instruction, getWidth() / 4 + 15, 45 + fontMetrics.getAscent(), getWidth() / 2 - 30);
-			drawWrappingText(g2d, "Any key to continue", getWidth() / 4 + 15, 15 + getHeight() / 3, getWidth() / 2 - 30);
+			int height = drawWrappingText(g2d, instruction, (getWidth() - boxWidth) / 2 + 15, 45 + fontMetrics.getAscent(), boxWidth - 30);
+			g2d.setFont(aktcFont);
+			g2d.drawString(anyKeyToContinue, (getWidth() - aktcWidth) / 2, 15 + getHeight() / 3);
 		}
 	}
 
