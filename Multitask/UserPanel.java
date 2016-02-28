@@ -37,6 +37,8 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		height = h;
 
 		pointLabel = new JLabel(Integer.toString(points));
+		pointLabel.setFont(font);
+		pointLabel.setBorder(BorderFactory.createEmptyBorder(3, 5, 0, 5));
 		pointLabel.setForeground(Color.WHITE);
 		pointLabel.setBackground(new Color(50, 50, 50));
 		pointLabel.setOpaque(true);
