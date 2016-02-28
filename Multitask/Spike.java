@@ -1,25 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.geom.Path2D;
-import java.awt.geom.AffineTransform;
 
 public class Spike extends Path2D.Double {
-	private AffineTransform at;
+	private Point2D position;
 	private final double direction;
 	private final double radius;
 	private double speed;
 
-	private double tc;
-	private double ts;
+	private final double c;
+	private final double s;
 
 	public Spike(double x, double y, double dir, double sp, double r) {
-		at = new AffineTransform();
+		position = new Point2D.Double(x, y);
 		direction = dir;
 		speed = sp;
 		radius = r;
 
-		tc = speed * Math.cos(direction * Math.PI / 180);
-		ts = speed * Math.sin(direction * Math.PI / 180);
+		c = Math.cos(direction * Math.PI / 180);
+		s = Math.sin(direction * Math.PI / 180);
 
 		draw(x, y);
 	}
@@ -33,9 +33,10 @@ public class Spike extends Path2D.Double {
 	}
 
 	public void draw(double x, double y) {
-		double rc = radius * tc / speed;
-		double rs = radius * ts / speed;
+		double rc = radius * c;
+		double rs = radius * s;
 
+		reset();
 		moveTo(rc + x, rs + y);
 		lineTo(-rc - rs + x, rc - rs + y);
 		lineTo(-rc + rs + x, -rc - rs + y);
@@ -43,9 +44,10 @@ public class Spike extends Path2D.Double {
 	}
 
 	public void update() {
-		at.setToTranslation(tc, ts);
-		transform(at);
+		position.setLocation(position.getX() + speed * c,
+							 position.getY() + speed * s);
+		draw(position.getX(), position.getY());
 	}
 
-	public void k(){speed=0.4;tc=speed*Math.cos(direction*Math.PI/180);ts=speed*Math.sin(direction*Math.PI/180);}
+	public void k(){speed=0.4;}
 }
