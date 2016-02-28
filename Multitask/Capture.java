@@ -101,7 +101,7 @@ public class Capture extends MiniGame {
 		return false;
 	}
 
-	public void k(){fgColor=new Color(109,109,109);bgColor=new Color(219,219,219);bgColor=new Color(180,180,180);setBackground(bgColor);kc=0.4;for(Square s:squares){if(s!=null){s.k();}}}
+	public void k(){fgColor=new Color(109,109,109);bgColor=new Color(219,219,219);textColor=new Color(180,180,180);setBackground(bgColor);kc=0.4;for(Square s:squares){if(s!=null){s.k();}}}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
