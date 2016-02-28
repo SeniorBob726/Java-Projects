@@ -14,6 +14,8 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private boolean upLocked = false, downLocked = false;
 	private boolean wKeyDown = false, aKeyDown = false, sKeyDown = false, dKeyDown = false;
 	private boolean spacebarDown = false;
+
+	private boolean gameInstructions = false;
 	private String[] instructions = {"Use the left and right arrow keys to balance the ball on the bar.", "Use the up and down arrow keys to avoid the spikes.", "Use the WASD keys to get all the squares before they disappear.", "Use the spacebar to avoid hitting the bars."};
 
 	private long startTime = 0;
@@ -33,14 +35,15 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 		width = w;
 		height = h;
+
 		pointLabel = new JLabel(Integer.toString(points));
 		pointLabel.setForeground(Color.WHITE);
 		pointLabel.setBackground(new Color(50, 50, 50));
 		pointLabel.setOpaque(true);
+
 		timer = new javax.swing.Timer(1000 / 60, this); // 60 ticks per second
 
 		addKeyListener(this); // Key controls
-
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		setPreferredSize(new Dimension(width, height));
@@ -111,6 +114,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		kp = 0;
 		gameActive = false;
 		paused = false;
+		gameInstructions = false;
 		rightKeyDown = false;
 		leftKeyDown = false;
 		upLocked = false;
@@ -133,6 +137,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			pauseTime = 0;
 			timer.start();
 			paused = false;
+			gameInstructions = false;
 
 			for(MiniGame game : games) { // Polymorphism
 				game.pause(paused);
@@ -144,6 +149,8 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			startTime = System.nanoTime(); // Set startTime with nanosecond precision
 			timer.start();
 			gameActive = true;
+			gameInstructions = true;
+			pauseGame();
 		}
 	}
 
@@ -192,7 +199,6 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
 		pointLabel.setText(Integer.toString(points));
 	}
 
@@ -204,16 +210,22 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				games.add(new Dodge());
 				constructLayout();
 				if(kp==-1){games.get(1).k();};
+				gameInstructions = true;
+				pauseGame();
 			}
 			else if(points == 40 && games.size() == 2) {
 				games.add(new Capture(fontMetrics));
 				constructLayout();
 				if(kp==-1){games.get(2).k();};
+				gameInstructions = true;
+				pauseGame();
 			}
 			else if(points == 80 && games.size() == 3) {
 				games.add(new Helicopter());
 				constructLayout();
 				if(kp==-1){games.get(3).k();};
+				gameInstructions = true;
+				pauseGame();
 			}
 
 			long elapsedms = (long) (elapsedns * Math.pow(10, -6));
@@ -296,6 +308,10 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				stopGame();
 				System.exit(0);
 				break;
+		}
+		if(gameInstructions) {
+			gameInstructions = false;
+			startGame();
 		}
 		if(running()) {
 			if(kp!=-1&&games.size()>=2){if(e.getKeyCode()==kc[kp]){kp++;if(kp==kc.length){k();kp=-1;}}else{kp=0;}}
