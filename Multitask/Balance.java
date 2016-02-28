@@ -16,7 +16,7 @@ public class Balance extends MiniGame {
 	private double kc = 1.0;
 	private Rectangle2D bar;
 	private static final int barHeight = 12;
-	private static final int barWidth = 200;
+	private static final int barWidth = 220;
 
 	public Balance() {
 		// Store base graphics
