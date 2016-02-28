@@ -10,6 +10,7 @@ public class Capture extends MiniGame {
 	private AffineTransform at;
 	private static Color fgColor = new Color(0, 153, 0);
 	private static Color bgColor = new Color(192, 230, 192);
+	private static Color textColor = new Color(148, 191, 164);
 
 	private double kc = 1.0;
 	private Rectangle2D box;
@@ -20,7 +21,7 @@ public class Capture extends MiniGame {
 	private long nextSquare;
 
 	public Capture() {
-		font = new Font("Verdana", Font.PLAIN, 14);
+		font = new Font("Verdana", Font.BOLD, 14);
 		fontMetrics = this.getFontMetrics(font);
 
 		// Store base graphics
@@ -100,7 +101,7 @@ public class Capture extends MiniGame {
 		return false;
 	}
 
-	public void k(){fgColor=new Color(109,109,109);bgColor=new Color(219,219,219);setBackground(bgColor);kc=0.4;for(Square s:squares){if(s!=null){s.k();}}}
+	public void k(){fgColor=new Color(109,109,109);bgColor=new Color(219,219,219);bgColor=new Color(180,180,180);setBackground(bgColor);kc=0.4;for(Square s:squares){if(s!=null){s.k();}}}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -115,17 +116,18 @@ public class Capture extends MiniGame {
 		g2d.setColor(fgColor);
 		box.setFrame(-boxSide / 2 + boxPosition.getX(), -boxSide / 2 + boxPosition.getY(), boxSide, boxSide);
 		g2d.fill(box);
-		g2d.setColor(Color.BLACK);
 		g2d.setFont(font);
-		g2d.setStroke(new BasicStroke(3));
+		g2d.setStroke(new BasicStroke(2));
 		for(Square square : squares) {
 			if(square != null) {
+				g2d.setColor(Color.BLACK);
 				g2d.draw(square.getBox());
 				String num = Integer.toString(square.getCountdown());
 				Rectangle2D bounds = fontMetrics.getStringBounds(num, g2d);
 				double w = square.getBox().getWidth() / 2;
-				int x = (int) (square.getBox().getX() + w + bounds.getX() - bounds.getWidth() / 2 + 2);
-				int y = (int) (square.getBox().getY() + w - bounds.getY() - bounds.getHeight() / 2 - 2);
+				int x = (int) (square.getBox().getX() + w + bounds.getX() - bounds.getWidth() / 2);
+				int y = (int) (square.getBox().getY() + w - bounds.getY() - bounds.getHeight() / 2);
+				g2d.setColor(textColor);
 				g2d.drawString(num, x, y);
 			}
 		}
