@@ -49,6 +49,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		setPreferredSize(new Dimension(width, height));
+		setBackground(new Color(153, 153, 153));
 
 		resetGame();
 	}
@@ -62,6 +63,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
+		c.insets = new Insets(0, 0, 2, 0);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridwidth = 2;
 		c.gridx = 0;
@@ -70,6 +72,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		c.gridwidth = 1;
 
 		// Single cell
+		c.insets = new Insets(0, 0, 0, 0);
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.weighty = 1;
@@ -78,16 +81,19 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 		for(int i = 0; i < games.size(); i++) {
 			if(games.size() == 2) { // Two cells - side by side, equal sizing
+				c.insets = new Insets(0, i, 0, 1 - i);
 				c.gridx = i;
 				c.gridy = 1;
 			}
 			else if(games.size() == 3) { // Three cells - 2x2 grid, first cell takes two rows
 				if(i == 0) {
+					c.insets = new Insets(0, 0, 0, 1);
 					c.gridheight = 2;
 					c.gridx = 0;
 					c.gridy = 1;
 				}
 				else {
+					c.insets = new Insets(i - 1, 1, 2 - i, 0);
 					c.gridheight = 1;
 					c.gridx = 1;
 					c.gridy = i;
@@ -95,9 +101,11 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			}
 			else if(games.size() == 4) { // Four cells - 2x2 grid, equal sizing
 				if(i == 0 || i == 3) {
+					c.insets = new Insets(i / 3, 0, 1 - i / 3, 1);
 					c.gridx = 0;
 				}
 				else {
+					c.insets = new Insets(i - 1, 1, 2 - i, 0);
 					c.gridx = 1;
 				}
 				c.gridy = (i <= 1 ? 1 : 2);
