@@ -34,9 +34,9 @@ public class Capture extends MiniGame {
 	}
 
 	public Square createSquare() {
-		double x = (Math.random() - 0.5) * (getWidth() - boxSide);
-		double y = (Math.random() - 0.5) * (getHeight() - boxSide);
-		return new Square(x, y, boxSide, (int) (1000 / kc));
+		double x = (Math.random() - 0.5) * (getWidth() - boxSide * 2);
+		double y = (Math.random() - 0.5) * (getHeight() - boxSide * 2);
+		return new Square(x, y, boxSide * 2, (int) (1000 / kc));
 	}
 
 	public void reset() {
