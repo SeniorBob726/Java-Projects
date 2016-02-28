@@ -49,8 +49,8 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		pointLabel = new JLabel(Integer.toString(points));
 		pointLabel.setFont(font);
 		pointLabel.setBorder(BorderFactory.createEmptyBorder(3, 5, 0, 5));
-		pointLabel.setForeground(Color.WHITE);
-		pointLabel.setBackground(new Color(50, 50, 50));
+		pointLabel.setForeground(new Color(102, 102, 102));
+		pointLabel.setBackground(new Color(216, 216, 216));
 		pointLabel.setOpaque(true);
 
 		timer = new javax.swing.Timer(1000 / 60, this); // 60 ticks per second
