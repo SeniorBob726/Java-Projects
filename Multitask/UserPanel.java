@@ -217,9 +217,45 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		return "Original game written in ActionScript by IcyLime.\nJava port by Taha.";
 	}
 
+	public int drawWrappingText(Graphics g, String text, int x, int y, int width) {
+		int lineHeight = fontMetrics.getHeight();
+		int spaceWidth = fontMetrics.stringWidth(" ");
+		int xOffset = 0;
+		int yOffset = 0;
+		String[] words = text.split(" ");
+
+		for(String word : words) {
+			int wordWidth = fontMetrics.stringWidth(word);
+			if(xOffset + wordWidth >= width) {
+				yOffset += lineHeight;
+				xOffset = 0;
+			}
+
+			g.drawString(word, x + xOffset, y + yOffset);
+			xOffset += wordWidth + spaceWidth;
+		}
+
+		return lineHeight + yOffset;
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		pointLabel.setText(Integer.toString(points));
+	}
+
+	public void paintChildren(Graphics g) {
+		super.paintChildren(g);
+
+		if(gameInstructions) {
+			g.setFont(font);
+			g.setColor(new Color(255, 255, 255, (int) (0.7 * 255)));
+			g.fillRect(getWidth() / 4, 30, getWidth() / 2, getHeight() / 3);
+
+			g.setColor(Color.BLACK);
+			String instruction = instructions[games.size() - 1];
+			int height = drawWrappingText(g, instruction, getWidth() / 4 + 15, 45 + fontMetrics.getAscent(), getWidth() / 2 - 30);
+			drawWrappingText(g, "Any key to continue", getWidth() / 4 + 15, 15 + getHeight() / 3, getWidth() / 2 - 30);
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
