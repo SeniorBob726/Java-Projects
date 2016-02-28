@@ -121,8 +121,8 @@ public class Capture extends MiniGame {
 				String num = Integer.toString(square.getCountdown());
 				Rectangle2D bounds = fontMetrics.getStringBounds(num, g2d);
 				double w = square.getBox().getWidth() / 2;
-				int x = (int) (square.getBox().getX() + w + bounds.getX() - bounds.getWidth() / 2);
-				int y = (int) (square.getBox().getY() + w - bounds.getY() - bounds.getHeight() / 2);
+				int x = (int) (square.getBox().getX() + w + bounds.getX() - bounds.getWidth() / 2 + 2);
+				int y = (int) (square.getBox().getY() + w - bounds.getY() - bounds.getHeight() / 2 - 2);
 				g2d.drawString(num, x, y);
 			}
 		}
