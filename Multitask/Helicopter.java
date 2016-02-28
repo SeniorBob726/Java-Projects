@@ -34,7 +34,7 @@ public class Helicopter extends MiniGame {
 
 	public Bar createBar() {
 		double x = getWidth() / 2;
-		double y = (Math.random() - 0.5) * (getHeight() - 50) - 20;
+		double y = (Math.random() - 0.5) * (getHeight() - 40) - 20;
 		return new Bar(x, y, 1.0 * kc);
 	}
 
@@ -72,8 +72,8 @@ public class Helicopter extends MiniGame {
 		helicopterVelocity += gravity;
 		helicopterVelocity = clamp(helicopterVelocity, -2, 2);
 
-		double topHeight = -getHeight() / 2 + 15;
-		double bottomHeight = getHeight() / 2 - 15;
+		double topHeight = -getHeight() / 2 + 10;
+		double bottomHeight = getHeight() / 2 - 10;
 		if(helicopterPosition < topHeight || helicopterPosition >= bottomHeight) {
 			helicopterPosition = clamp(helicopterPosition, topHeight, bottomHeight);
 			helicopterVelocity = 0;
@@ -85,7 +85,7 @@ public class Helicopter extends MiniGame {
 				nextBar += getWidth() * 16 / kc;
 			}
 			else if(bars[i] != null) {
-				if(bars[i].getY() < -getWidth() / 2 - 5) {
+				if(bars[i].getY() < -getWidth() / 2) {
 					bars[i] = null;
 				}
 				else {
@@ -130,8 +130,6 @@ public class Helicopter extends MiniGame {
 		drawHelicopter();
 		g2d.fill(helicopter);
 		g2d.setColor(Color.BLACK);
-		g2d.fillRect(-centerX, -centerY - 5, getWidth(), 10);
-		g2d.fillRect(-centerX, centerY - 5, getWidth(), 10);
 		for(Bar bar : bars) {
 			if(bar != null) {
 				g2d.fill(bar);
