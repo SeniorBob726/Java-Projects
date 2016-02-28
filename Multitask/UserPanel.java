@@ -1,4 +1,3 @@
-import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -29,15 +28,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private int highScore = 0;
 
 	public UserPanel(int w, int h) {
-		try {
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Asap-Regular.otf")));
-			font = new Font("Asap", Font.PLAIN, 18);
-		}
-		catch (IOException|FontFormatException e) {
-			System.out.println("Could not load font.");
-			font = new Font(this.getFont().getFamily(), Font.PLAIN, 18);
-		}
+		font = new Font("Verdana", Font.PLAIN, 18);
 		fontMetrics = this.getFontMetrics(font);
 
 		points = 0;
