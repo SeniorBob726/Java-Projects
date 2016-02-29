@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class UserPanel extends JPanel implements ActionListener, KeyListener, ArcadeFriendly {
-	private int width, height;
 	private JLabel pointLabel;
 	private javax.swing.Timer timer; // Game clock
 	private Font font;
@@ -30,7 +29,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private int points;
 	private int highScore = 0;
 
-	public UserPanel(int w, int h) {
+	public UserPanel(int width, int height) {
 		font = new Font("Verdana", Font.PLAIN, 18);
 		aktcFont = new Font("Verdana", Font.PLAIN, 12);
 		fontMetrics = this.getFontMetrics(font);
@@ -38,9 +37,6 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 		points = 0;
 		games = new ArrayList<MiniGame>(4);
-
-		width = w;
-		height = h;
 
 		pointLabel = new JLabel(Integer.toString(points));
 		pointLabel.setFont(font);
