@@ -140,6 +140,7 @@ public class Dodge extends MiniGame {
 		g2d.setColor(fgColor);
 		bar.setFrame(-barWidth / 2, -barHeight / 2 + barHeight * barPosition, barWidth, barHeight);
 		g2d.fill(bar);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		for(Spike spike : spikes) {
 			if(spike != null) {
 				double opacity = 255;
@@ -153,6 +154,7 @@ public class Dodge extends MiniGame {
 				g2d.fill(spike);
 			}
 		}
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 		g2d.setColor(Color.BLACK);
 		g2d.draw(barCross);
 		g2d.setStroke(new BasicStroke(2));

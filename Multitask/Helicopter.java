@@ -126,9 +126,12 @@ public class Helicopter extends MiniGame {
 
 		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setColor(fgColor);
 		drawHelicopter();
 		g2d.fill(helicopter);
+
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 		g2d.setColor(Color.BLACK);
 		for(Bar bar : bars) {
 			if(bar != null) {

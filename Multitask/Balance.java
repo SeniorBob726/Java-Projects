@@ -91,6 +91,7 @@ public class Balance extends MiniGame {
 		int centerY = getHeight() / 2;
 
 		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2d.translate(centerX, centerY); // Set Graphics2D transform origin to center of panel
 		g2d.rotate(Math.toRadians(angle), 0, 0);
