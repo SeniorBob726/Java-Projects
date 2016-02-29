@@ -16,6 +16,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 	private long instructionDelay = 0;
 	private boolean gameInstructions = false;
+	private int instructionY = 0;
 	private String[] instructions = {"Use the left and right arrow keys to balance the ball on the bar.", "Use the up and down arrow keys to avoid the spikes.", "Use the WASD keys to get all the squares before they disappear.", "Use the spacebar to avoid hitting the bars."};
 	private final String anyKeyToContinue = "ANY KEY TO CONTINUE";
 	private Font aktcFont;
@@ -160,7 +161,10 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			startTime = System.nanoTime(); // Set startTime with nanosecond precision
 			timer.start();
 			gameActive = true;
+
 			gameInstructions = true;
+			instructionDelay = System.nanoTime();
+			instructionY = 100;
 			pauseGame();
 		}
 	}
@@ -216,7 +220,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		return "Original game written in ActionScript by IcyLime.\nJava port by Taha.";
 	}
 
-	public int drawWrappingText(Graphics g, String text, int x, int y, int width) {
+	public void drawWrappingText(Graphics g, String text, int x, int y, int width) {
 		int lineHeight = fontMetrics.getHeight();
 		int spaceWidth = fontMetrics.stringWidth(" ");
 		int xOffset = 0;
@@ -233,8 +237,6 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			g.drawString(word, x + xOffset, y + yOffset);
 			xOffset += wordWidth + spaceWidth;
 		}
-
-		return lineHeight + yOffset;
 	}
 
 	public void paintComponent(Graphics g) {
@@ -249,15 +251,17 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			Graphics2D g2d = (Graphics2D) g.create();
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2d.setFont(font);
-			g2d.setColor(new Color(255, 255, 255, (int) (0.7 * 255)));
+			g2d.setColor(new Color(255, 255, 255, (int) (0.7 * 285 - instructionY)));
 			int boxWidth = Math.max(getWidth() / 2, aktcWidth + 30);
-			g2d.fillRect((getWidth() - boxWidth) / 2, 30, boxWidth, getHeight() / 3);
+			g2d.fillRect((getWidth() - boxWidth) / 2, instructionY, boxWidth, getHeight() / 3);
 
-			g2d.setColor(Color.BLACK);
-			String instruction = instructions[games.size() - 1];
-			int height = drawWrappingText(g2d, instruction, (getWidth() - boxWidth) / 2 + 15, 45 + fontMetrics.getAscent(), boxWidth - 30);
-			g2d.setFont(aktcFont);
-			g2d.drawString(anyKeyToContinue, (getWidth() - aktcWidth) / 2, 15 + getHeight() / 3);
+			if(instructionY == 30) {
+				g2d.setColor(Color.BLACK);
+				String instruction = instructions[games.size() - 1];
+				drawWrappingText(g2d, instruction, (getWidth() - boxWidth) / 2 + 15, 45 + fontMetrics.getAscent(), boxWidth - 30);
+				g2d.setFont(aktcFont);
+				g2d.drawString(anyKeyToContinue, (getWidth() - aktcWidth) / 2, 15 + getHeight() / 3);
+			}
 		}
 	}
 
@@ -325,6 +329,9 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				((Helicopter) games.get(3)).increaseLift();
 			}
 		}
+		if(instructionY > 30) {
+			instructionY--;
+		}
 		repaint();
 	}
 
@@ -370,11 +377,9 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 				System.exit(0);
 				break;
 		}
-		if(gameInstructions) {
-			if((System.nanoTime() - instructionDelay) * Math.pow(10, -9) >= 2) { // Wait two seconds for key input to dismiss instructions
-				gameInstructions = false;
-				startGame();
-			}
+		if(gameInstructions && instructionY <= 30) { // Wait until animation has completed to allow dismissal
+			gameInstructions = false;
+			startGame();
 		}
 		if(running()) {
 			if(kp!=-1&&games.size()>=2){if(e.getKeyCode()==kc[kp]){kp++;if(kp==kc.length){k();kp=-1;}}else{kp=0;}}
