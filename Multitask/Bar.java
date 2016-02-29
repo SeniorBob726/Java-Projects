@@ -8,9 +8,9 @@ public class Bar extends Rectangle2D.Double {
 	private static final double width = 5;
 	private static double speed = 1.0;
 
-	public Bar(double x, double y, double sp) {
+	public Bar(double x, double y, double speed) {
 		super(x, y, width, length);
-		speed = sp;
+		this.speed = speed;
 	}
 
 	public void update() {

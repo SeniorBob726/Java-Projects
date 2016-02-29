@@ -12,11 +12,11 @@ public class Spike extends Path2D.Double {
 	private final double c;
 	private final double s;
 
-	public Spike(double x, double y, double dir, double sp, double r) {
-		position = new Point2D.Double(x, y);
-		direction = dir % 360;
-		speed = sp;
-		radius = r;
+	public Spike(double x, double y, double direction, double speed, double radius) {
+		this.position = new Point2D.Double(x, y);
+		this.direction = direction % 360;
+		this.speed = speed;
+		this.radius = radius;
 
 		c = Math.cos(direction * Math.PI / 180);
 		s = Math.sin(direction * Math.PI / 180);
@@ -24,8 +24,8 @@ public class Spike extends Path2D.Double {
 		draw(x, y);
 	}
 
-	public Spike(double x, double y, double dir, double sp) {
-		this(x, y, dir, sp, 8);
+	public Spike(double x, double y, double direction, double speed) {
+		this(x, y, direction, speed, 8);
 	}
 
 	public Point2D getPosition() {
