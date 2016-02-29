@@ -16,8 +16,8 @@ public class Dodge extends MiniGame {
 	private static final int barHeight = 24;
 	private static final int barWidth = 8;
 
-	private long spikeOneTime, spikeTwoTime; // Spike creation timers
 	private Spike[] spikes; // Contains active spikes
+	private long[] spikeTimes; // Spike creation times
 
 	public Dodge() {
 		// Store base graphics
@@ -77,22 +77,25 @@ public class Dodge extends MiniGame {
 		barPosition = 0;
 
 		spikes = new Spike[2];
-		spikeOneTime = (long) (15.5 * 1000.0);
-		spikeTwoTime = (long) (18 * 1000.0);
+		spikeTimes = new long[2];
+		spikeTimes[0] = (long) (15.5 * 1000.0);
+		spikeTimes[1] = (long) (18 * 1000.0);
 	}
 
 	public void update(long elapsedms) {
-		if(elapsedms >= spikeOneTime) {
-			spikes[0] = createSpike();
-			spikeOneTime += 16 * getWidth() / kc;
-		}
-		if(elapsedms >= spikeTwoTime) {
-			spikes[1] = createSpike();
-			spikeTwoTime += 16 * getWidth() / kc;
-		}
-		for(Spike spike : spikes) {
-			if(spike != null) {
-				spike.update();
+		for(int i = 0; i < spikes.length; i++) {
+			if(spikes[i] != null) {
+				double xBound = spikes[i].getDirection() == 0 ? getWidth() * 0.5 - 20 : -getWidth() * 0.5 + 20;
+				if(spikes[i].getPosition().getX() > xBound) {
+					spikes[i] = null;
+					spikeTimes[i] = elapsedms + (long) (Math.random() * 2000 / kc);
+				}
+				else {
+					spikes[i].update();
+				}
+			}
+			else if(elapsedms >= spikeTimes[i]) {
+				spikes[i] = createSpike();
 			}
 		}
 	}
