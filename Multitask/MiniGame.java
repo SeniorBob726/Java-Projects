@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 public abstract class MiniGame extends JPanel {
+	private static double k = 1.0;
 	private static double gameSpeed = 1.0;
 
 	public static void setGameSpeed(double speed) {
@@ -11,11 +12,13 @@ public abstract class MiniGame extends JPanel {
 		return gameSpeed;
 	}
 
+	public static double getK(){return k;}
+	public static void setK(double ks){k=ks;}
+
 	public abstract void reset();
 	public abstract void update(long elapsedms);
 	public abstract void pause(boolean paused);
 	public abstract boolean gameOver();
-
 	public abstract void k();
 
 	public double clamp(double value, double min, double max) {

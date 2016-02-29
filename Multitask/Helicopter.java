@@ -11,7 +11,6 @@ public class Helicopter extends MiniGame {
 
 	private static final double gravity = 0.06;
 
-	private double kc = 1.0;
 	private Path2D helicopter;
 	private double helicopterPosition = 0;
 	private double helicopterVelocity = 0;
@@ -35,7 +34,7 @@ public class Helicopter extends MiniGame {
 	public Bar createBar() {
 		double x = getWidth() / 2;
 		double y = (Math.random() - 0.5) * (getHeight() - 40) - 20;
-		return new Bar(x, y, 1.0 * kc);
+		return new Bar(x, y, 1.0 * MiniGame.getK());
 	}
 
 	public void reset() {
@@ -43,7 +42,6 @@ public class Helicopter extends MiniGame {
 		fgColor = new Color(153, 51, 204);
 		bgColor = new Color(225, 194, 240);
 		setBackground(bgColor);
-		kc = 1.0;
 
 		helicopterPosition = 0;
 		helicopterVelocity = 0;
@@ -82,7 +80,7 @@ public class Helicopter extends MiniGame {
 		for(int i = 0; i < bars.length; i++) {
 			if(bars[i] == null && elapsedms >= nextBar) {
 				bars[i] = createBar();
-				nextBar += getWidth() * 16 / kc;
+				nextBar += getWidth() * 16 / MiniGame.getK();
 			}
 			else if(bars[i] != null) {
 				if(bars[i].getX() < -getWidth() / 2) {
@@ -114,7 +112,7 @@ public class Helicopter extends MiniGame {
 		return false;
 	}
 
-	public void k(){fgColor=new Color(84,84,84);bgColor=new Color(204,204,204);setBackground(bgColor);kc=0.4;}
+	public void k(){fgColor=new Color(84,84,84);bgColor=new Color(204,204,204);setBackground(bgColor);}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

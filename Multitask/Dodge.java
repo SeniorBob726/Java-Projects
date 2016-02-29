@@ -10,7 +10,6 @@ public class Dodge extends MiniGame {
 	private GeneralPath barFrame;
 	private GeneralPath barCross;
 
-	public double kc = 1.0;
 	private Rectangle2D bar;
 	private int barPosition = 0; // -2 (top) to 2 (bottom)
 	private static final int barHeight = 24;
@@ -65,7 +64,7 @@ public class Dodge extends MiniGame {
 			x *= -1;
 		}
 		int lane = (int) (Math.random() * 6 - 3.0);
-		return new Spike(x, lane * barHeight, direction, 1.0 * kc);
+		return new Spike(x, lane * barHeight, direction, 1.0 * MiniGame.getK());
 	}
 
 	public void reset() {
@@ -73,7 +72,6 @@ public class Dodge extends MiniGame {
 		fgColor = new Color(0, 51, 153);
 		bgColor = new Color(179, 194, 225);
 		setBackground(bgColor);
-		kc = 1.0;
 		barPosition = 0;
 
 		spikes = new Spike[2];
@@ -94,7 +92,7 @@ public class Dodge extends MiniGame {
 				}
 				if(outOfBounds) {
 					spikes[i] = null;
-					spikeTimes[i] = elapsedms + (long) (Math.random() * 2000 / kc);
+					spikeTimes[i] = elapsedms + (long) (Math.random() * 2000 / MiniGame.getK());
 				}
 				else {
 					spikes[i].update();
@@ -125,7 +123,7 @@ public class Dodge extends MiniGame {
 		return false;
 	}
 
-	public void k(){fgColor=new Color(48,48,48);bgColor=new Color(193,193,193);setBackground(bgColor);kc=0.4;for(Spike s:spikes){if(s!=null){s.k();}}}
+	public void k(){fgColor=new Color(48,48,48);bgColor=new Color(193,193,193);setBackground(bgColor);for(Spike s:spikes){if(s!=null){s.k();}}}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

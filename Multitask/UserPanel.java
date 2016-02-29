@@ -137,6 +137,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		points = 0;
 		kp = 0;
 		MiniGame.setGameSpeed(1.0);
+		MiniGame.setK(1.0);
 		gameActive = false;
 		paused = false;
 		gameInstructions = false;
@@ -423,5 +424,5 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 	private int kp=0;
 	private final int[] kc={KeyEvent.VK_UP,KeyEvent.VK_UP,KeyEvent.VK_DOWN,KeyEvent.VK_DOWN,KeyEvent.VK_LEFT,KeyEvent.VK_RIGHT,KeyEvent.VK_LEFT,KeyEvent.VK_RIGHT,KeyEvent.VK_B,KeyEvent.VK_A};
-	public void k(){for(MiniGame g:games){g.k();}}
+	public void k(){MiniGame.setK(0.4);for(MiniGame g:games){g.k();}}
 }
