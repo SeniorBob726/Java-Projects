@@ -185,6 +185,15 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			System.out.println("Pause - Game");
 			pauseTime = System.nanoTime();
 			timer.stop();
+			rightKeyDown = false;
+			leftKeyDown = false;
+			upLocked = false;
+			downLocked = false;
+			wKeyDown = false;
+			aKeyDown = false;
+			sKeyDown = false;
+			dKeyDown = false;
+			spacebarDown = false;
 			paused = true;
 
 			for(MiniGame game : games) { // Polymorphism
