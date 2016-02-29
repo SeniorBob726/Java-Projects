@@ -140,12 +140,20 @@ public class Dodge extends MiniGame {
 		g2d.setColor(fgColor);
 		bar.setFrame(-barWidth / 2, -barHeight / 2 + barHeight * barPosition, barWidth, barHeight);
 		g2d.fill(bar);
-		g2d.setColor(Color.BLACK);
 		for(Spike spike : spikes) {
 			if(spike != null) {
+				double opacity = 255;
+				if(spike.getDirection() == 0) {
+					opacity = getWidth() * 0.5 - 70 - spike.getPosition().getX();
+				}
+				else {
+					opacity = spike.getPosition().getX() + getWidth() * 0.5 - 70;
+				}
+				g2d.setColor(new Color(0, 0, 0, (int) clamp(opacity * 10, 0, 255)));
 				g2d.fill(spike);
 			}
 		}
+		g2d.setColor(Color.BLACK);
 		g2d.draw(barCross);
 		g2d.setStroke(new BasicStroke(2));
 		g2d.draw(barFrame);
