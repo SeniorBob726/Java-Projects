@@ -85,8 +85,14 @@ public class Dodge extends MiniGame {
 	public void update(long elapsedms) {
 		for(int i = 0; i < spikes.length; i++) {
 			if(spikes[i] != null) {
-				double xBound = spikes[i].getDirection() == 0 ? getWidth() * 0.5 - 20 : -getWidth() * 0.5 + 20;
-				if(spikes[i].getPosition().getX() > xBound) {
+				boolean outOfBounds = false;
+				if(spikes[i].getDirection() == 0) {
+					outOfBounds = spikes[i].getPosition().getX() > getWidth() * 0.5 - 20;
+				}
+				else {
+					outOfBounds = spikes[i].getPosition().getX() < -getWidth() * 0.5 + 20;
+				}
+				if(outOfBounds) {
 					spikes[i] = null;
 					spikeTimes[i] = elapsedms + (long) (Math.random() * 2000 / kc);
 				}
