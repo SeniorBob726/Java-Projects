@@ -119,6 +119,16 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		this.repaint();
 	}
 
+	public void addMiniGame(MiniGame minigame) { // Polymorphism
+		games.add(minigame);
+		constructLayout();
+		if(kp==-1){games.get(games.size() - 1).k();};
+		gameInstructions = true;
+		instructionDelay = System.nanoTime();
+		instructionY = 100;
+		pauseGame();
+	}
+
 	public boolean running() {
 		return gameActive && !paused;
 	}
@@ -271,28 +281,13 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			long elapsedms = (long) (elapsedns * Math.pow(10, -6));
 			points = (int) (elapsedms / 1000); // Points = seconds from start
 			if(points == 15 && games.size() == 1) {
-				games.add(new Dodge());
-				constructLayout();
-				if(kp==-1){games.get(1).k();};
-				gameInstructions = true;
-				instructionDelay = System.nanoTime();
-				pauseGame();
+				addMiniGame(new Dodge());
 			}
 			else if(points == 40 && games.size() == 2) {
-				games.add(new Capture());
-				constructLayout();
-				if(kp==-1){games.get(2).k();};
-				gameInstructions = true;
-				instructionDelay = System.nanoTime();
-				pauseGame();
+				addMiniGame(new Capture());
 			}
 			else if(points == 80 && games.size() == 3) {
-				games.add(new Helicopter());
-				constructLayout();
-				if(kp==-1){games.get(3).k();};
-				gameInstructions = true;
-				instructionDelay = System.nanoTime();
-				pauseGame();
+				addMiniGame(new Helicopter());
 			}
 
 			for(MiniGame game : games) { // Polymorphism
