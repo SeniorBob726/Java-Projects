@@ -147,7 +147,6 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			System.out.println("Resume - Game");
 			startTime += System.nanoTime() - pauseTime; // Shift startTime to reduce calculations
 			pauseTime = 0;
-			timer.start();
 			paused = false;
 			gameInstructions = false;
 
@@ -180,7 +179,6 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 		if(running()) {
 			System.out.println("Pause - Game");
 			pauseTime = System.nanoTime();
-			timer.stop();
 			rightKeyDown = false;
 			leftKeyDown = false;
 			upLocked = false;
@@ -264,7 +262,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(gameActive) {
+		if(running()) {
 			long elapsedns = System.nanoTime() - startTime;
 			long elapsedms = (long) (elapsedns * Math.pow(10, -6));
 			points = (int) (elapsedms / 1000); // Points = seconds from start
@@ -326,9 +324,8 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			if(games.size() >= 4 && spacebarDown) {
 				((Helicopter) games.get(3)).increaseLift();
 			}
-
-			repaint();
 		}
+		repaint();
 	}
 
 	public void keyTyped(KeyEvent e) {}
