@@ -1,6 +1,16 @@
 import javax.swing.*;
 
 public abstract class MiniGame extends JPanel {
+	private static double gameSpeed = 1.0;
+
+	public static void setGameSpeed(double speed) {
+		gameSpeed = speed;
+	}
+
+	public static double getGameSpeed() {
+		return gameSpeed;
+	}
+
 	public abstract void reset();
 	public abstract void update(long elapsedms);
 	public abstract void pause(boolean paused);

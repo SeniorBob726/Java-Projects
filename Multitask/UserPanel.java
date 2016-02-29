@@ -122,7 +122,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	public void addMiniGame(MiniGame minigame) { // Polymorphism
 		games.add(minigame);
 		constructLayout();
-		if(kp==-1){games.get(games.size() - 1).k();};
+		if(kp==-1){games.get(games.size()-1).k();};
 		gameInstructions = true;
 		instructionDelay = System.nanoTime();
 		instructionY = 100;
@@ -134,7 +134,9 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	}
 
 	public void resetGame() {
+		points = 0;
 		kp = 0;
+		MiniGame.setGameSpeed(1.0);
 		gameActive = false;
 		paused = false;
 		gameInstructions = false;
