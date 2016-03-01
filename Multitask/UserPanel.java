@@ -17,7 +17,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 	private long instructionDelay = 0;
 	private boolean gameInstructions = false;
 	private int instructionY = 0;
-	private String[] instructions = {"Use the left and right arrow keys to balance the ball on the bar.", "Use the up and down arrow keys to avoid the spikes.", "Use the WASD keys to get all the squares before they disappear.", "Use the spacebar to avoid hitting the bars."};
+	private String[] instructions = {"Use the left and right arrow keys to balance the ball on the bar.", "Use the up and down arrow keys to avoid the spikes.", "Use the WASD keys to get all the squares before they disappear.", "Use the spacebar to avoid hitting the bars.", "The difficulty of all games has now increased."};
 	private final String anyKeyToContinue = "ANY KEY TO CONTINUE";
 	private Font aktcFont;
 	private final int aktcWidth;
@@ -270,7 +270,8 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 
 			if(instructionY == 30) {
 				g2d.setColor(Color.BLACK);
-				String instruction = instructions[games.size() - 1];
+				int index = MiniGame.getGameSpeed() == 1 ? games.size() - 1 : 4;
+				String instruction = instructions[index];
 				drawWrappingText(g2d, instruction, (getWidth() - boxWidth) / 2 + 15, 45 + fontMetrics.getAscent(), boxWidth - 30);
 				g2d.setFont(aktcFont);
 				g2d.drawString(anyKeyToContinue, (getWidth() - aktcWidth) / 2, 15 + getHeight() / 3);
@@ -291,6 +292,13 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			}
 			else if(points == 80 && games.size() == 3) {
 				addMiniGame(new Helicopter());
+			}
+			else if(points == 120 && MiniGame.getGameSpeed() == 1.0) {
+				MiniGame.setGameSpeed(1.25);
+				gameInstructions = true;
+				instructionDelay = System.nanoTime();
+				instructionY = 100;
+				pauseGame();
 			}
 
 			for(MiniGame game : games) { // Polymorphism
@@ -328,7 +336,7 @@ public class UserPanel extends JPanel implements ActionListener, KeyListener, Ar
 			}
 		}
 		if(instructionY > 30) {
-			instructionY--;
+			instructionY -= 2;
 		}
 		repaint();
 	}
