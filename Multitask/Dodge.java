@@ -57,8 +57,7 @@ public class Dodge extends MiniGame {
 		}
 	}
 
-	public Spike createSpike() {
-		double direction = 180 * (int) (Math.random() * 2);
+	public Spike createSpike(double direction) {
 		double x = getWidth() * 0.5 - 30;
 		if(direction == 0) {
 			x *= -1;
@@ -92,14 +91,14 @@ public class Dodge extends MiniGame {
 				}
 				if(outOfBounds) {
 					spikes[i] = null;
-					spikeTimes[i] = elapsedms + (long) (Math.random() * 2000 / MiniGame.getK());
+					spikeTimes[i] = elapsedms + (long) (Math.random() * 2000 / MiniGame.getK() / MiniGame.getGameSpeed());
 				}
 				else {
 					spikes[i].update();
 				}
 			}
 			else if(elapsedms >= spikeTimes[i]) {
-				spikes[i] = createSpike();
+				spikes[i] = createSpike(i * 180);
 			}
 		}
 	}
