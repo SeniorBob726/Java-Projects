@@ -34,7 +34,7 @@ public class Helicopter extends MiniGame {
 	public Bar createBar() {
 		double x = getWidth() / 2;
 		double y = (Math.random() - 0.5) * (getHeight() - 40) - 20;
-		return new Bar(x, y, 1.0 * MiniGame.getK());
+		return new Bar(x, y, 1.0 * MiniGame.getK() * MiniGame.getGameSpeed());
 	}
 
 	public void reset() {
@@ -80,7 +80,7 @@ public class Helicopter extends MiniGame {
 		for(int i = 0; i < bars.length; i++) {
 			if(bars[i] == null && elapsedms >= nextBar) {
 				bars[i] = createBar();
-				nextBar += getWidth() * 16 / MiniGame.getK();
+				nextBar += getWidth() * 16 / MiniGame.getK() / MiniGame.getGameSpeed();
 			}
 			else if(bars[i] != null) {
 				if(bars[i].getX() < -getWidth() / 2) {
