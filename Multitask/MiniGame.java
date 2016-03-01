@@ -4,7 +4,7 @@ public abstract class MiniGame extends JPanel {
 	private static double gameSpeed = 1.0;
 
 	public static void setGameSpeed(double gameSpeed) {
-		this.gameSpeed = gameSpeed;
+		MiniGame.gameSpeed = gameSpeed;
 	}
 
 	public static double getGameSpeed() {
@@ -23,5 +23,5 @@ public abstract class MiniGame extends JPanel {
 
 	private static double k = 1.0;
 	public static double getK(){return k;}
-	public static void setK(double k){this.k=k;}
+	public static void setK(double k){MiniGame.k=k;}
 }
