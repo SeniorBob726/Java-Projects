@@ -3,13 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 
-public class Square implements ActionListener {
-	private Rectangle2D box;
+public class Square extends Rectangle2D.Double implements ActionListener {
 	private javax.swing.Timer lifespan; // Lifespan clock
 	private int countdown;
 
 	public Square(double x, double y, double s, int tickLength) {
-		box = new Rectangle2D.Double(x - s / 2, y - s / 2, s, s);
+		super(x - s / 2, y - s / 2, s, s);
 		lifespan = new javax.swing.Timer(tickLength, this);
 		lifespan.start();
 		countdown = 10;
@@ -21,10 +20,6 @@ public class Square implements ActionListener {
 
 	public void stopCountdown() {
 		lifespan.stop();
-	}
-
-	public Rectangle2D getBox() {
-		return box;
 	}
 
 	public int getCountdown() {
