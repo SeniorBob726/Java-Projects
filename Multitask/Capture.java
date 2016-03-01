@@ -63,7 +63,7 @@ public class Capture extends MiniGame {
 				squares[i] = createSquare();
 				nextSquare = elapsedms + (long) ((Math.random() * 4000 + 1000) / MiniGame.getK() / MiniGame.getGameSpeed());
 			}
-			else if(squares[i] != null && squares[i].getBox().intersects(box.getX(), box.getY(), box.getWidth(), box.getHeight())) {
+			else if(squares[i] != null && squares[i].intersects(box)) {
 				squares[i].stopCountdown();
 				squares[i] = null;
 			}
@@ -119,12 +119,12 @@ public class Capture extends MiniGame {
 		for(Square square : squares) {
 			if(square != null) {
 				g2d.setColor(Color.BLACK);
-				g2d.draw(square.getBox());
+				g2d.draw(square);
 				String num = Integer.toString(square.getCountdown());
 				Rectangle2D bounds = fontMetrics.getStringBounds(num, g2d);
-				double w = square.getBox().getWidth() / 2;
-				int x = (int) (square.getBox().getX() + w + bounds.getX() - bounds.getWidth() / 2);
-				int y = (int) (square.getBox().getY() + w - bounds.getY() - bounds.getHeight() / 2);
+				double w = square.getWidth() / 2;
+				int x = (int) (square.getX() + w + bounds.getX() - bounds.getWidth() / 2);
+				int y = (int) (square.getY() + w - bounds.getY() - bounds.getHeight() / 2);
 				g2d.setColor(textColor);
 				g2d.drawString(num, x, y);
 			}
