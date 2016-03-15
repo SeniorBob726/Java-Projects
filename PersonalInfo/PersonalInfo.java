@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class PersonalInfo {
+public class PersonalInfo implements Comparable<PersonalInfo> {
 	private String firstName;
 	private String lastName;
 	private int age = 0;
@@ -69,6 +69,14 @@ public class PersonalInfo {
 
 	public void addWebsite(String w) {
 		websites.add(w);
+	}
+
+	public int compareTo(PersonalInfo pi) {
+		int diff = this.lastName.compareTo(pi.getLastName());
+		if(diff == 0) {
+			diff = this.firstName.compareTo(pi.getFirstName());
+		}
+		return diff;
 	}
 
 	public String toString() {
