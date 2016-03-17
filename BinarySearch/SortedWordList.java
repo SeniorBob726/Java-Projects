@@ -92,9 +92,9 @@ public class SortedWordList extends ArrayList<String> {
 		l.add("ad");
 		l.add("minim");
 		l.add("veniam");
-		Collections.sort(l);
 		System.out.println(l);
-		System.out.println(l.set(21, "u"));
+		System.out.println(l.add(20, "u"));
+		System.out.println(l.indexOf("u"));
 		System.out.println(l);
 	}
 }
