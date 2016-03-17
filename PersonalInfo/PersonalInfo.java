@@ -71,6 +71,13 @@ public class PersonalInfo implements Comparable<PersonalInfo> {
 		websites.add(w);
 	}
 
+	public boolean equals(PersonalInfo pi) {
+		if(pi instanceof PersonalInfo) {
+			return this.lastName == pi.getLastName() && this.firstName == pi.getFirstName() && this.address == pi.getAddress();
+		}
+		return false;
+	}
+
 	public int compareTo(PersonalInfo pi) {
 		String name = this.lastName + this.firstName;
 		String cName = pi.getLastName() + pi.getFirstName();
