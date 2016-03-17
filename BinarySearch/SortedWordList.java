@@ -40,6 +40,33 @@ public class SortedWordList extends ArrayList<String> {
 		return super.set(i, word);
 	}
 
+	public boolean add(String word) {
+		int low = 0;
+		int high = this.size();
+		while(low < high) {
+			int middle = (high + low) / 2;
+			int diff = this.get(middle).compareToIgnoreCase(word);
+			if(diff == 0) {
+				return false;
+			}
+			else if(diff > 0) {
+				high = middle;
+			}
+			else {
+				low = middle + 1;
+			}
+		}
+		super.add(high, word);
+		return true;
+	}
+
+	public void add(int i, String word) {
+		if((i > 0 && this.get(i - 1).compareToIgnoreCase(word) >= 0) || (i < this.size() && this.get(i).compareToIgnoreCase(word) <= 0)) {
+			throw new IllegalArgumentException("index = " + i + " word = " + word);
+		}
+		super.add(i, word);
+	}
+
 	public static void main(String[] args) {
 		SortedWordList l = new SortedWordList();
 		l.add("ipsum");
