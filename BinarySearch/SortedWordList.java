@@ -15,10 +15,11 @@ public class SortedWordList extends ArrayList<String> {
 		int high = this.size() - 1;
 		while(low <= high) {
 			int middle = (high + low) / 2;
-			if(s.compareTo(this.get(middle)) == 0) {
+			int diff = s.compareToIgnoreCase(this.get(middle));
+			if(diff == 0) {
 				return middle;
 			}
-			else if(s.compareTo(this.get(middle)) > 0) {
+			else if(diff > 0) {
 				low = middle + 1;
 			}
 			else {
@@ -30,6 +31,13 @@ public class SortedWordList extends ArrayList<String> {
 
 	public boolean contains(String s) {
 		return indexOf(s) != -1;
+	}
+
+	public String set(int i, String word) {
+		if((i > 0 && this.get(i - 1).compareToIgnoreCase(word) >= 0) || (i < this.size() - 1 && this.get(i + 1).compareToIgnoreCase(word) <= 0)) {
+			throw new IllegalArgumentException("index = " + i + " word = " + word);
+		}
+		return super.set(i, word);
 	}
 
 	public static void main(String[] args) {
@@ -59,6 +67,7 @@ public class SortedWordList extends ArrayList<String> {
 		l.add("veniam");
 		Collections.sort(l);
 		System.out.println(l);
-		System.out.println(l.indexOf("x"));
+		System.out.println(l.set(21, "u"));
+		System.out.println(l);
 	}
 }
