@@ -81,7 +81,14 @@ public class PersonalInfo implements Comparable<PersonalInfo> {
 	public int compareTo(PersonalInfo pi) {
 		String name = this.lastName + this.firstName;
 		String cName = pi.getLastName() + pi.getFirstName();
-		return name.compareTo(cName);
+		int diff = name.compareTo(cName);
+		if(diff == 0) {
+			diff = this.address.compareTo(pi.getAddress());
+		}
+		if(diff == 0) {
+			diff = this.age - pi.getAge();
+		}
+		return diff;
 	}
 
 	public String toString() {
