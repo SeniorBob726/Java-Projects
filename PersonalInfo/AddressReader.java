@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class AddressReader {
@@ -131,6 +132,7 @@ public class AddressReader {
 						System.out.println(p);
 					}
 					findResults = database.findPeopleFromState(state);
+					Collections.sort(findResults); // Default alphabetical sorting, last name first
 					for(int i = 0; i < findResults.size() && i < 10; i++) {
 						System.out.println(findResults.get(i));
 					}
@@ -141,6 +143,7 @@ public class AddressReader {
 					System.out.print(" - Enter upper age: ");
 					int upper = scanner.nextInt();
 					findResults = database.findPeopleBetweenAges(lower, upper);
+					Collections.sort(findResults, new AgeComparator()); // Age sorting
 					for(int i = 0; i < findResults.size() && i < 10; i++) {
 						System.out.println(findResults.get(i));
 					}
@@ -151,6 +154,7 @@ public class AddressReader {
 					System.out.print(" - Enter voting affiliation: ");
 					int vA = scanner.nextInt();
 					findResults = database.findVotingAffiliationsByState(st, vA);
+					Collections.sort(findResults); // Default alphabetical sorting, last name first
 					for(int i = 0; i < findResults.size() && i < 10; i++) {
 						System.out.println(findResults.get(i));
 					}
