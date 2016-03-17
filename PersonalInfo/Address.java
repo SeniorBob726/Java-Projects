@@ -33,6 +33,20 @@ public class Address {
 		return zipcode;
 	}
 
+	public int compareTo(Address a) {
+		int diff = this.state.compareTo(a.getState());
+		if(diff == 0) {
+			diff = this.county.compareTo(a.getCounty());
+		}
+		if(diff == 0) {
+			diff = this.city.compareTo(a.getCity());
+		}
+		if(diff == 0) {
+			diff = this.street.compareTo(a.getStreet());
+		}
+		return diff;
+	}
+
 	public String toString() {
 		return String.format("%s %s, %s, %s %s", street, city, county, state, zipcode);
 	}
