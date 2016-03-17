@@ -15,15 +15,15 @@ public class SortedWordList extends ArrayList<String> {
 		int high = this.size() - 1;
 		while(low <= high) {
 			int middle = (high + low) / 2;
-			int diff = s.compareToIgnoreCase(this.get(middle));
+			int diff = this.get(middle).compareToIgnoreCase(s);
 			if(diff == 0) {
 				return middle;
 			}
 			else if(diff > 0) {
-				low = middle + 1;
+				high = middle - 1;
 			}
 			else {
-				high = middle - 1;
+				low = middle + 1;
 			}
 		}
 		return -1;
