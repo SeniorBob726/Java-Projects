@@ -27,7 +27,7 @@ public class SortingAlgorithms {
 	}
 
 	public <T extends Comparable<T>> void selectionSort(T[] array) {
-		for(int n = array.length - 1; n > 0; n--) {
+		for(int n = array.length - 1; n > 1; n--) {
 			int index = 0;
 			for(int i = 1; i < n; i++) {
 				if(array[i].compareTo(array[index]) > 0) {
