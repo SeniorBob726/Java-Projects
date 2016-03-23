@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class SortingAlgorithms {
@@ -55,6 +56,25 @@ public class SortingAlgorithms {
 		}
 	}
 
+	public <T extends Comparable<T>> void mergeSort(T[] array, int low, int high) {
+		if(low >= high) {
+			return;
+		}
+		int middle = (high + low) / 2;
+		mergeSort(array, low, middle);
+		mergeSort(array, middle + 1, high);
+		for(int i = low; i <= high; i++) {
+			System.out.print(array[i] + " ");
+		}
+		System.out.println();
+		if(array[middle].compareTo(array[middle + 1]) > 0) {
+			if(high - low == 2) {
+
+			}
+		}
+
+	}
+
 	public static void main(String[] args) {
 		SortingAlgorithms s = new SortingAlgorithms();
 		s.shuffle();
@@ -65,6 +85,11 @@ public class SortingAlgorithms {
 		s.shuffle();
 		s.printArray();
 		s.insertionSort(s.getArray());
+		s.printArray();
+
+		s.shuffle();
+		s.printArray();
+		s.mergeSort(s.getArray(), 0, s.getArray().length - 1);
 		s.printArray();
 	}
 }
