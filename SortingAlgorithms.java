@@ -23,7 +23,7 @@ public class SortingAlgorithms {
 		for(Integer i : array) {
 			output += i + ", ";
 		}
-		System.out.println(output.substring(0, output.length() - 3) + "]");
+		System.out.println(output.substring(0, output.length() - 2) + "]");
 	}
 
 	public <T extends Comparable<T>> void selectionSort(T[] array) {
