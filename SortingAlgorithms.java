@@ -27,7 +27,7 @@ public class SortingAlgorithms {
 	}
 
 	public <T extends Comparable<T>> void selectionSort(T[] array) {
-		for(int n = array.length - 1; n > 1; n--) {
+		for(int n = array.length - 1; n > 0; n--) {
 			int index = 0;
 			for(int i = 1; i < n; i++) {
 				if(array[i].compareTo(array[index]) > 0) {
@@ -42,7 +42,7 @@ public class SortingAlgorithms {
 
 	public <T extends Comparable<T>> void insertionSort(T[] array) {
 		for(int n = 0; n < array.length; n++) {
-			for(int i = n; i > 1; i--) {
+			for(int i = n; i > 0; i--) {
 				if(array[i].compareTo(array[i - 1]) < 0) {
 					T swap = array[i];
 					array[i] = array[i - 1];
