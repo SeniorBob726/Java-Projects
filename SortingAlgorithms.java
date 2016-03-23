@@ -26,9 +26,25 @@ public class SortingAlgorithms {
 		System.out.println(output.substring(0, output.length() - 3) + "]");
 	}
 
+	public <T extends Comparable<T>> void selectionSort(T[] array) {
+		for(int n = array.length - 1; n > 0; n--) {
+			int index = 0;
+			for(int i = 1; i < n; i++) {
+				if(array[i].compareTo(array[index]) > 0) {
+					index = i;
+				}
+			}
+			T swap = array[n];
+			array[n] = array[index];
+			array[index] = swap;
+		}
+	}
+
 	public static void main(String[] args) {
 		SortingAlgorithms s = new SortingAlgorithms();
 		s.shuffle();
+		s.printArray();
+		s.selectionSort(s.getArray());
 		s.printArray();
 	}
 }
