@@ -2,26 +2,26 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class SortingAlgorithms {
-	private Integer[] array = {-78, -69, -45, -43, -42, -36, -24, 10, 21, 23, 30, 31, 36, 50, 52, 55, 62, 74, 88, 92};
+	private Integer[] sampleArray = {-78, -69, -45, -43, -42, -36, -24, 10, 21, 23, 30, 31, 36, 50, 52, 55, 62, 74, 88, 92};
 
-	public void shuffle() { // Fisher-Yates Shuffle
+	public <T> void shuffle(T[] array) { // Fisher-Yates Shuffle
 		int m = array.length;
 		while(m > 0) {
 			m--;
-			int i = (int)(Math.random() * m);
-			Integer t = array[m];
+			int i = (int) (Math.random() * m);
+			T t = array[m];
 			array[m] = array[i];
 			array[i] = t;
 		}
 	}
 
 	public Integer[] getArray() {
-		return array;
+		return this.sampleArray;
 	}
 
 	public void printArray() {
 		String output = "[";
-		for(Integer i : array) {
+		for(Integer i : this.sampleArray) {
 			output += i + ", ";
 		}
 		System.out.println(output.substring(0, output.length() - 2) + "]");
@@ -77,17 +77,17 @@ public class SortingAlgorithms {
 
 	public static void main(String[] args) {
 		SortingAlgorithms s = new SortingAlgorithms();
-		s.shuffle();
+		s.shuffle(s.getArray());
 		s.printArray();
 		s.selectionSort(s.getArray());
 		s.printArray();
 
-		s.shuffle();
+		s.shuffle(s.getArray());
 		s.printArray();
 		s.insertionSort(s.getArray());
 		s.printArray();
 
-		s.shuffle();
+		s.shuffle(s.getArray());
 		s.printArray();
 		s.mergeSort(s.getArray(), 0, s.getArray().length - 1);
 		s.printArray();
