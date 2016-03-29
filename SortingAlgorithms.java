@@ -56,19 +56,34 @@ public class SortingAlgorithms {
 		}
 	}
 
-	public <T extends Comparable<T>> T[] merge(T[] a, T[] b) {
-		@SuppressWarnings("unchecked")
-		T[] array = (T[]) Array.newInstance(a.getClass().getComponentType(), a.length + b.length);
+	@SuppressWarnings("unchecked")
+	public <T extends Comparable<T>> T[] mergeSort(T[] array) {
+		if(array.length <= 1) {
+			return array;
+		}
+
+		T[] a = (T[]) Array.newInstance(array.getClass().getComponentType(), array.length / 2);
+		T[] b = (T[]) Array.newInstance(array.getClass().getComponentType(), array.length - a.length);
+		System.arraycopy(array, 0, a, 0, a.length);
+		System.arraycopy(array, a.length, b, 0, b.length);
+
+		a = mergeSort(a);
+		b = mergeSort(b);
+
 		int indexA = 0;
 		int indexB = 0;
 		for(int i = 0; i < a.length + b.length; i++) {
 			if(indexA >= a.length) {
-				System.arraycopy(b, indexB, array, indexA, array.length - indexA - indexB);
-				return array;
+				for(int j = indexB; j < b.length; j++) {
+					array[i + j - indexB] = b[j];
+				}
+				break;
 			}
 			if(indexB >= b.length) {
-				System.arraycopy(a, indexA, array, indexB, array.length - indexA - indexB);
-				return array;
+				for(int j = indexA; j < a.length; j++) {
+					array[i + j - indexA] = a[j];
+				}
+				break;
 			}
 			if(a[indexA].compareTo(b[indexB]) < 0) {
 				array[i] = a[indexA];
@@ -79,24 +94,8 @@ public class SortingAlgorithms {
 				indexB++;
 			}
 		}
+
 		return array;
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T extends Comparable<T>> void mergeSort(T[] array) {
-		System.out.println(Arrays.toString(array));
-		T[] a = (T[]) Array.newInstance(array.getClass().getComponentType(), array.length / 2);
-		T[] b = (T[]) Array.newInstance(array.getClass().getComponentType(), array.length - a.length);
-		System.arraycopy(array, 0, a, 0, a.length);
-		System.arraycopy(array, a.length, b, 0, b.length);
-
-		if(a.length > 1) {
-			mergeSort(a);
-		}
-		if(b.length > 1) {
-			mergeSort(b);
-		}
-		array = merge(a, b);
 	}
 
 	public static void main(String[] args) {
@@ -113,7 +112,6 @@ public class SortingAlgorithms {
 
 		s.shuffle(s.getArray());
 		s.printArray();
-		s.mergeSort(s.getArray());
-		s.printArray();
+		System.out.println(Arrays.toString(s.mergeSort(s.getArray())));
 	}
 }
