@@ -56,23 +56,47 @@ public class SortingAlgorithms {
 		}
 	}
 
-	public <T extends Comparable<T>> void mergeSort(T[] array, int low, int high) {
-		if(low >= high) {
-			return;
-		}
-		int middle = (high + low) / 2;
-		mergeSort(array, low, middle);
-		mergeSort(array, middle + 1, high);
-		for(int i = low; i <= high; i++) {
-			System.out.print(array[i] + " ");
-		}
-		System.out.println();
-		if(array[middle].compareTo(array[middle + 1]) > 0) {
-			if(high - low == 2) {
-
+	public <T extends Comparable<T>> T[] merge(T[] a, T[] b) {
+		@SuppressWarnings("unchecked")
+		T[] array = (T[]) Array.newInstance(a.getClass().getComponentType(), a.length + b.length);
+		int indexA = 0;
+		int indexB = 0;
+		for(int i = 0; i < a.length + b.length; i++) {
+			if(indexA >= a.length) {
+				System.arraycopy(b, indexB, array, indexA, array.length - indexA - indexB);
+				return array;
+			}
+			if(indexB >= b.length) {
+				System.arraycopy(a, indexA, array, indexB, array.length - indexA - indexB);
+				return array;
+			}
+			if(a[indexA].compareTo(b[indexB]) < 0) {
+				array[i] = a[indexA];
+				indexA++;
+			}
+			else {
+				array[i] = b[indexB];
+				indexB++;
 			}
 		}
+		return array;
+	}
 
+	@SuppressWarnings("unchecked")
+	public <T extends Comparable<T>> void mergeSort(T[] array) {
+		System.out.println(Arrays.toString(array));
+		T[] a = (T[]) Array.newInstance(array.getClass().getComponentType(), array.length / 2);
+		T[] b = (T[]) Array.newInstance(array.getClass().getComponentType(), array.length - a.length);
+		System.arraycopy(array, 0, a, 0, a.length);
+		System.arraycopy(array, a.length, b, 0, b.length);
+
+		if(a.length > 1) {
+			mergeSort(a);
+		}
+		if(b.length > 1) {
+			mergeSort(b);
+		}
+		array = merge(a, b);
 	}
 
 	public static void main(String[] args) {
@@ -89,7 +113,7 @@ public class SortingAlgorithms {
 
 		s.shuffle(s.getArray());
 		s.printArray();
-		s.mergeSort(s.getArray(), 0, s.getArray().length - 1);
+		s.mergeSort(s.getArray());
 		s.printArray();
 	}
 }
