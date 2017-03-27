@@ -100,6 +100,18 @@ class ForbiddenIslandWorld extends World {
 		}
 
 		this.board = list;
+		this.waterHeight = 1;
+	}
+
+	public void l(WorldScene scene, IList<Cell> list) {
+		if(list instanceof MtList) {
+			return;
+		}
+		Cell cell = ((ConsList<Cell>) list).first;
+		int placeX = 10 * cell.x + 5;
+		int placeY = 10 * cell.y + 5;
+		scene.placeImageXY(cell.draw(ISLAND_SIZE, this.waterHeight), placeX, placeY);
+		l(scene, ((ConsList<Cell>) list).rest);
 	}
 
 	// Render an image of this World
@@ -108,18 +120,14 @@ class ForbiddenIslandWorld extends World {
 		WorldScene scene = new WorldScene(10 * ISLAND_SIZE, 10 * ISLAND_SIZE);
 
 		// Loop over each Cell in the board and render it in place
-		for(Cell cell : this.board) {
-			int placeX = 10 * cell.x + 5;
-			int placeY = 10 * cell.y + 5;
-			scene.placeImageXY(cell.draw(ISLAND_SIZE, this.waterHeight), placeX, placeY);
-		}
+		l(scene, this.board);
 
 		return scene;
 	}
 }
 
 class Island {
-	public void testGame() {
+	public void testGame(Tester t) {
 		ForbiddenIslandWorld f = new ForbiddenIslandWorld();
 		f.bigBang(ForbiddenIslandWorld.ISLAND_SIZE, ForbiddenIslandWorld.ISLAND_SIZE, 0.1);
 	}
