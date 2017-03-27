@@ -32,7 +32,7 @@ class ForbiddenIslandWorld extends World {
 }
 
 class Island {
-	public static void main(String[] args) {
-
+	public void testGame() {
+		ForbiddenIslandWorld f = new ForbiddenIslandWorld();
 	}
 }
